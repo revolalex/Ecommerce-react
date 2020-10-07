@@ -1,9 +1,13 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const config = require ("./modules/config")
+const config = require("./modules/config");
 const saltRounds = 12;
 
 const appRouter = async function(app, connection) {
+  /**************************** API USER ***************************************/
+
+  /*****************************************************************************/
+
   // - POST /users/sign-up ⇒ Will add a user in the Users table (of course the
   // password will be encrypted...)
   app.post("/users/sign-up", async (req, res) => {
@@ -82,12 +86,71 @@ const appRouter = async function(app, connection) {
     });
   });
 
+  //   to be continued
+  // - GET /users/:id ⇒ Return all the datas of this specific User (including the name of the products he created...)
+  await app.get("/users/:id", function(req, res) {
+    let id = req.params.id;
+    let getUserInfo = `SELECT * FROM ecomreact.users where id = ${id};`;
+    connection.query(getUserInfo, function(err, results) {
+      if (err) throw err;
+      res.send(results);
+    });
+  });
+
+  /**************************** API PRODUCTS ***********************************/
+
+  /*****************************************************************************/
+
+  //   GET /products/ ⇒ Return the list of registered products (return only Names and Ids, Prices)
+  await app.get("/products/", function(req, res) {
+    let getProductsInfo = "SELECT name, id FROM products";
+    connection.query(getProductsInfo, function(err, results) {
+      if (err) throw err;
+      res.send(results);
+    });
+  });
+
+
+  // must add middleware for jwt allow acces
+  // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
+  await app.post("/products/", function(req, res) {
+    let category = req.body.category;
+    let prices = req.body.prices;
+    let name = req.body.name;
+    let description = req.body.description;
+
+    const productObject = {
+      category: category,
+      name: name,
+      description: description,
+      prices: prices,
+    };
+
+    let postProduct = "INSERT INTO products SET ?";
+
+    connection.query(postProduct, productObject, function(err, results) {
+      if (err) throw err;
+      res.send(results);
+    });
+  });
+
+
+
+
+  //GET /products/:id ⇒ Return all the datas of this specific Product 
+  //(including the name of the user who created it, the category, the description etc...)
+  await app.get("/products/:id", function(req, res){
+      let id = req.params.id
+      let productInfo = `SELECT * FROM ecomreact.products where id = ${id};`
+
+      connection.query(productInfo, function(err, results){
+          if (err) throw err;
+          res.send(results)
+      })
+
+  })
 
 
 
 };
 module.exports = appRouter;
-
-// - POST /users/sign-in ⇒ Will check whether the password is the good one for
-// this specific email. If so it will deliver a JWT including Email and Id of this User.
-//  - GET /users/:id ⇒ Return all the datas of this specific User (including the name of the products he created...)
