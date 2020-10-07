@@ -17,6 +17,8 @@ const allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "*");
   res.header("Access-Control-Allow-Headers", "*");
+  //token header
+  res.header("Access-Control-Request-Headers: Authorization");
   next();
 };
 app.use(allowCrossDomain);
@@ -26,10 +28,10 @@ const connection = require("./database/db");
 connection.connect();
 
 /************************** Routes ****************************/
-// require("./routes/route")(app, connection);
+require("./routes/route")(app, connection);
 
 //connection.end();
 
-app.listen(3000, function() {
-  console.log("server listening on: http://localhost:3000/sign-up");
+app.listen(8080, function() {
+  console.log("server listening on: http://localhost:8080/");
 });
