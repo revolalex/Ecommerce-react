@@ -68,7 +68,7 @@ app.get('/users/:id', (req,res) => {
 })
 
 // --------------------------------------------------------------------------------------------------------------------
-// Routes USER 
+// Routes PRODUCT
 
 app.get('/products', (req,res) => {
     let sql = 'SELECT id,name,price FROM products'
