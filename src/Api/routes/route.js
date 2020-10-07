@@ -110,7 +110,6 @@ const appRouter = async function(app, connection) {
     });
   });
 
-
   // must add middleware for jwt allow acces
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
   await app.post("/products/", function(req, res) {
@@ -118,12 +117,14 @@ const appRouter = async function(app, connection) {
     let prices = req.body.prices;
     let name = req.body.name;
     let description = req.body.description;
+    let id_user_affiliate = req.body.id_user_affiliate;
 
     const productObject = {
       category: category,
       name: name,
       description: description,
       prices: prices,
+      id_user_affiliate: id_user_affiliate,
     };
 
     let postProduct = "INSERT INTO products SET ?";
@@ -134,23 +135,18 @@ const appRouter = async function(app, connection) {
     });
   });
 
-
-
-
-  //GET /products/:id ⇒ Return all the datas of this specific Product 
+  //GET /products/:id ⇒ Return all the datas of this specific Product
   //(including the name of the user who created it, the category, the description etc...)
-  await app.get("/products/:id", function(req, res){
-      let id = req.params.id
-      let productInfo = `SELECT * FROM ecomreact.products where id = ${id};`
+  await app.get("/products/:id", function(req, res) {
+    let id = req.params.id;
+    let productInfo = 
+    `SELECT users.name AS username, products.name, products.category, products.description, products.prices 
+    FROM users INNER JOIN products ON products.id_user_affiliate = ${id} `;
 
-      connection.query(productInfo, function(err, results){
-          if (err) throw err;
-          res.send(results)
-      })
-
-  })
-
-
-
+    connection.query(productInfo, function(err, results) {
+      if (err) throw err;
+      res.send(results);
+    });
+  });
 };
 module.exports = appRouter;

@@ -22,7 +22,7 @@ connection.connect(function(err) {
   });
 
   let productTable =
-    "CREATE TABLE IF NOT EXISTS products ( id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, category VARCHAR(30) NOT NULL, name VARCHAR(30) NOT NULL, description VARCHAR(200) NOT NULL, prices INT(10) NOT NULL)";
+    "CREATE TABLE IF NOT EXISTS products ( id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, category VARCHAR(30) NOT NULL, name VARCHAR(30) NOT NULL, description VARCHAR(200) NOT NULL, prices INT(10) NOT NULL, id_user_affiliate INT(10))";
   connection.query(productTable, function(err, results) {
     if (err) throw err;
   });
