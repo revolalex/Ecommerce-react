@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import "./Login.css";
 
 class SignupComponent extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      url: ""
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(event) {
+    this.setState({
+      file: event.target.value
+    })
+  }
   render() {
     return (
       <div>
@@ -12,10 +24,20 @@ class SignupComponent extends Component {
         </div>
         <div className="login-box">
           <h2>Sign up</h2>
+          <img className="profileImg" src={this.state.file}/>
           <form>
             <div className="user-box">
-              <input type="text" name="" required=""></input>
-              <label>Username</label>
+              <input type="text" name="firstName" required=""></input>
+              <label>First Name</label>
+            </div>
+            <div className="user-box">
+              <input type="text" name="lastName" required=""></input>
+              <label>Last Name</label>
+            </div>
+            <div className="user-box">
+              <input type="text" name="" required="" onChange={this.handleChange}></input>
+              <label>Profil Picture url</label>
+              
             </div>
             <div className="user-box">
               <input type="email" name="" required=""></input>
@@ -24,6 +46,10 @@ class SignupComponent extends Component {
             <div className="user-box">
               <input type="password" name="" required=""></input>
               <label>Password</label>
+            </div>
+            <div className="user-box">
+              <input type="password" name="" required=""></input>
+              <label>Confirm Password</label>
             </div>
             <a href="">
               <span></span>
