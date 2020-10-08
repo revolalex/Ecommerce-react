@@ -10,7 +10,7 @@ class NavBarComponent extends Component {
     return (
       <main>
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/">Navbar</Navbar.Brand>
+          <Navbar.Brand href="/">React-Ecom</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/">Sign-Up</Nav.Link>
             <Nav.Link href="/sign-in">Sign-In</Nav.Link>
