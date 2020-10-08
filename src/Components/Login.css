@@ -169,9 +169,9 @@ body {
   }
 }
 
-/*waves****************************/
+/************** Waves Animation ****************************/
 
-.box {
+.waveBox {
   position: fixed;
   top: 0;
   transform: rotate(80deg);
@@ -195,15 +195,10 @@ body {
   border-radius: 43%;
   animation: drift 7000ms infinite linear;
 }
-@media only screen and (max-width: 600px) {
-  .wave {
-    width: 300px;
-    height: 500px;
-    transform-origin: 20% 18%;
-    margin-top: 250px;
-    margin-left: 150px;
-  }
-}
+
+
+
+
 
 .wave.-three {
   animation: drift 7500ms infinite linear;
@@ -237,16 +232,33 @@ body {
     transform: rotate(360deg);
   }
 }
+@media only screen and (max-width: 600px) {
+  .wave {
+    width: 300px;
+    height: 500px;
+    transform-origin: 20% 18%;
+    margin-top: 250px;
+    margin-left: 150px;
+  
+  }
+  
 
+}
+
+
+/*********** uplaoad url image ***********/
 .uploadImg{
   max-width: 300px;
   max-height: 150px;
+  margin-left: 50px;
 }
 
 .profileImg{
   max-width: 200px;
   max-height: 100px;
   margin-bottom: 40px;
+  text-align: center;
+  margin-left: 100px;
 
 }
 .passAlert{

@@ -52,7 +52,7 @@ class SignupComponent extends Component {
 
     return (
       <div>
-        <div className="box">
+        <div className="waveBox">
           <div className="wave -one"></div>
           <div className="wave -two"></div>
           <div className="wave -three"></div>
