@@ -12,18 +12,24 @@ const appRouter = async function(app, connection) {
   // password will be encrypted...)
   app.post("/users/sign-up", async (req, res) => {
     let cryptedPassword = await bcrypt.hash(req.body.password, saltRounds);
-    let name = req.body.name;
-    let nameFirstLetterCapitalize =
-      name.charAt(0).toUpperCase() + name.slice(1);
-    let addUser = "INSERT INTO users (name,email,password) VALUES (?)";
+    // work with the names
+    let lastName = req.body.lastName
+    let firstName = req.body.firstName;
+    let capitalLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
+    let capitalFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    
+    // let nameFirstLetterCapitalize =
+    //   name.charAt(0).toUpperCase() + name.slice(1);
+    let addUser = "INSERT INTO users (firstName,lastName,email,password) VALUES (?)";
     let user = [
-      nameFirstLetterCapitalize,
+      capitalFirstName,
+      capitalLastName,
       req.body.email.toLowerCase(),
       cryptedPassword,
     ];
     connection.query(addUser, [user], (err) => {
       if (err) throw err;
-      res.status(201).send(`Utilisateur enregistré: ${req.body.name}`);
+      res.status(201).send(`Utilisateur enregistré: ${req.body.firstName}`);
     });
   });
 

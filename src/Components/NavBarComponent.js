@@ -6,8 +6,8 @@ import "./NavBar.css";
 import ProductCardComponet from "./ProductCardComponent";
 import ProductCardComponet2 from "./ProductCardComponent2";
 
-import SignupComponent from "./Signup";
-import LoginComponent from "./Login";
+import SignupComponent from "./SignupComponent";
+import LoginComponent from "./LoginComponent";
 import AddingProductComponent from "./AddingProductComponent";
 
 export default class Navbare extends Component {

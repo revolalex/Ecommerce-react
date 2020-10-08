@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import "./Login.css";
+import axios from "axios"
 
 class SignupComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      
+      firstName:"",
+      lastName: "",
       url: "",
+      email:"",
       password: "",
       confirmPassword: "",
       passTest: Boolean,
@@ -40,6 +45,10 @@ class SignupComponent extends Component {
       passTest: this.state.password === this.state.confirmPassword,
     });
     console.log(this.state.passTest);
+  }
+  buttonIsClick(){
+    let userObject = {}
+    axios.post("http://localhost:8080/users/sign-up",{})
   }
   render() {
     let textConfPass;
@@ -104,7 +113,7 @@ class SignupComponent extends Component {
               <label>Confirm Password</label>
               {textConfPass}
             </div>
-            <a href="t">
+            <a href="t" onClick={this.buttonIsClick}>
               <span></span>
               <span></span>
               <span></span>
