@@ -44,9 +44,9 @@ class AddingProductComponent extends Component {
             <div className="user-box">
               <input type="text" name="picture" required="" onChange={this.handleChange}></input>
               <label>Picture</label>
-              <img className="uploadImg" src={this.state.file}/>
+              <img className="uploadImg" src={this.state.file} alt=""/>
             </div>
-            <a href="">
+            <a href="t">
               <span></span>
               <span></span>
               <span></span>

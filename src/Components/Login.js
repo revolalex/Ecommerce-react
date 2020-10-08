@@ -11,14 +11,14 @@ class LoginComponent extends Component {
           <div class="wave -three"></div>
         </div>
         <div className="login-box">
-          <h2>Login</h2>
+          <h2>Sign-In</h2>
           <form>
             <div className="user-box">
-              <input type="text" name="" required=""></input>
-              <label>Username</label>
+              <input type="text" name="email" required=""></input>
+              <label>Email</label>
             </div>
             <div className="user-box">
-              <input type="password" name="" required=""></input>
+              <input type="password" name="password" required=""></input>
               <label>Password</label>
             </div>
             <a href="">
