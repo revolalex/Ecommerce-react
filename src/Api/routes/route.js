@@ -10,20 +10,24 @@ const appRouter = async function(app, connection) {
 
   // - POST /users/sign-up ⇒ Will add a user in the Users table (of course the
   // password will be encrypted...)
-  app.post("/users/sign-up", async (req, res) => {
-    let cryptedPassword = await bcrypt.hash(req.body.password, saltRounds);
+  await app.post("/users/sign-up", (req, res) => {
+    let password = req.body.password
+    console.log(password);
     // work with the names
     let lastName = req.body.lastName
     let firstName = req.body.firstName;
+    let url = req.body.url
+  
     let capitalLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
     let capitalFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
     
-    // let nameFirstLetterCapitalize =
-    //   name.charAt(0).toUpperCase() + name.slice(1);
-    let addUser = "INSERT INTO users (firstName,lastName,email,password) VALUES (?)";
+    let cryptedPassword = bcrypt.hashSync(password, saltRounds);
+
+    let addUser = "INSERT INTO users (firstName,lastName,url,email,password) VALUES (?)";
     let user = [
       capitalFirstName,
       capitalLastName,
+      url,
       req.body.email.toLowerCase(),
       cryptedPassword,
     ];
