@@ -21,7 +21,7 @@ class LoginComponent extends Component {
               <input type="password" name="password" required=""></input>
               <label>Password</label>
             </div>
-            <a href="">
+            <a href="t">
               <span></span>
               <span></span>
               <span></span>

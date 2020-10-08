@@ -1,23 +1,26 @@
-import React from "react";
+import React, { Component } from 'react';
 import "./App.css";
+import {Route, Switch } from 'react-router-dom';
+
+import NavBarComponent from "./Components/Login"
 import LoginComponent from "./Components/Login";
 import SignupComponent from "./Components/Signup";
 import AddingProductComponent from "./Components/AddingProductComponent"
-import { BrowserRouter, Route, Link, Router } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      {/* <AddingProductComponent/> */}
-      <SignupComponent />
-      {/* <BrowserRouter>
-        <Route path="/signup" element={<SignupComponent/>} />
-        <Route path="/signin" element={<LoginComponent/>}>
-          <Route path="/addproduct" element={<AddingProductComponent  />} />
-        </Route>
-    </BrowserRouter> */}
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+
+      <main>
+        {/* <NavBarComponent/> */}
+        <Switch>
+          <Route path="/" component={SignupComponent} exact />
+          <Route path="/signin" component={LoginComponent} />
+          <Route path="/product" component={AddingProductComponent} />
+        </Switch>
+      </main>
+    );
+  }
 }
 
 export default App;

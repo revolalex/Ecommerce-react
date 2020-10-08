@@ -21,8 +21,8 @@ class SignupComponent extends Component {
     });
   }
   handlePassword(event) {
-    this.setState({
-      password: event.target.value,
+    this.setState({ password: event.target.value,}, () => {
+      this.comparePassword();
     });
   }
   // The second (optional) parameter is a callback function that 
@@ -37,7 +37,7 @@ class SignupComponent extends Component {
     console.log(this.state.password);
     console.log(this.state.confirmPassword);
     this.setState({
-      passTest: this.state.password == this.state.confirmPassword,
+      passTest: this.state.password === this.state.confirmPassword,
     });
     console.log(this.state.passTest);
   }
