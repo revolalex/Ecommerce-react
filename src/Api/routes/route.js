@@ -86,7 +86,7 @@ const appRouter = async function(app, connection) {
       console.log(user);
       connection.query(addUser, [user], (err) => {
         if (err) throw err;
-        res.status(201).send(`Utilisateur enregistré: ${req.body.firstName}`);
+        res.status(201).send(`Utilisateur enregistré`);
       });
     } else {
       res.send("error");

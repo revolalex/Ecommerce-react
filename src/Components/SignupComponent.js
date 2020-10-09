@@ -77,33 +77,53 @@ class SignupComponent extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(userObject);
-    try {
-      axios
-        .post(`http://localhost:8080/users/sign-up/`, userObject)
-        .then((result) => {
-          console.log("RESULT", result);
-          this.setState({
-            submitOk: true,
+    var mailformat = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (userObject.firstName.length < 3) {
+      alert("first name error: min 3 character");
+    } else if (userObject.lastName.length < 3) {
+      alert("last name error: min 3 character");
+    } else if (userObject.url.length < 10) {
+      alert("url profile picture require");
+    } else if (userObject.password < 8) {
+      alert("password minimun 8 character");
+    } else if (!userObject.email.match(mailformat)) {
+      alert("email incorrect");
+    } else if (userObject.password != this.state.confirmPassword) {
+      alert("confirm password error");
+    } else {
+      console.log(userObject);
+      try {
+        axios
+          .post(`http://localhost:8080/users/sign-up/`, userObject)
+          .then((result) => {
+            console.log("RESULT", result);
+            if (result.data === "Utilisateur enregistré") {
+              this.setState({
+                submitOk: true,
+              });
+              // reset input
+              this.setState({
+                firstName: "",
+                lastName: "",
+                url: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+              });
+            }
+            if (result.data === "error") {
+              alert("request error");
+            }
+          })
+          .catch(() => {
+            console.log("Oops, request failed!");
           });
-          // reset input
-          this.setState({
-            firstName: "",
-            lastName: "",
-            url: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-          });
-        })
-
-        .catch(() => {
-          console.log("Oops, request failed!");
-        });
-    } catch (error) {
-      console.log(error);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
+
   render() {
     let testConfirmPassword;
     const passwordMatch = this.state.passTest;
@@ -148,14 +168,13 @@ class SignupComponent extends Component {
       requireUrl = <span id="formTestUrl">Require</span>;
     }
 
-    let emailTestFormat
-    var mailformat = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    if(this.state.email.match(mailformat)){
+    let emailTestFormat;
+    var mailformat = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (this.state.email.match(mailformat)) {
       emailTestFormat = <span id="formTestEmail"></span>;
-    } else{
+    } else {
       emailTestFormat = <span id="formTestEmail">valid email required</span>;
     }
-
 
     return (
       <div>
