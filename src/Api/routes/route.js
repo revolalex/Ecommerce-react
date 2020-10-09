@@ -183,12 +183,14 @@ const appRouter = async function(app, connection) {
     let prices = req.body.prices;
     let name = req.body.name;
     let description = req.body.description;
+    let url = req.body.url;
     let id_user_affiliate = req.body.id_user_affiliate;
 
     const productObject = {
       category: category,
       name: name,
       description: description,
+      url: url,
       prices: prices,
       id_user_affiliate: id_user_affiliate,
     };

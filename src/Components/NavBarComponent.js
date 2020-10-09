@@ -5,10 +5,11 @@ import "./NavBar.css";
 
 import ProductCardComponet from "./ProductCardComponent";
 import ProductCardComponet2 from "./ProductCardComponent2";
+import ProductListPage from "./ProductListPage";
 
 import SignupComponent from "./SignupComponent";
 import SignInComponent from "./SignInComponent";
-import AddingProductComponent from "./AddingProductComponent";
+import CreateProductPage from "./CreateProductPage";
 
 export default class Navbare extends Component {
   render() {
@@ -27,9 +28,10 @@ export default class Navbare extends Component {
               <Nav className="mr-auto">
                 <Nav.Link href="/">Sign-Up</Nav.Link>
                 <Nav.Link href="/sign-in">Sign-In</Nav.Link>
-                <Nav.Link href="/product">Product</Nav.Link>
+                <Nav.Link href="/addProduct">Product</Nav.Link>
                 <Nav.Link href="/productCard">ProductCard</Nav.Link>
                 <Nav.Link href="/productCard2">ProductCard2</Nav.Link>
+                <Nav.Link href="/ProductListPage">ProductListPage</Nav.Link>
               </Nav>
               <Form inline>
                 <FormControl
@@ -42,39 +44,18 @@ export default class Navbare extends Component {
             </Navbar.Collapse>
           </Navbar>
           <Switch>
-            <Route path="/ProductCard2">
-              <ProductCardComponent2 />
-            </Route>
-            <Route path="/ProductCard">
-              <ProductCardComponent />
-            </Route>
-            <Route path="/Product">
-              <ProductComponentFunction />
-            </Route>
-            <Route path="/Sign-in">
-              <SignInComponents />
-            </Route>
-            <Route path="/">
-              <SignupComponents />
-            </Route>
+            <Route exact path="/" component={SignupComponent}></Route>
+            <Route path="/sign-in" component={SignInComponent}></Route>
+            <Route path="/addProduct" component={CreateProductPage}></Route>
+            <Route path="/productCard" component={ProductCardComponet}></Route>
+            <Route
+              path="/productCard2"
+              component={ProductCardComponet2}
+            ></Route>
+            <Route path="/ProductListPage" component={ProductListPage}></Route>
           </Switch>
         </Router>
       </div>
     );
   }
-}
-function SignupComponents() {
-  return <SignupComponent />;
-}
-function SignInComponents() {
-  return <SignInComponent />;
-}
-function ProductComponentFunction() {
-  return <AddingProductComponent />;
-}
-function ProductCardComponent() {
-  return <ProductCardComponet />;
-}
-function ProductCardComponent2() {
-  return <ProductCardComponet2 />;
 }

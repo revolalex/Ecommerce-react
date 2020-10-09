@@ -88,7 +88,7 @@ class SignupComponent extends Component {
       alert("password minimun 8 character");
     } else if (!userObject.email.match(mailformat)) {
       alert("email incorrect");
-    } else if (userObject.password != this.state.confirmPassword) {
+    } else if (userObject.password !== this.state.confirmPassword) {
       alert("confirm password error");
     } else {
       console.log(userObject);
