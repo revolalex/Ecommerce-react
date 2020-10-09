@@ -6,11 +6,7 @@ export default class ProductCardComponent extends Component {
   render() {
     return (
       <div >
-        <div className="waveBox">
-          <div className="wave -one"></div>
-          <div className="wave -two"></div>
-          <div className="wave -three"></div>
-        </div>
+
         <Card 
           id="myCard"
           className="text-center"

@@ -5,11 +5,6 @@ class LoginComponent extends Component {
   render() {
     return (
       <div>
-        <div className="waveBox">
-          <div className="wave -one"></div>
-          <div className="wave -two"></div>
-          <div className="wave -three"></div>
-        </div>
         <div className="login-box">
           <h2>Sign-In</h2>
           <form>

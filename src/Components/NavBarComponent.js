@@ -14,6 +14,11 @@ export default class Navbare extends Component {
   render() {
     return (
       <div>
+        <div className="waveBox">
+          <div className="wave -one"></div>
+          <div className="wave -two"></div>
+          <div className="wave -three"></div>
+        </div>
         <Router>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand href="/">React-Ecom</Navbar.Brand>
