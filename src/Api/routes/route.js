@@ -8,33 +8,89 @@ const appRouter = async function(app, connection) {
 
   /*****************************************************************************/
 
+  // await app.post("/users/sign-up", function(req, res) {
+  //   let password = req.body.password;
+  //   let lastName = req.body.lastName;
+  //   let firstName = req.body.firstName;
+  //   let url = req.body.url;
+  //   if (password.length < 0) {
+  //     if (lastName.length < 0) {
+  //       if (firstName.length < 0) {
+  //         if (url.length < 0) {
+  //           let capitalLastName =
+  //             lastName.charAt(0).toUpperCase() + lastName.slice(1);
+  //           let capitalFirstName =
+  //             firstName.charAt(0).toUpperCase() + firstName.slice(1);
+
+  //           let cryptedPassword = bcrypt.hashSync(password, saltRounds);
+
+  //           let addUser =
+  //             "INSERT INTO users (firstName,lastName,url,email,password) VALUES (?)";
+  //           let user = [
+  //             capitalFirstName,
+  //             capitalLastName,
+  //             url,
+  //             req.body.email.toLowerCase(),
+  //             cryptedPassword,
+  //           ];
+  //           connection.query(addUser, [user], (err) => {
+  //             if (err) throw err;
+  //             res
+  //               .status(201)
+  //               .send(`Utilisateur enregistré: ${req.body.firstName}`);
+  //           });
+  //         } else {
+  //           console.log("url error");
+  //         }
+  //       } else {
+  //         console.log("first name error");
+  //       }
+  //     } else {
+  //       console.log("last Name Error");
+  //     }
+  //   } else {
+  //     console.log("password Error");
+  //   }
+  // });
+
   // - POST /users/sign-up ⇒ Will add a user in the Users table (of course the
   // password will be encrypted...)
   await app.post("/users/sign-up", (req, res) => {
-    let password = req.body.password
-    console.log(password);
-    // work with the names
-    let lastName = req.body.lastName
+    let password = req.body.password;
+    let lastName = req.body.lastName;
     let firstName = req.body.firstName;
-    let url = req.body.url
-  
-    let capitalLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
-    let capitalFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
-    
-    let cryptedPassword = bcrypt.hashSync(password, saltRounds);
+    let url = req.body.url;
 
-    let addUser = "INSERT INTO users (firstName,lastName,url,email,password) VALUES (?)";
-    let user = [
-      capitalFirstName,
-      capitalLastName,
-      url,
-      req.body.email.toLowerCase(),
-      cryptedPassword,
-    ];
-    connection.query(addUser, [user], (err) => {
-      if (err) throw err;
-      res.status(201).send(`Utilisateur enregistré: ${req.body.firstName}`);
-    });
+    if (
+      password.length &&
+      lastName.length &&
+      firstName.length &&
+      url.length > 0
+    ) {
+      let capitalLastName =
+        lastName.charAt(0).toUpperCase() + lastName.slice(1);
+      let capitalFirstName =
+        firstName.charAt(0).toUpperCase() + firstName.slice(1);
+
+      let cryptedPassword = bcrypt.hashSync(password, saltRounds);
+
+      let addUser =
+        "INSERT INTO users (firstName,lastName,url,email,password) VALUES (?)";
+      let user = [
+        capitalFirstName,
+        capitalLastName,
+        url,
+        req.body.email.toLowerCase(),
+        cryptedPassword,
+      ];
+      console.log(user);
+      connection.query(addUser, [user], (err) => {
+        if (err) throw err;
+        res.status(201).send(`Utilisateur enregistré: ${req.body.firstName}`);
+      });
+    } else {
+      res.send("error");
+    }
   });
 
   // GET /users/ ⇒ Return the list of registered users (return only Names and Ids)
@@ -149,8 +205,7 @@ const appRouter = async function(app, connection) {
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = 
-    `SELECT users.name AS username, products.name, products.category, products.description, products.prices 
+    let productInfo = `SELECT users.name AS username, products.name, products.category, products.description, products.prices 
     FROM users INNER JOIN products ON products.id_user_affiliate = ${id} `;
 
     connection.query(productInfo, function(err, results) {

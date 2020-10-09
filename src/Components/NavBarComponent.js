@@ -7,7 +7,7 @@ import ProductCardComponet from "./ProductCardComponent";
 import ProductCardComponet2 from "./ProductCardComponent2";
 
 import SignupComponent from "./SignupComponent";
-import LoginComponent from "./LoginComponent";
+import SignInComponent from "./SignInComponent";
 import AddingProductComponent from "./AddingProductComponent";
 
 export default class Navbare extends Component {
@@ -19,7 +19,7 @@ export default class Navbare extends Component {
           <div className="wave -two"></div>
           <div className="wave -three"></div>
         </div>
-        <Router>
+        <Router id="myNav">
           <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand href="/">React-Ecom</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -41,22 +41,6 @@ export default class Navbare extends Component {
               </Form>
             </Navbar.Collapse>
           </Navbar>
-          {/* <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="/">React-Ecom</Navbar.Brand>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link href="/">Sign-Up</Nav.Link>
-                <Nav.Link href="/sign-in">Sign-In</Nav.Link>
-                <Nav.Link href="/product">Product</Nav.Link>
-              </Nav>
-              <Form inline>
-                <FormControl type="text" placeholder="Search" />
-                <Button className="searchButton" variant="outline-info">
-                  Search Product
-                </Button>
-              </Form>
-            </Navbar.Collapse>
-          </Navbar> */}
           <Switch>
             <Route path="/ProductCard2">
               <ProductCardComponent2 />
@@ -68,7 +52,7 @@ export default class Navbare extends Component {
               <ProductComponentFunction />
             </Route>
             <Route path="/Sign-in">
-              <LoginComponents />
+              <SignInComponents />
             </Route>
             <Route path="/">
               <SignupComponents />
@@ -79,15 +63,12 @@ export default class Navbare extends Component {
     );
   }
 }
-
 function SignupComponents() {
   return <SignupComponent />;
 }
-
-function LoginComponents() {
-  return <LoginComponent />;
+function SignInComponents() {
+  return <SignInComponent />;
 }
-
 function ProductComponentFunction() {
   return <AddingProductComponent />;
 }
