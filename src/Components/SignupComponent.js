@@ -41,6 +41,9 @@ class SignupComponent extends Component {
       url: event.target.value,
     });
   }
+  // The second (optional) parameter is a callback function that
+  // will be executed once setState is completed and the
+  // component is re-rendered.
   handlePassword(event) {
     this.setState({ password: event.target.value }, () => {
       this.comparePassword();
@@ -51,7 +54,6 @@ class SignupComponent extends Component {
       email: event.target.value,
     });
   }
-
   // The second (optional) parameter is a callback function that
   // will be executed once setState is completed and the
   // component is re-rendered.
@@ -65,6 +67,7 @@ class SignupComponent extends Component {
       passTest: this.state.password === this.state.confirmPassword,
     });
   }
+  // post user to DB
   buttonIsClick(e) {
     e.preventDefault();
     let userObject = {
@@ -83,6 +86,7 @@ class SignupComponent extends Component {
           this.setState({
             submitOk: true,
           });
+          // reset input
           this.setState({
             firstName: "",
             lastName: "",
@@ -90,10 +94,9 @@ class SignupComponent extends Component {
             email: "",
             password: "",
             confirmPassword: "",
-
-          })
+          });
         })
-        
+
         .catch(() => {
           console.log("Oops, request failed!");
         });
@@ -102,20 +105,20 @@ class SignupComponent extends Component {
     }
   }
   render() {
-    let textConfPass;
+    let testConfirmPassword;
     const passwordMatch = this.state.passTest;
     if (passwordMatch) {
-      textConfPass = <p></p>;
+      testConfirmPassword = <p></p>;
     } else {
-      textConfPass = <p className="passAlert">password not match</p>;
+      testConfirmPassword = <span id="formTestPass">Password not match</span>;
     }
 
-    let submitTest;
+    let submitUserTest;
     const submitTestDone = this.state.submitOk;
     if (submitTestDone) {
-      submitTest = <p id="submitOk">User Created, please sign-in !</p>;
+      submitUserTest = <p id="submitOk">User Created, please sign-in !</p>;
     } else {
-      submitTest = <p id="submitOk"></p>;
+      submitUserTest = <p id="submitOk"></p>;
     }
 
     let passwordCharCheck;
@@ -123,8 +126,36 @@ class SignupComponent extends Component {
       passwordCharCheck = <p id="formTest"></p>;
     } else {
       // passwordCharCheck = <span id="formTest">Min 8 characters</span>;
-    passwordCharCheck = <span id="formTest">Min 8 characters, need {8 -this.state.password.length} more</span>;
+      passwordCharCheck = (
+        <span id="formTest">
+          Min 8 characters, need {8 - this.state.password.length} more
+        </span>
+      );
     }
+
+    let requireFirstName;
+    if (this.state.firstName.length < 3) {
+      requireFirstName = <span id="formTestNames">Min 3 character</span>;
+    }
+
+    let requireLastName;
+    if (this.state.lastName.length < 3) {
+      requireLastName = <span id="formTestNames">Min 3 character</span>;
+    }
+
+    let requireUrl;
+    if (this.state.url.length < 10) {
+      requireUrl = <span id="formTestUrl">Require</span>;
+    }
+
+    let emailTestFormat
+    var mailformat = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if(this.state.email.match(mailformat)){
+      emailTestFormat = <span id="formTestEmail"></span>;
+    } else{
+      emailTestFormat = <span id="formTestEmail">valid email required</span>;
+    }
+
 
     return (
       <div>
@@ -141,7 +172,7 @@ class SignupComponent extends Component {
                 onChange={this.handleFirstName}
                 required
               ></input>
-              <label>First Name</label>
+              <label>First Name {requireFirstName}</label>
             </div>
             <div className="user-box">
               <input
@@ -151,7 +182,7 @@ class SignupComponent extends Component {
                 onChange={this.handleLastName}
                 required
               ></input>
-              <label>Last Name</label>
+              <label>Last Name {requireLastName}</label>
             </div>
             <div className="user-box">
               <input
@@ -161,17 +192,17 @@ class SignupComponent extends Component {
                 onChange={this.handleImgProfile}
                 required
               ></input>
-              <label>Profil Picture url</label>
+              <label>Profil Picture url {requireUrl}</label>
             </div>
             <div className="user-box">
-            <input
+              <input
                 type="text"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleEmail}
                 required
               ></input>
-              <label>Email</label>
+              <label>Email {emailTestFormat}</label>
             </div>
             <div className="user-box">
               <input
@@ -192,8 +223,7 @@ class SignupComponent extends Component {
                 onChange={this.handlePasswordConfirm}
                 required
               ></input>
-              <label>Confirm Password</label>
-              {textConfPass}
+              <label>Confirm Password {testConfirmPassword}</label>
             </div>
 
             <a href="/#" onClick={this.buttonIsClick} type="submit">
@@ -203,7 +233,7 @@ class SignupComponent extends Component {
               <span></span>
               Submit
             </a>
-            {submitTest}
+            {submitUserTest}
           </form>
         </div>
       </div>
