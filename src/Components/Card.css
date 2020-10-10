@@ -1,11 +1,21 @@
 #myCard{
     margin-top: 10vh;
-    margin-left: 35%;
     opacity: 0.8;
-    
 }
 
 .cardProductImg{
     max-width: 330px;
     padding-bottom: 30px;
+}
+.blabla{
+    font-size: 10em;
+    color: yellow;
+}
+#myColums{
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+html{
+    height: 180%;
 }

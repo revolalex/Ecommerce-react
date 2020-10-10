@@ -54,32 +54,31 @@ class CreateProductPage extends Component {
       description: this.state.description,
       url: this.state.url,
       prices: this.state.prices,
-      id_user_affiliate: localStorage.getItem('id'),
+      id_user_affiliate: localStorage.getItem("id"),
     };
     console.log(productObject);
-    axios.post("http://localhost:8080/products/", productObject)
-    .then((result)=>{
-      console.log(result)
+    axios
+      .post("http://localhost:8080/products/", productObject)
+      .then((result) => {
+        console.log(result);
 
-      this.setState({
-        submitOk: true,
+        this.setState({
+          submitOk: true,
+        });
+
+        // reset input
+        this.setState({
+          category: "",
+          name: "",
+          description: "",
+          url: "",
+          prices: "",
+          id_user_affiliate: "",
+        });
+      })
+      .catch(() => {
+        console.log("Oops, request failed!");
       });
-
-
-
-       // reset input
-       this.setState({
-        category: "",
-        name: "",
-        description: "",
-        url: "",
-        prices: "",
-        id_user_affiliate: "",
-      });
-    })
-    .catch(() => {
-      console.log("Oops, request failed!");
-    });
   }
   render() {
     let submitProduct;

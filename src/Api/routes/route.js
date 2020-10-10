@@ -169,7 +169,7 @@ const appRouter = async function(app, connection) {
 
   //   GET /products/ ⇒ Return the list of registered products (return only Names and Ids, Prices)
   await app.get("/products/", function(req, res) {
-    let getProductsInfo = "SELECT name, id FROM products";
+    let getProductsInfo = "SELECT * FROM products";
     connection.query(getProductsInfo, function(err, results) {
       if (err) throw err;
       res.send(results);
