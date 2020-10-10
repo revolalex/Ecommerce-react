@@ -11,6 +11,8 @@ import SignupComponent from "./SignupComponent";
 import SignInComponent from "./SignInComponent";
 import CreateProductPage from "./CreateProductPage";
 
+import UsersList from"./userList"
+
 export default class Navbare extends Component {
   render() {
     return (
@@ -32,6 +34,7 @@ export default class Navbare extends Component {
                 <Nav.Link href="/productCard">ProductCard</Nav.Link>
                 <Nav.Link href="/productCard2">ProductCard2</Nav.Link>
                 <Nav.Link href="/ProductListPage">ProductListPage</Nav.Link>
+                <Nav.Link href="/UsersList">Users List</Nav.Link>
               </Nav>
               <Form inline>
                 <FormControl
@@ -53,6 +56,7 @@ export default class Navbare extends Component {
               component={ProductCardComponet2}
             ></Route>
             <Route path="/ProductListPage" component={ProductListPage}></Route>
+            <Route path="/UsersList" component={UsersList}></Route>
           </Switch>
         </Router>
       </div>

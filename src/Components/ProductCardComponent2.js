@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./Card.css";
+import "./productCard2.css";
 
 export default class ProductCardComponent2 extends Component {
   render() {
@@ -12,12 +12,16 @@ export default class ProductCardComponent2 extends Component {
           <img className="cardProductImg" src="https://images-na.ssl-images-amazon.com/images/I/71j3g0GW6EL._AC_SL1500_.jpg" alt=""/>
           <form>
             <div className="user-box">
-              <input type="text" name="email" required=""></input>
-              <label>Description</label>
+              <h4>Description</h4>
+              <p>Clablablabla valavkavkav vakav</p>
             </div>
             <div className="user-box">
-              <input type="password" name="password" required=""></input>
-              <label>Password</label>
+              <h4>Category</h4>
+              <p>Game</p>
+            </div>
+            <div className="user-box">
+              <h4>Price</h4>
+              <p>60€</p>
             </div>
             <a href="t">
               <span></span>

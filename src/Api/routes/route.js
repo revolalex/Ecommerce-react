@@ -103,6 +103,16 @@ const appRouter = async function(app, connection) {
     });
   });
 
+   // Get all users with all info
+   await app.get("/allUsers", function(req, res) {
+    let getUserInfo = "SELECT * FROM users";
+    connection.query(getUserInfo, function(err, results) {
+      console.log(err);
+      if (err) throw err;
+      res.send(results);
+    });
+  });
+
   // - POST /users/sign-in ⇒ Will check whether the password is the good one for
   // this specific email. If so it will deliver a JWT including Email and Id of this User.
   await app.post("/users/sign-in", function(req, res) {
