@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("./modules/config");
 const saltRounds = 12;
+const auth = require("../middleware/auth");
 
 const appRouter = async function(app, connection) {
   /**************************** API USER ***************************************/
@@ -188,7 +189,7 @@ const appRouter = async function(app, connection) {
 
   // must add middleware for jwt allow acces
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
-  await app.post("/products/", function(req, res) {
+  await app.post("/products/",auth, function(req, res) {
     let category = req.body.category;
     let prices = req.body.prices;
     let name = req.body.name;

@@ -13,6 +13,11 @@ class CreateProductPage extends Component {
       prices: "",
       id_user_affiliate: "",
       submitOk: false,
+      headerWithToken: {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      },
     };
     this.handleUrl = this.handleUrl.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
@@ -47,6 +52,7 @@ class CreateProductPage extends Component {
     });
   }
   buttonIsClick(e) {
+    console.log(this.state.headerWithToken);
     e.preventDefault();
     let productObject = {
       category: this.state.category,
@@ -58,7 +64,7 @@ class CreateProductPage extends Component {
     };
     console.log(productObject);
     axios
-      .post("http://localhost:8080/products/", productObject)
+      .post("http://localhost:8080/products/", productObject, this.state.headerWithToken)
       .then((result) => {
         console.log(result);
 
