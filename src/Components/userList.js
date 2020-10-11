@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CardColumns, Card } from "react-bootstrap";
-import "./Card.css";
+import "./ProductCard.css";
 import axios from "axios";
 
 class UsersList extends Component {

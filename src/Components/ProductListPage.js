@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CardColumns, Card, Button } from "react-bootstrap";
-import "./Card.css";
+import "./ProductList.css";
 import axios from "axios";
 
 class ProductListPage extends Component {
@@ -28,9 +28,11 @@ class ProductListPage extends Component {
   render() {
     console.log(this.state.data);
     return (
+      <div id="myRow" class="row">
       <CardColumns id="myColums">
         {this.state.data.map((product) => this.renderProduct(product))}
       </CardColumns>
+      </div>
     );
   }
 

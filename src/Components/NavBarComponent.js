@@ -3,15 +3,16 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import "./NavBar.css";
 
-import ProductCardComponet from "./ProductCardComponent";
+import UserListComponet from "./UserListComponent";
 import ProductCardComponet2 from "./ProductCardComponent2";
 import ProductListPage from "./ProductListPage";
 
 import SignupComponent from "./SignupComponent";
 import SignInComponent from "./SignInComponent";
 import CreateProductPage from "./CreateProductPage";
+import encours from "./encours";
 
-import UsersList from"./userList"
+import UsersList from "./userList";
 
 export default class Navbare extends Component {
   render() {
@@ -31,10 +32,11 @@ export default class Navbare extends Component {
                 <Nav.Link href="/">Sign-Up</Nav.Link>
                 <Nav.Link href="/sign-in">Sign-In</Nav.Link>
                 <Nav.Link href="/addProduct">Product</Nav.Link>
-                <Nav.Link href="/productCard">ProductCard</Nav.Link>
+                <Nav.Link href="/Users-List">Users-List</Nav.Link>
+                <Nav.Link href="/list-of-products">list-of-products</Nav.Link>
                 <Nav.Link href="/productCard2">ProductCard2</Nav.Link>
                 <Nav.Link href="/ProductListPage">ProductListPage</Nav.Link>
-                <Nav.Link href="/UsersList">Users List</Nav.Link>
+                <Nav.Link href="/UsersList">Test</Nav.Link>
               </Nav>
               <Form inline>
                 <FormControl
@@ -50,13 +52,14 @@ export default class Navbare extends Component {
             <Route exact path="/" component={SignupComponent}></Route>
             <Route path="/sign-in" component={SignInComponent}></Route>
             <Route path="/addProduct" component={CreateProductPage}></Route>
-            <Route path="/productCard" component={ProductCardComponet}></Route>
+            <Route path="/Users-List" component={UserListComponet}></Route>
             <Route
               path="/productCard2"
               component={ProductCardComponet2}
             ></Route>
             <Route path="/ProductListPage" component={ProductListPage}></Route>
             <Route path="/UsersList" component={UsersList}></Route>
+            <Route path="/list-of-products" component={encours}></Route>
           </Switch>
         </Router>
       </div>
