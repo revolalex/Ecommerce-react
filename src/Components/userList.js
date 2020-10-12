@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CardColumns, Card } from "react-bootstrap";
-import "./ProductCard.css";
+import "./UserList.css";
 import axios from "axios";
 
 class UsersList extends Component {
@@ -42,7 +42,7 @@ class UsersList extends Component {
         border="info"
         bg="dark"
         text="light"
-        style={{ width: "18rem" }}
+        // style={{ width: "18rem" }}
       >
         <Card.Header>{users.firstName} {users.lastName}</Card.Header>
         <Card.Img variant="top" src={users.url} />

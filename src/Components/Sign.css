@@ -1,4 +1,4 @@
-html{
+html {
   height: 100%;
 }
 body {
@@ -6,7 +6,6 @@ body {
   padding: 0;
   font-family: sans-serif;
   background: linear-gradient(#141e30, #243b55);
-  height: 100vh;
 }
 
 .login-box {
@@ -21,8 +20,6 @@ body {
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   margin-top: 50vh;
- 
-
 }
 
 .login-box h2 {
@@ -272,39 +269,38 @@ body {
   margin-left: 100px;
 }
 
-
 #buttonNotVisible {
   display: none;
 }
 #submitOk {
-  color:  #03e9f4;
+  color: #03e9f4;
   float: right;
 }
 
 /************** Sentence of validation in form ****************************/
-#formTest{
-  color:  #03e9f4;
+#formTest {
+  color: #03e9f4;
   font-size: 0.8em;
   padding-left: 50px;
   display: left;
 }
-#formTestNames{
-  color:  #03e9f4;
+#formTestNames {
+  color: #03e9f4;
   font-size: 0.8em;
   padding-left: 130px;
 }
-#formTestUrl{
-  color:  #03e9f4;
+#formTestUrl {
+  color: #03e9f4;
   font-size: 0.8em;
   padding-left: 140px;
 }
-#formTestEmail{
-  color:  #03e9f4;
+#formTestEmail {
+  color: #03e9f4;
   font-size: 0.8em;
   padding-left: 150px;
 }
-#formTestPass{
-  color:  #03e9f4;
+#formTestPass {
+  color: #03e9f4;
   font-size: 0.8em;
   padding-left: 60px;
 }

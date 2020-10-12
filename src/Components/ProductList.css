@@ -1,5 +1,9 @@
-#myCard{
-    margin-top: 10vh;
-    opacity: 0.8;
-    flex-wrap: wrap;
+html{
+    height: 100%;
 }
+#myCard {
+  margin-top: 10vh;
+  opacity: 0.8;
+  flex-wrap: wrap;
+}
+
