@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Button, Col , Row, Container} from "react-bootstrap";
+import { Card, Col , Row, Container} from "react-bootstrap";
 import "./ProductCard.css";
 import axios from 'axios';
 

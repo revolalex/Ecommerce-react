@@ -6,6 +6,7 @@ class CreateProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: [],
       category: "",
       name: "",
       description: "",
@@ -25,6 +26,11 @@ class CreateProductPage extends Component {
     this.handleName = this.handleName.bind(this);
     this.handlePrices = this.handlePrices.bind(this);
     this.buttonIsClick = this.buttonIsClick.bind(this);
+  }
+  componentWillMount() {
+    this.setState({
+      token: localStorage.getItem("token"),
+    });
   }
   handleCategory(event) {
     this.setState({

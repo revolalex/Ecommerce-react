@@ -37,7 +37,7 @@ class UsersList extends Component {
   usersList(users, index) {
     return (
       <Col xs={6} md={4}>
-               <Card
+        <Card
           className="box"
           border="info"
           bg="dark"
@@ -45,12 +45,13 @@ class UsersList extends Component {
           style={{ width: "18rem" }}
           key={users.id}
         >
-          <Card.Header>{users.firstName} {users.lastName}</Card.Header>
+          <Card.Header>
+            {users.firstName} {users.lastName}
+          </Card.Header>
           <Card.Img className="testImg" variant="top" src={users.url} />
           <Card.Body>
             <Card.Title>Email: {users.email}</Card.Title>
             <Card.Text>{users.description}</Card.Text>
-         
           </Card.Body>
           <Card.Footer text="light">Id: {users.id}</Card.Footer>
         </Card>

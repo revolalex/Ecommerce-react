@@ -10,8 +10,8 @@ import UserListComponent from "./UserListComponent";
 
 //to work on
 import ProductCardComponet2 from "./ProductCardComponent2";
-import ProductListPage from "./ProductListPage";
-import UsersList from "./UserList";
+// import ProductListPage from "./ProductListPage";
+// import UsersList from "./UserList";
 
 import ListOfProducts from "./ListOfProductsComponent";
 
@@ -23,23 +23,27 @@ export default class Navbare extends Component {
     };
     this.DeleteToken = this.DeleteToken.bind(this);
   }
+
   componentDidMount() {
     this.setState({
       token: localStorage.getItem("token"),
     });
   }
-  DeleteToken() {
-    
-    localStorage.setItem("token", "");
 
-    if (localStorage.getItem("token") === "") {
+  DeleteToken() {
+    const { history } = this.props;
+    localStorage.setItem("token", "");
+    this.setState({
+      token: "",
+    });
+    if (localStorage.getItem("token") === "" && this.state.token === "") {
       console.log("super token effacer");
-      this.props.history.push("/sign-in");
+      history.push("/sign-in");
     }
   }
   render() {
     let withToken;
-    const testToken = localStorage.getItem("token");
+    const testToken = this.state.token;
     if (testToken) {
       withToken = (
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -47,15 +51,12 @@ export default class Navbare extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/">Sign-Up</Nav.Link>
-              <Nav.Link href="/sign-in">Sign-In</Nav.Link>
-              <Nav.Link href="/addProduct">Product</Nav.Link>
-              <Nav.Link href="/Users-List">Users-List</Nav.Link>
-              <Nav.Link href="/list-of-products">list-of-products</Nav.Link>
+
+              <Nav.Link href="/addProduct">Add Product</Nav.Link>
+              <Nav.Link href="/Users-List">Users List</Nav.Link>
+              <Nav.Link href="/list-of-products">Products List</Nav.Link>
               {/* prototype */}
               <Nav.Link href="/productCard2">ProductCard2</Nav.Link>
-              <Nav.Link href="/ProductListPage">ProductListPage</Nav.Link>
-              <Nav.Link href="/UsersList">Test</Nav.Link>
             </Nav>
             <Form inline>
               <FormControl
@@ -111,8 +112,6 @@ export default class Navbare extends Component {
               path="/productCard2"
               component={ProductCardComponet2}
             ></Route>
-            <Route path="/ProductListPage" component={ProductListPage}></Route>
-            <Route path="/UsersList" component={UsersList}></Route>
           </Switch>
         </Router>
       </div>

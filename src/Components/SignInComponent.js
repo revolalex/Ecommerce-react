@@ -44,6 +44,7 @@ class SignInComponent extends Component {
       password: this.state.password,
     };
     console.log(userObject);
+  
     try {
       axios
         .post(`http://localhost:8080/users/sign-in/`, userObject)
