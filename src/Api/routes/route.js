@@ -6,53 +6,7 @@ const auth = require("../middleware/auth");
 
 const appRouter = async function(app, connection) {
   /**************************** API USER ***************************************/
-
   /*****************************************************************************/
-
-  // await app.post("/users/sign-up", function(req, res) {
-  //   let password = req.body.password;
-  //   let lastName = req.body.lastName;
-  //   let firstName = req.body.firstName;
-  //   let url = req.body.url;
-  //   if (password.length < 0) {
-  //     if (lastName.length < 0) {
-  //       if (firstName.length < 0) {
-  //         if (url.length < 0) {
-  //           let capitalLastName =
-  //             lastName.charAt(0).toUpperCase() + lastName.slice(1);
-  //           let capitalFirstName =
-  //             firstName.charAt(0).toUpperCase() + firstName.slice(1);
-
-  //           let cryptedPassword = bcrypt.hashSync(password, saltRounds);
-
-  //           let addUser =
-  //             "INSERT INTO users (firstName,lastName,url,email,password) VALUES (?)";
-  //           let user = [
-  //             capitalFirstName,
-  //             capitalLastName,
-  //             url,
-  //             req.body.email.toLowerCase(),
-  //             cryptedPassword,
-  //           ];
-  //           connection.query(addUser, [user], (err) => {
-  //             if (err) throw err;
-  //             res
-  //               .status(201)
-  //               .send(`Utilisateur enregistré: ${req.body.firstName}`);
-  //           });
-  //         } else {
-  //           console.log("url error");
-  //         }
-  //       } else {
-  //         console.log("first name error");
-  //       }
-  //     } else {
-  //       console.log("last Name Error");
-  //     }
-  //   } else {
-  //     console.log("password Error");
-  //   }
-  // });
 
   // - POST /users/sign-up ⇒ Will add a user in the Users table (of course the
   // password will be encrypted...)
@@ -84,7 +38,7 @@ const appRouter = async function(app, connection) {
         req.body.email.toLowerCase(),
         cryptedPassword,
       ];
-      console.log("USER -- /users/sign-up",user);
+      console.log("USER -- /users/sign-up", user);
       connection.query(addUser, [user], (err) => {
         if (err) throw err;
         res.status(201).send(`Utilisateur enregistré`);
@@ -104,8 +58,8 @@ const appRouter = async function(app, connection) {
     });
   });
 
-   // Get all users with all info
-   await app.get("/allUsers", function(req, res) {
+  // Get all users with all info
+  await app.get("/allUsers", function(req, res) {
     let getUserInfo = "SELECT * FROM users";
     connection.query(getUserInfo, function(err, results) {
       if (err) throw err;
@@ -174,7 +128,6 @@ const appRouter = async function(app, connection) {
   });
 
   /**************************** API PRODUCTS ***********************************/
-
   /*****************************************************************************/
 
   //   GET /products/ ⇒ Return the list of registered products (return only Names and Ids, Prices)
@@ -188,7 +141,7 @@ const appRouter = async function(app, connection) {
 
   // must add middleware for jwt allow acces
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
-  await app.post("/products/",auth, function(req, res) {
+  await app.post("/products/", auth, function(req, res) {
     let category = req.body.category;
     let prices = req.body.prices;
     let name = req.body.name;
@@ -217,7 +170,7 @@ const appRouter = async function(app, connection) {
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = `SELECT users.lastName AS username, products.name, products.category, products.description, products.prices 
+    let productInfo = `SELECT users.lastName AS username, products.name, products.category, products.description, products.prices, products.url 
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {

@@ -1,4 +1,9 @@
-html, body {
+html,
+body {
+  min-width: 100%;
+  overflow-x: hidden;
+}
+.myRow {
   min-width: 100%;
   overflow-x: hidden;
 }
@@ -8,4 +13,30 @@ html, body {
 .user-box h4 {
   color: #03e9f4;
 }
-
+.user-box {
+  display: inline;
+}
+.productDiv {
+  overflow-x: hidden;
+}
+.login-box {
+  position: relative;
+  width: auto;
+  padding: 40px;
+  /* transform: translate(-50%, -50%); */
+  background: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  margin-top: 50vh ;
+  height: 80%;
+  background: linear-gradient(#243b55, #141e30);
+  opacity: 0.9;
+}
+@media screen and (max-width: 600px) {
+  .login-box {
+    margin-top: 65vh;
+    margin-right: 1vw;
+    margin-left: 1vw;
+  }
+}

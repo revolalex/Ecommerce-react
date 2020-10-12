@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Button, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
 import axios from "axios";
 import "./ListOfProduct.css";
@@ -10,6 +10,7 @@ class ProductListPage extends Component {
     this.state = {
       data: [],
     };
+    this.productClick = this.productClick.bind(this)
   }
 
   componentDidMount() {
@@ -19,10 +20,15 @@ class ProductListPage extends Component {
         this.setState({
           data: result.data,
         });
+        // localStorage.setItem("product", JSON.stringify(this.state.data));
       })
       .catch(() => {
         console.log("Oops, request failed!");
       });
+  }
+  productClick(id){
+    console.log("IDCLICK",id)
+    localStorage.setItem("productIdClick", JSON.stringify(id));
   }
 
   render() {
@@ -53,7 +59,8 @@ class ProductListPage extends Component {
           <Card.Body>
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
-            <Button variant="info">Add to Cart</Button>
+            <a href="/productCard2" onClick={()=>{localStorage.setItem("productIdClick", JSON.stringify(product.id))}}>More Info</a>
+            {/* <Button variant="info">Add to Cart</Button> */}
           </Card.Body>
           <Card.Footer text="light">{product.prices} €</Card.Footer>
         </Card>
