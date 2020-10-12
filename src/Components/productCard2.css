@@ -1,6 +1,11 @@
+html, body {
+  min-width: 100%;
+  overflow-x: hidden;
+}
 .user-box p {
   color: white;
 }
 .user-box h4 {
   color: #03e9f4;
 }
+

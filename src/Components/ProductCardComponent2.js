@@ -5,7 +5,7 @@ import "./productCard2.css";
 export default class ProductCardComponent2 extends Component {
   render() {
     return (
-      <div>
+      <div className="productDiv">
         <div className="login-box">
           <h2>Nintendo Switch</h2>
           <img

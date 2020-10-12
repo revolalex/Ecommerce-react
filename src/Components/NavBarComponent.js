@@ -62,12 +62,12 @@ class Navbare extends Component {
               <Nav.Link href="/productCard2">ProductCard2</Nav.Link>
             </Nav>
             <Form inline>
-              <FormControl
+              {/* <FormControl
                 type="text"
                 placeholder="Product Search"
                 className="mr-sm-2"
               />
-              <Button variant="outline-info">Search</Button>
+              <Button variant="outline-info">Search</Button> */}
               <Button variant="danger" onClick={this.DeleteToken}>
                 Delete token
               </Button>
