@@ -27,7 +27,7 @@ class CreateProductPage extends Component {
     this.handlePrices = this.handlePrices.bind(this);
     this.buttonIsClick = this.buttonIsClick.bind(this);
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       token: localStorage.getItem("token"),
     });

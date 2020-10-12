@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import "./NavBar.css";
 
+import { withRouter } from "react-router-dom";
+
 import CreateProductPage from "./CreateProductPage";
 import SignupComponent from "./SignupComponent";
 import SignInComponent from "./SignInComponent";
@@ -15,7 +17,7 @@ import ProductCardComponet2 from "./ProductCardComponent2";
 
 import ListOfProducts from "./ListOfProductsComponent";
 
-export default class Navbare extends Component {
+class Navbare extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,16 +33,18 @@ export default class Navbare extends Component {
   }
 
   DeleteToken() {
-    const { history } = this.props;
-    localStorage.setItem("token", "");
+    //reset token
     this.setState({
-      token: "",
+      token: [],
     });
-    if (localStorage.getItem("token") === "" && this.state.token === "") {
-      console.log("super token effacer");
-      history.push("/sign-in");
+    localStorage.setItem("token", []);
+    // check token is empty
+    if (localStorage.getItem("token") == []) {
+      this.props.history.push("/");
+      window.location.reload(false);
     }
   }
+
   render() {
     let withToken;
     const testToken = this.state.token;
@@ -51,7 +55,6 @@ export default class Navbare extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-
               <Nav.Link href="/addProduct">Add Product</Nav.Link>
               <Nav.Link href="/Users-List">Users List</Nav.Link>
               <Nav.Link href="/list-of-products">Products List</Nav.Link>
@@ -82,11 +85,6 @@ export default class Navbare extends Component {
               <Nav.Link href="/">Sign-Up</Nav.Link>
               <Nav.Link href="/sign-in">Sign-In</Nav.Link>
             </Nav>
-            <Form inline>
-              <Button variant="danger" onClick={this.DeleteToken}>
-                Delete token
-              </Button>
-            </Form>
           </Navbar.Collapse>
         </Navbar>
       );
@@ -118,3 +116,4 @@ export default class Navbare extends Component {
     );
   }
 }
+export default withRouter(Navbare);

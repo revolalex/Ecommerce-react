@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Card, Col , Row, Container} from "react-bootstrap";
+import { Card, Col, Row, Container } from "react-bootstrap";
 import "./ProductCard.css";
-import axios from 'axios';
+import axios from "axios";
 
 export default class ProductCardComponent extends Component {
   constructor(props) {
@@ -18,7 +18,6 @@ export default class ProductCardComponent extends Component {
         this.setState({
           data: result.data,
         });
-        console.log("STATE DATA", this.state.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -26,35 +25,34 @@ export default class ProductCardComponent extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div id="myRow">
-      <Container className="testContainer">
-        <Row className="justify-content-md-center">
-          {this.state.data.map((user) => this.renderProduct(user))}
-        </Row>
-      </Container>
+        <Container className="testContainer">
+          <Row className="justify-content-md-center">
+            {this.state.data.map((user) => this.renderProduct(user))}
+          </Row>
+        </Container>
       </div>
     );
   }
 
-  renderProduct(user, index) {
+  renderProduct(user) {
     return (
-      <Col className="testCol" md="auto">
+      <Col className="testCol" md="auto" key={user.id}>
         <Card
           className="box"
           border="info"
           bg="dark"
           text="light"
           style={{ width: "18rem" }}
-          key={index}
         >
-          <Card.Header>{user.firstName} {user.lastName}</Card.Header>
+          <Card.Header>
+            {user.firstName} {user.lastName}
+          </Card.Header>
           <Card.Img className="testImg" variant="top" src={user.url} />
           <Card.Body>
             <Card.Title>Email: {user.email}</Card.Title>
-            <Card.Text>{user.description}</Card.Text>
-         
+            <Card.Text>{user.firstName}</Card.Text>
           </Card.Body>
           <Card.Footer text="light">Id: {user.id}</Card.Footer>
         </Card>
@@ -62,5 +60,3 @@ export default class ProductCardComponent extends Component {
     );
   }
 }
-
-

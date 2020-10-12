@@ -19,7 +19,6 @@ class ProductListPage extends Component {
         this.setState({
           data: result.data,
         });
-        console.log("STATE DATA", this.state.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -27,7 +26,6 @@ class ProductListPage extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div id="myRow">
         <Container className="testContainer">
@@ -39,16 +37,16 @@ class ProductListPage extends Component {
     );
   }
 
-  renderProduct(product, index) {
+  renderProduct(product) {
     return (
-      <Col className="testCol" md="auto">
+      <Col className="testCol" md="auto" key={product.id}>
         <Card
           className="box"
           border="info"
           bg="dark"
           text="light"
           style={{ width: "18rem" }}
-          key={index}
+          
         >
           <Card.Header>{product.category}</Card.Header>
           <Card.Img className="testImg" variant="top" src={product.url} />

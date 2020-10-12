@@ -5,6 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// import{provider} from "react-redux"
+
+
+
 
 import { BrowserRouter } from 'react-router-dom'
 

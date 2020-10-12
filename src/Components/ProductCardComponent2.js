@@ -5,11 +5,14 @@ import "./productCard2.css";
 export default class ProductCardComponent2 extends Component {
   render() {
     return (
-      <div >
-
+      <div>
         <div className="login-box">
           <h2>Nintendo Switch</h2>
-          <img className="cardProductImg" src="https://images-na.ssl-images-amazon.com/images/I/71j3g0GW6EL._AC_SL1500_.jpg" alt=""/>
+          <img
+            className="cardProductImg"
+            src="https://images-na.ssl-images-amazon.com/images/I/71j3g0GW6EL._AC_SL1500_.jpg"
+            alt=""
+          />
           <form>
             <div className="user-box">
               <h4>Description</h4>
@@ -32,7 +35,6 @@ export default class ProductCardComponent2 extends Component {
             </a>
           </form>
         </div>
-       
       </div>
     );
   }

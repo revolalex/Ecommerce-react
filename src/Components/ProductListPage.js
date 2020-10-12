@@ -29,9 +29,9 @@ class ProductListPage extends Component {
     console.log(this.state.data);
     return (
       <div id="myRow" className="row">
-      <CardColumns id="myColums">
-        {this.state.data.map((product) => this.renderProduct(product))}
-      </CardColumns>
+        <CardColumns id="myColums">
+          {this.state.data.map((product) => this.renderProduct(product))}
+        </CardColumns>
       </div>
     );
   }

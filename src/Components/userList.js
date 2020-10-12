@@ -18,7 +18,6 @@ class UsersList extends Component {
         this.setState({
           data: result.data,
         });
-        console.log("STATE DATA", this.state.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
