@@ -28,11 +28,13 @@ export default class ProductCardComponent extends Component {
   render() {
     console.log(this.state.data);
     return (
+      <div id="myRow">
       <Container className="testContainer">
         <Row className="justify-content-md-center">
           {this.state.data.map((user) => this.renderProduct(user))}
         </Row>
       </Container>
+      </div>
     );
   }
 

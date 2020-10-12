@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CardColumns, Card } from "react-bootstrap";
+import { CardColumns, Card, Container, Col, Row } from "react-bootstrap";
 import "./UserList.css";
 import axios from "axios";
 
@@ -26,32 +26,52 @@ class UsersList extends Component {
   }
 
   render() {
-    console.log(this.state.data);
+    console.log("DATA", this.state.data);
     return (
-      <CardColumns id="myColums">
-        {this.state.data.map((users) => this.usersList(users))}
-      </CardColumns>
+      <Container>
+        <Row>{this.state.data.map((users) => this.usersList(users))}</Row>
+      </Container>
     );
   }
 
-  usersList(users) {
+  usersList(users, index) {
     return (
-      <Card
-        id="myCard"
-        className="text-center"
-        border="info"
-        bg="dark"
-        text="light"
-        // style={{ width: "18rem" }}
-      >
-        <Card.Header>{users.firstName} {users.lastName}</Card.Header>
-        <Card.Img variant="top" src={users.url} />
-        <Card.Body>
-          <Card.Title>Email: {users.email}</Card.Title>
-          <Card.Text>Id: {users.id}</Card.Text>
-        </Card.Body>
-        <Card.Footer text="light">First Name: {users.firstName}</Card.Footer>
-      </Card>
+      <Col xs={6} md={4}>
+               <Card
+          className="box"
+          border="info"
+          bg="dark"
+          text="light"
+          style={{ width: "18rem" }}
+          key={users.id}
+        >
+          <Card.Header>{users.firstName} {users.lastName}</Card.Header>
+          <Card.Img className="testImg" variant="top" src={users.url} />
+          <Card.Body>
+            <Card.Title>Email: {users.email}</Card.Title>
+            <Card.Text>{users.description}</Card.Text>
+         
+          </Card.Body>
+          <Card.Footer text="light">Id: {users.id}</Card.Footer>
+        </Card>
+      </Col>
+
+      // <Card
+      //   id="myCard"
+      //   className="text-center"
+      //   border="info"
+      //   bg="dark"
+      //   text="light"
+      //   // style={{ width: "18rem" }}
+      // >
+      //   <Card.Header>{users.firstName} {users.lastName}</Card.Header>
+      //   <Card.Img variant="top" src={users.url} />
+      //   <Card.Body>
+      //     <Card.Title>Email: {users.email}</Card.Title>
+      //     <Card.Text>Id: {users.id}</Card.Text>
+      //   </Card.Body>
+      //   <Card.Footer text="light">First Name: {users.firstName}</Card.Footer>
+      // </Card>
     );
   }
 }

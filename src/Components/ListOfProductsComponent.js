@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Card, Button, Col, Container, Row } from "react-bootstrap";
 
 import axios from "axios";
-import "./encours.css";
+import "./ListOfProduct.css";
+
 class ProductListPage extends Component {
   constructor(props) {
     super(props);
@@ -28,11 +29,13 @@ class ProductListPage extends Component {
   render() {
     console.log(this.state.data);
     return (
-      <Container className="testContainer">
-        <Row className="justify-content-md-center">
-          {this.state.data.map((product) => this.renderProduct(product))}
-        </Row>
-      </Container>
+      <div id="myRow">
+        <Container className="testContainer">
+          <Row className="justify-content-md-center">
+            {this.state.data.map((product) => this.renderProduct(product))}
+          </Row>
+        </Container>
+      </div>
     );
   }
 

@@ -1,11 +1,12 @@
 html {
-  height: 100%;
-}
+  height: 100%;	 
+}	
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background: linear-gradient(#141e30, #243b55);
+  
 }
 
 .login-box {
@@ -20,6 +21,10 @@ body {
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   margin-top: 50vh;
+  height: 100%;
+  background: linear-gradient(#243b55, #141e30);
+  opacity: 0.9;
+  
 }
 
 .login-box h2 {
@@ -169,6 +174,8 @@ body {
   }
 }
 
+
+
 /************** Waves Animation ****************************/
 
 .waveBox {
@@ -228,6 +235,10 @@ body {
     transform: rotate(360deg);
   }
 }
+
+
+
+/************** Media Queries *******************/
 @media only screen and (max-width: 600px) {
   .wave {
     top: 0;
@@ -254,7 +265,9 @@ body {
   }
 }
 
-/*********** uplaoad url image ***********/
+
+
+/*********** Uplaoad url image ***********/
 .uploadImg {
   max-width: 300px;
   max-height: 150px;
@@ -276,6 +289,9 @@ body {
   color: #03e9f4;
   float: right;
 }
+
+
+
 
 /************** Sentence of validation in form ****************************/
 #formTest {

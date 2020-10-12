@@ -16,7 +16,7 @@ class SignInComponent extends Component {
     this.handlePassword = this.handlePassword.bind(this);
     this.buttonIsClick = this.buttonIsClick.bind(this);
     this.saveTokenToLocalStorage = this.saveTokenToLocalStorage.bind(this);
-    this.saveIdToLocalStorage = this.saveIdToLocalStorage.bind(this)
+    this.saveIdToLocalStorage = this.saveIdToLocalStorage.bind(this);
   }
   handleEmail(event) {
     this.setState({
@@ -74,7 +74,7 @@ class SignInComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div id="myContainer">
         <div className="login-box">
           <h2>Sign-In</h2>
           <form>
@@ -82,9 +82,9 @@ class SignInComponent extends Component {
               <input
                 type="text"
                 name="email"
-                required=""
                 value={this.state.email}
                 onChange={this.handleEmail}
+                required
               ></input>
               <label>Email</label>
             </div>
@@ -92,9 +92,9 @@ class SignInComponent extends Component {
               <input
                 type="password"
                 name="password"
-                required=""
                 value={this.state.password}
                 onChange={this.handlePassword}
+                required
               ></input>
               <label>Password</label>
             </div>

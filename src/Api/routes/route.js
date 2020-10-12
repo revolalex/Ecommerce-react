@@ -84,7 +84,7 @@ const appRouter = async function(app, connection) {
         req.body.email.toLowerCase(),
         cryptedPassword,
       ];
-      console.log(user);
+      console.log("USER -- /users/sign-up",user);
       connection.query(addUser, [user], (err) => {
         if (err) throw err;
         res.status(201).send(`Utilisateur enregistré`);
@@ -108,7 +108,6 @@ const appRouter = async function(app, connection) {
    await app.get("/allUsers", function(req, res) {
     let getUserInfo = "SELECT * FROM users";
     connection.query(getUserInfo, function(err, results) {
-      console.log(err);
       if (err) throw err;
       res.send(results);
     });

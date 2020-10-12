@@ -52,7 +52,7 @@ class CreateProductPage extends Component {
     });
   }
   buttonIsClick(e) {
-    console.log(this.state.headerWithToken);
+    console.log("HEADER REQUEST POST", this.state.headerWithToken);
     e.preventDefault();
     let productObject = {
       category: this.state.category,
@@ -62,30 +62,52 @@ class CreateProductPage extends Component {
       prices: this.state.prices,
       id_user_affiliate: localStorage.getItem("id"),
     };
-    console.log(productObject);
-    axios
-      .post("http://localhost:8080/products/", productObject, this.state.headerWithToken)
-      .then((result) => {
-        console.log(result);
 
-        this.setState({
-          submitOk: true,
-        });
+    if (productObject.category.length < 2) {
+      alert("category error: min 2 characters");
+    } else if (productObject.name.length < 3) {
+      alert("name error: min 3 characters");
+    } else if (productObject.description.length < 10) {
+      alert("description required min 10 characters");
+    } else if (productObject.url.length < 10) {
+      alert("url of product picture required min 10 characters");
+    } else if (productObject.prices.length < 1) {
+      alert("Price missing");
+    } else {
+      try {
+        console.log(productObject);
+        axios
+          .post(
+            "http://localhost:8080/products/",
+            productObject,
+            this.state.headerWithToken
+          )
+          .then((result) => {
+            console.log(result);
 
-        // reset input
-        this.setState({
-          category: "",
-          name: "",
-          description: "",
-          url: "",
-          prices: "",
-          id_user_affiliate: "",
-        });
-      })
-      .catch(() => {
-        console.log("Oops, request failed!");
-      });
+            this.setState({
+              submitOk: true,
+            });
+
+            // reset input
+            this.setState({
+              category: "",
+              name: "",
+              description: "",
+              url: "",
+              prices: "",
+              id_user_affiliate: "",
+            });
+          })
+          .catch(() => {
+            console.log("Oops, request failed!");
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
+
   render() {
     let submitProduct;
     const submitTestDone = this.state.submitOk;
@@ -143,9 +165,9 @@ class CreateProductPage extends Component {
               <input
                 type="text"
                 name="picture"
-                required=""
                 value={this.state.url}
                 onChange={this.handleUrl}
+                required
               ></input>
               <label>Picture</label>
               <img className="uploadImg" src={this.state.url} alt="" />
