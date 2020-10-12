@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Col, Row, Container } from "react-bootstrap";
-import "./ProductCard.css";
+import "./UserList.css";
 import axios from "axios";
 
 export default class ProductCardComponent extends Component {

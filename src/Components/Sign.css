@@ -7,8 +7,20 @@ body {
   font-family: sans-serif;
   background: linear-gradient(#141e30, #243b55);
 }
-
 .login-box {
+  margin: auto; 
+  margin-top: 10vh;
+  width: 400px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  background: linear-gradient(#243b55, #141e30);
+  opacity: 0.9;
+}
+
+/* .login-box {
   position: relative;
   top: 50%;
   left: 50%;
@@ -23,7 +35,7 @@ body {
   height: 100%;
   background: linear-gradient(#243b55, #141e30);
   opacity: 0.9;
-}
+} */
 
 .login-box h2 {
   margin: 0 0 30px;

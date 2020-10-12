@@ -9,11 +9,8 @@ import CreateProductPage from "./CreateProductPage";
 import SignupComponent from "./SignupComponent";
 import SignInComponent from "./SignInComponent";
 import UserListComponent from "./UserListComponent";
-
-//to work on
 import ProductCardComponet2 from "./ProductCardComponent2";
-// import ProductListPage from "./ProductListPage";
-// import UsersList from "./UserList";
+
 
 import ListOfProducts from "./ListOfProductsComponent";
 
@@ -56,20 +53,12 @@ class Navbare extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link href="/addProduct">Add Product</Nav.Link>
-              <Nav.Link href="/Users-List">Users List</Nav.Link>
               <Nav.Link href="/list-of-products">Products List</Nav.Link>
-              {/* prototype */}
-              <Nav.Link href="/productCard2">ProductCard2</Nav.Link>
+              <Nav.Link href="/Users-List">Users List</Nav.Link>
             </Nav>
             <Form inline>
-              {/* <FormControl
-                type="text"
-                placeholder="Product Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-info">Search</Button> */}
               <Button variant="danger" onClick={this.DeleteToken}>
-                Delete token
+                Sign Out
               </Button>
             </Form>
           </Navbar.Collapse>

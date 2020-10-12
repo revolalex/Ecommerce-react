@@ -31,7 +31,7 @@ export default class ProductCardComponent2 extends Component {
 
   render() {
     return (
-      <div className="myRow">
+      <div className="myRow2">
         {this.state.product.map((product) => this.renderProduct(product))}
       </div>
     );
@@ -40,29 +40,30 @@ export default class ProductCardComponent2 extends Component {
   renderProduct(product) {
     return (
       // <div className="productDiv" key={product.id}>
-        <div className="login-box">
+        <div className="login-box2" key={product.id}>
           <h2>{product.name}</h2>
-          <img className="cardProductImg" src={product.url} alt="" />
+          <img className="cardProductImg2" src={product.url} alt="" />
           <form>
-            <div className="user-box">
+            <div className="user-box2">
               <h4>Description:</h4>
               <p>{product.description}</p>
             </div>
-            <div className="user-box">
+            <div className="user-box2">
               <h4>Category</h4>
               <p>{product.category}</p>
             </div>
-            <div className="user-box">
+            <div className="user-box2">
               <h4>Price</h4>
               <p>{product.prices}$</p>
-              <p>Sell by: {product.username}</p>
+              <h4>Seller</h4>
+              <p>{product.username}</p>
             </div>
             <a href="t">
               <span></span>
               <span></span>
               <span></span>
               <span></span>
-              Buy
+              Buy {product.prices} $
             </a>
           </form>
         </div>

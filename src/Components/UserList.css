@@ -1,17 +1,19 @@
-
-html {
-  height: 100%;
+.cardProductImg {
+  max-width: 330px;
+  padding-bottom: 30px;
 }
-#myCard {
-  margin-top: 10vh;
-  opacity: 0.8;
-  flex-wrap: wrap;
+#myColums {
+  padding-left: 10%;
+  padding-right: 10%;
 }
 #myRow {
   display: "flex";
   height: 100%;
   background: linear-gradient(#141e30, #243b55);
 }
-.cardProductImg {
-  max-height: 400px;
+
+@media screen and (max-width: 600px) {
+  #myRow {
+    padding: 10vw;
+  }
 }

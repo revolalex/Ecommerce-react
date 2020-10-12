@@ -49,7 +49,15 @@ class SignInComponent extends Component {
       axios
         .post(`http://localhost:8080/users/sign-in/`, userObject)
         .then((result) => {
-          console.log("RESULT TOKEN", result.data.token);
+          console.log(result);
+          // console.log("RESULT TOKEN", result.data.token);
+          if (result.data === "Sorry, email incorrect") {
+            alert("Sorry, email incorrect");
+          }
+          if (result.data === "password error") {
+            alert("Password error");
+          }
+
           this.setState({
             token: result.data.token,
           });
