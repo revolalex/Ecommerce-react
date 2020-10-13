@@ -8,8 +8,9 @@ module.exports  = (req, res, next) => {
     // console.log("MIDDLEWARE DECODED TOKEN:",decodedToken);
     if (token > 0) {
       // console.log("MIDDLEWARE TOKEN:",token);
+      next()
     } else {
-      next();
+      res.status(401).send("error auth")
     }
   } catch {
     res.status(401).json({

@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import "./NavBar.css";
-
 import { withRouter } from "react-router-dom";
-
-import CreateProductPage from "./CreateProductPage";
-import SignupComponent from "./SignupComponent";
-import SignInComponent from "./SignInComponent";
-import UserListComponent from "./UserListComponent";
-import ProductCardComponet2 from "./ProductCardComponent2";
-
-
-import ListOfProducts from "./ListOfProductsComponent";
+import MyRouter from "./Router";
 
 class Navbare extends Component {
   constructor(props) {
@@ -86,21 +76,8 @@ class Navbare extends Component {
           <div className="wave -two"></div>
           <div className="wave -three"></div>
         </div>
-        <Router id="myNav">
-          {withToken}
-          <Switch>
-            <Route exact path="/" component={SignupComponent}></Route>
-            <Route path="/sign-in" component={SignInComponent}></Route>
-            <Route path="/addProduct" component={CreateProductPage}></Route>
-            <Route path="/Users-List" component={UserListComponent}></Route>
-            <Route path="/list-of-products" component={ListOfProducts}></Route>
-            {/* prototype */}
-            <Route
-              path="/productCard2"
-              component={ProductCardComponet2}
-            ></Route>
-          </Switch>
-        </Router>
+        {withToken}
+        <MyRouter/>
       </div>
     );
   }
