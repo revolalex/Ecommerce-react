@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { setProducts } from "../store/action/products";
 import axios from "axios";
+import { connect } from "react-redux";
 import "./ListOfProduct.css";
-
-import { configureStore } from "@reduxjs/toolkit";
-import productReducer from "../store/reducer/product";
 
 class ProductListPage extends Component {
   constructor() {
@@ -13,26 +11,16 @@ class ProductListPage extends Component {
     this.state = {
       data: [],
     };
-    this.add = this.add.bind(this);
   }
 
-  add = (data) => {
-    setProducts(data);
-  };
-
   componentDidMount() {
-    const store = configureStore({ reducer: productReducer });
     axios
       .get(`http://localhost:8080/products/`)
       .then((result) => {
         this.setState({
           data: result.data,
         });
-        // this.props.setProducts(result.data)
-        this.add(result.data);
-        // store.dispatch({setProducts})
-
-        // localStorage.setItem("product", JSON.stringify(this.state.data));
+        this.props.setProducts(result.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -86,4 +74,12 @@ class ProductListPage extends Component {
   }
 }
 
-export default ProductListPage;
+const mapStateToProps = (state) => ({
+  products: state.productReducer.products,
+});
+
+const mapDispatchToProps = {
+  setProducts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListPage);

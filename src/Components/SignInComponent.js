@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./Sign.css";
 import axios from "axios";
+import { setToken } from "../store/action/user";
 
 class SignInComponent extends Component {
   constructor(props) {
@@ -30,11 +32,10 @@ class SignInComponent extends Component {
   }
   saveTokenToLocalStorage = () => {
     localStorage.setItem("token", JSON.stringify(this.state.token));
-    console.log("storeLOCALTOKEN", localStorage);
+    this.props.setToken(this.state.token)
   };
   saveIdToLocalStorage = () => {
     localStorage.setItem("id", JSON.stringify(this.state.id));
-    console.log("storeLOCALID", localStorage);
   };
   buttonIsClick(e) {
     const { history } = this.props;
@@ -50,14 +51,12 @@ class SignInComponent extends Component {
         .post(`http://localhost:8080/users/sign-in/`, userObject)
         .then((result) => {
           console.log(result);
-          // console.log("RESULT TOKEN", result.data.token);
           if (result.data === "Sorry, email incorrect") {
             alert("Sorry, email incorrect");
           }
           if (result.data === "password error") {
             alert("Password error");
           }
-
           this.setState({
             token: result.data.token,
           });
@@ -121,4 +120,13 @@ class SignInComponent extends Component {
     );
   }
 }
-export default SignInComponent;
+
+const mapStateToProps = (state) => ({
+  token: state.userReducer.name,
+  users: state.userReducer.age,
+});
+
+const mapDispatchToProps = {
+  setToken,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SignInComponent);

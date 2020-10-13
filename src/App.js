@@ -17,8 +17,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   products: state.productReducer.products,
-  token: state.userReducer.name,
-  users: state.userReducer.age,
+  token: state.userReducer.token,
+  users: state.userReducer.users,
 });
 
 const mapDispatchToProps = {

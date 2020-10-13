@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
+import { setToken } from "../store/action/user";
+import { connect } from "react-redux";
 
 class CreateProductPage extends Component {
   constructor(props) {
@@ -31,6 +33,25 @@ class CreateProductPage extends Component {
     this.setState({
       token: localStorage.getItem("token"),
     });
+    /* use redux store */ 
+    this.props.setToken(localStorage.getItem("token"))
+
+    try {
+      let id = localStorage.getItem("id")
+      axios.get(`http://localhost:8080/users/${id}`)
+        .then((result) => {
+          console.log("SUPER",result.data);
+          let userInfo = result.data
+          this.props.setUsers(userInfo)
+        })
+        .catch(() => {
+          console.log("Oops, request failed!");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
+
   }
   handleCategory(event) {
     this.setState({
@@ -192,4 +213,13 @@ class CreateProductPage extends Component {
     );
   }
 }
-export default CreateProductPage;
+
+const mapStateToProps = (state) => ({
+  token: state.userReducer.token,
+  users: state.userReducer.users,
+});
+
+const mapDispatchToProps = {
+  setToken,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProductPage);

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CreateProductPage from "./CreateProductPage";
-import SignupComponent from "./SignupComponent";
-import SignInComponent from "./SignInComponent";
-import UserListComponent from "./UserListComponent";
-import ProductCardComponet2 from "./ProductCardComponent2";
-import ListOfProducts from "./ListOfProductsComponent";
+import SignupComponent from './SignupComponent';
+import SignInComponent from './SignInComponent';
+import CreateProductPage from './CreateProductPage';
+import UserListComponent from './UserListComponent';
+import ListOfProducts from './ListOfProductsComponent';
+import ProductCardComponent2 from './ProductCardComponent2';
+
 
 class MyRouter extends Component {
   render() {
@@ -17,7 +18,7 @@ class MyRouter extends Component {
           <Route path="/addProduct" component={CreateProductPage}></Route>
           <Route path="/Users-List" component={UserListComponent}></Route>
           <Route path="/list-of-products" component={ListOfProducts}></Route>
-          <Route path="/productCard2" component={ProductCardComponet2}></Route>
+          <Route path="/productCard2" component={ProductCardComponent2}></Route>
         </Switch>
       </Router>
     );

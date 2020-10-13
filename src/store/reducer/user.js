@@ -21,9 +21,7 @@ const userReducer = (state = initialStates, action) => {
           users: action.users
       };
     default:
-      return {
-        ...state,
-      };
+      return state
   }
 };
 
