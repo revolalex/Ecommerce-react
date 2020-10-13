@@ -77,7 +77,7 @@ class Navbare extends Component {
           <div className="wave -three"></div>
         </div>
         {withToken}
-        <MyRouter/>
+        <MyRouter />
       </div>
     );
   }

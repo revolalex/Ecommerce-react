@@ -24,18 +24,6 @@ export default class ProductCardComponent extends Component {
       });
   }
 
-  render() {
-    return (
-      <div id="myRow">
-        <Container className="testContainer">
-          <Row className="justify-content-md-center">
-            {this.state.data.map((user) => this.renderProduct(user))}
-          </Row>
-        </Container>
-      </div>
-    );
-  }
-
   renderProduct(user) {
     return (
       <Col className="testCol" md="auto" key={user.id}>
@@ -57,6 +45,17 @@ export default class ProductCardComponent extends Component {
           <Card.Footer text="light">Id: {user.id}</Card.Footer>
         </Card>
       </Col>
+    );
+  }
+  render() {
+    return (
+      <div id="myRow">
+        <Container className="testContainer">
+          <Row className="justify-content-md-center">
+            {this.state.data.map((user) => this.renderProduct(user))}
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
