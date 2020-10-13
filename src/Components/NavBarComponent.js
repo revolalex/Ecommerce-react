@@ -32,11 +32,11 @@ class Navbare extends Component {
   DeleteToken() {
     //reset token
     this.setState({
-      token: [],
+      token: "",
     });
-    localStorage.setItem("token", []);
+    localStorage.setItem("token", "");
     // check token is empty
-    if (localStorage.getItem("token") == []) {
+    if (localStorage.getItem("token") ==="[]") {
       this.props.history.push("/");
       window.location.reload(false);
     }

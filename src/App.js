@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import "./App.css";
-// import LoginComponent from "./Components/Login";
-// import SignupComponent from "./Components/Signup";
-// import AddingProductComponent from "./Components/AddingProductComponent"
-// import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setProduct } from "./store/actions/product";
+import { setToken, deleteToken } from "./store/actions/user";
 import Navbar from "./Components/NavBarComponent";
 
 class App extends Component {
- 
   render() {
     return <Navbar />;
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  products: state.productReducer.products,
+  token: state.userReducer.token,
+  users: state.userReducer.user,
+});
+
+const mapDispatchToProps = {
+  setProduct,
+  setToken,
+  deleteToken,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Card, Col, Row, Container } from "react-bootstrap";
 import "./UserList.css";
 import axios from "axios";
+import { connect } from "react-redux";
 
-export default class ProductCardComponent extends Component {
+class UserListComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,10 +19,12 @@ export default class ProductCardComponent extends Component {
         this.setState({
           data: result.data,
         });
+        console.log(result.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
       });
+      
   }
 
   render() {
@@ -60,3 +63,9 @@ export default class ProductCardComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  products: state.productReducer.products
+})
+
+export default connect(mapStateToProps)(UserListComponent)

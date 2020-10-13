@@ -1,26 +1,19 @@
 import React, { Component } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-
+import {setProduct} from '../store/actions/product.js'
 import axios from "axios";
 import "./ListOfProduct.css";
-
+import {connect} from 'react-redux'
 class ProductListPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: [],
-    };
     this.productClick = this.productClick.bind(this)
   }
-
   componentDidMount() {
     axios
       .get(`http://localhost:8080/products/`)
       .then((result) => {
-        this.setState({
-          data: result.data,
-        });
-        // localStorage.setItem("product", JSON.stringify(this.state.data));
+        this.props.setProduct(result.data)
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -36,7 +29,7 @@ class ProductListPage extends Component {
       <div id="myRow">
         <Container className="testContainer">
           <Row className="justify-content-md-center">
-            {this.state.data.map((product) => this.renderProduct(product))}
+            {this.props.products.map((product) => this.renderProduct(product))}
           </Row>
         </Container>
       </div>
@@ -60,7 +53,6 @@ class ProductListPage extends Component {
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
             <a href="/productCard2" onClick={()=>{localStorage.setItem("productIdClick", JSON.stringify(product.id))}}>More Info</a>
-            {/* <Button variant="info">Add to Cart</Button> */}
           </Card.Body>
           <Card.Footer text="light">{product.prices} €</Card.Footer>
         </Card>
@@ -69,4 +61,12 @@ class ProductListPage extends Component {
   }
 }
 
-export default ProductListPage;
+const mapStateToProps = (state) => ({
+  products: state.productReducer.products
+})
+
+const mapDispatchToProps = {
+  setProduct
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (ProductListPage);

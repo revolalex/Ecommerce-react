@@ -38,7 +38,6 @@ const appRouter = async function(app, connection) {
         req.body.email.toLowerCase(),
         cryptedPassword,
       ];
-      console.log("USER -- /users/sign-up", user);
       connection.query(addUser, [user], (err) => {
         if (err) throw err;
         res.status(201).send(`Utilisateur enregistré`);
@@ -77,10 +76,8 @@ const appRouter = async function(app, connection) {
 
     connection.query(mailUser, [email], function(err, results) {
       if (err) throw err;
-      console.log("result sign-in ==>", results);
       // handle email error
       if (!Array.isArray(results) || !results.length) {
-        console.log("email error");
         // res.status(401).send("Sorry, email incorrect");
         res.send("Sorry, email incorrect");
       } else {
@@ -99,8 +96,6 @@ const appRouter = async function(app, connection) {
             var decoded = jwt.decode(token);
             // get the decoded payload and header
             var decoded = jwt.decode(token, { complete: true });
-            console.log("header ==>", decoded.header);
-            console.log("payload ==>", decoded.payload);
             res.status(200).send({
               auth: true,
               token: token,
@@ -108,7 +103,6 @@ const appRouter = async function(app, connection) {
               id: id,
             });
           } else {
-            console.log("pass error");
             res.send("password error");
           }
         });
@@ -170,7 +164,7 @@ const appRouter = async function(app, connection) {
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = `SELECT users.lastName AS username, products.name, products.category, products.description, products.prices, products.url 
+    let productInfo = `SELECT users.lastName,users.firstName, products.name, products.category, products.description, products.prices, products.url 
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {

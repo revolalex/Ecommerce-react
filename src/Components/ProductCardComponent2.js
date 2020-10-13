@@ -22,7 +22,6 @@ export default class ProductCardComponent2 extends Component {
           product: result.data,
         });
         console.log(this.state.product);
-        // localStorage.setItem("product", JSON.stringify(this.state.data));
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -39,7 +38,6 @@ export default class ProductCardComponent2 extends Component {
 
   renderProduct(product) {
     return (
-      // <div className="productDiv" key={product.id}>
         <div className="login-box2" key={product.id}>
           <h2>{product.name}</h2>
           <img className="cardProductImg2" src={product.url} alt="" />
@@ -56,9 +54,9 @@ export default class ProductCardComponent2 extends Component {
               <h4>Price</h4>
               <p>{product.prices}$</p>
               <h4>Seller</h4>
-              <p>{product.username}</p>
+              <p>{product.firstName} {product.lastName}</p>
             </div>
-            <a href="t">
+            <a href="/productCard2">
               <span></span>
               <span></span>
               <span></span>
@@ -67,7 +65,6 @@ export default class ProductCardComponent2 extends Component {
             </a>
           </form>
         </div>
-      // </div>
     );
   }
 }

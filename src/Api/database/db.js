@@ -2,7 +2,8 @@ var mysql = require("mysql2");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "alexandre",
+  password: "",
+  port:3308,
   database: "ecomreact",
 });
 
