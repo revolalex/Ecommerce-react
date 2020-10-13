@@ -35,7 +35,7 @@ class CreateProductPage extends Component {
     this.setState({
       token: localStorage.getItem("token"),
     });
-    /* use redux store */ 
+    /* use redux store to record token stock in localStorage*/ 
     this.props.setToken(localStorage.getItem("token"))
 
     try {
@@ -218,13 +218,21 @@ class CreateProductPage extends Component {
   }
 }
 
+// mapStateToProps: called every time the store state changes. 
+// It receives the entire store state, and should return 
+// an object of data this component needs.
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
   users: state.userReducer.users,
 });
-
+// If it’s an object full of action creators, each action 
+// creator will be turned into a prop function that 
+// automatically dispatches its action when called. 
 const mapDispatchToProps = {
   setToken,
   setUsers
 };
+
+// connect function for you to read values from
+//  the Redux store (and re-read the values when the store updates).
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProductPage);

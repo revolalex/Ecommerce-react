@@ -26,6 +26,9 @@ let store = createStore(persistedReducer,
 const persistor = persistStore(store);
 
 ReactDOM.render(
+  // we need to make the store available to our app. 
+  // To do this, we wrap our app with the <Provider /> 
+  // API provided by React Redux. store is passed in as a prop
   <Provider store={store}>
     <PersistGate persistor={persistor}>
       <BrowserRouter>

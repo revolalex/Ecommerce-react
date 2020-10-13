@@ -5,16 +5,14 @@ module.exports  = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(JSON.parse(token), config.secret);
-    // console.log("MIDDLEWARE DECODED TOKEN:",decodedToken);
-    if (token > 0) {
-      // console.log("MIDDLEWARE TOKEN:",token);
-      next()
+    if (decodedToken) {
+      next();
     } else {
-      res.status(401).send("error auth")
+      res.sendStatus(403)
     }
   } catch {
     res.status(401).json({
       error: new Error('Invalid request!')
     });
   }
-};
+}
