@@ -182,7 +182,6 @@ class SignupComponent extends Component {
         <div className="login-box">
           <h2>Sign up</h2>
           <img className="profileImg" src={this.state.url} alt="" />
-
           <form>
             <div className="user-box">
               <input
@@ -190,8 +189,8 @@ class SignupComponent extends Component {
                 name="firstName"
                 value={this.state.firstName}
                 onChange={this.handleFirstName}
-                required
-              ></input>
+                required>
+              </input>
               <label>First Name {requireFirstName}</label>
             </div>
             <div className="user-box">
@@ -200,8 +199,8 @@ class SignupComponent extends Component {
                 name="lastName"
                 value={this.state.lastName}
                 onChange={this.handleLastName}
-                required
-              ></input>
+                required>
+              </input>
               <label>Last Name {requireLastName}</label>
             </div>
             <div className="user-box">
@@ -210,8 +209,8 @@ class SignupComponent extends Component {
                 name="url"
                 value={this.state.url}
                 onChange={this.handleImgProfile}
-                required
-              ></input>
+                required>
+              </input>
               <label>Profil Picture url {requireUrl}</label>
             </div>
             <div className="user-box">
@@ -220,8 +219,8 @@ class SignupComponent extends Component {
                 name="email"
                 value={this.state.email}
                 onChange={this.handleEmail}
-                required
-              ></input>
+                required>
+              </input>
               <label>Email {emailTestFormat}</label>
             </div>
             <div className="user-box">
@@ -230,9 +229,8 @@ class SignupComponent extends Component {
                 name="password"
                 value={this.state.password}
                 onChange={this.handlePassword}
-                required
-              ></input>
-
+                required>
+              </input>
               <label>Password {passwordCharCheck}</label>
             </div>
             <div className="user-box">
@@ -241,11 +239,10 @@ class SignupComponent extends Component {
                 name="confirmPassword"
                 value={this.state.confirmPassword}
                 onChange={this.handlePasswordConfirm}
-                required
-              ></input>
+                required>
+              </input>
               <label>Confirm Password {testConfirmPassword}</label>
             </div>
-
             <a href="/#" onClick={this.buttonIsClick} type="submit">
               <span></span>
               <span></span>

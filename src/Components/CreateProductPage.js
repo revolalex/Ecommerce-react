@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
 import { setToken } from "../store/action/user";
+import { setUsers } from "../store/action/user";
 import { connect } from "react-redux";
 
 class CreateProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInfo:[],
       token: [],
       category: "",
       name: "",
@@ -41,8 +43,12 @@ class CreateProductPage extends Component {
       axios.get(`http://localhost:8080/users/${id}`)
         .then((result) => {
           console.log("SUPER",result.data);
-          let userInfo = result.data
-          this.props.setUsers(userInfo)
+          this.setState({
+            userInfo: result.data
+          })
+          console.log(this.state.userInfo);
+          this.props.setUsers(result.data)
+          
         })
         .catch(() => {
           console.log("Oops, request failed!");
@@ -50,8 +56,6 @@ class CreateProductPage extends Component {
     } catch (error) {
       console.log(error);
     }
-
-
   }
   handleCategory(event) {
     this.setState({
@@ -221,5 +225,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setToken,
+  setUsers
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProductPage);

@@ -65,7 +65,6 @@ class ProductListPage extends Component {
             >
               More Info
             </a>
-            {/* <Button variant="info">Add to Cart</Button> */}
           </Card.Body>
           <Card.Footer text="light">{product.prices} €</Card.Footer>
         </Card>

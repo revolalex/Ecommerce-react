@@ -70,7 +70,7 @@ class SignInComponent extends Component {
           if (result.data.auth === true) {
             console.log("auth is true", result);
             history.push("/addProduct");
-            window.location.reload(false);
+            // window.location.reload(false);
           }
         })
         .catch(() => {

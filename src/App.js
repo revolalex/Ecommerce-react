@@ -7,7 +7,7 @@ import "./App.css";
 // import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setProducts } from "./store/action/products";
-import { setToken, deleteToken } from "./store/action/user";
+import { setToken, deleteToken, setUsers } from "./store/action/user";
 
 class App extends Component {
   render() {
@@ -25,6 +25,7 @@ const mapDispatchToProps = {
   setProducts,
   setToken,
   deleteToken,
+  setUsers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
