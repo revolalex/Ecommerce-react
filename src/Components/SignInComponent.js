@@ -1,22 +1,18 @@
 import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
-
+import { connect } from "react-redux";
+import {setToken,setID} from "../store/actions/user"
 class SignInComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
-      token: "",
-      auth: false,
-      id: "",
     };
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.buttonIsClick = this.buttonIsClick.bind(this);
-    this.saveTokenToLocalStorage = this.saveTokenToLocalStorage.bind(this);
-    this.saveIdToLocalStorage = this.saveIdToLocalStorage.bind(this);
   }
   handleEmail(event) {
     this.setState({
@@ -28,14 +24,6 @@ class SignInComponent extends Component {
       password: event.target.value,
     });
   }
-  saveTokenToLocalStorage = () => {
-    localStorage.setItem("token", JSON.stringify(this.state.token));
-    console.log("storeLOCALTOKEN", localStorage);
-  };
-  saveIdToLocalStorage = () => {
-    localStorage.setItem("id", JSON.stringify(this.state.id));
-    console.log("storeLOCALID", localStorage);
-  };
   buttonIsClick(e) {
     const { history } = this.props;
     e.preventDefault();
@@ -43,39 +31,24 @@ class SignInComponent extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(userObject);
-
     try {
       axios
         .post(`http://localhost:8080/users/sign-in/`, userObject)
         .then((result) => {
-          console.log(result);
-          // console.log("RESULT TOKEN", result.data.token);
           if (result.data === "Sorry, email incorrect") {
             alert("Sorry, email incorrect");
           }
           if (result.data === "password error") {
             alert("Password error");
           }
-
-          this.setState({
-            token: result.data.token,
-          });
-          this.setState({
-            id: result.data.id,
-          });
-          this.saveIdToLocalStorage();
-
-          this.saveTokenToLocalStorage();
-          console.log("TOKEN", this.state.token);
+          this.props.setToken(result.data.token)
+          this.props.setID(result.data.id)
           if (result.data.auth === true) {
-            console.log("auth is true", result);
-            history.push("/addProduct");
-            window.location.reload(false);
+            history.push("/Users-List");
           }
         })
-        .catch(() => {
-          console.log("Oops, request failed!");
+        .catch((error) => {
+          console.log(error);
         });
     } catch (error) {
       console.log(error);
@@ -121,4 +94,15 @@ class SignInComponent extends Component {
     );
   }
 }
-export default SignInComponent;
+
+const mapStateToProps = (state) => ({
+  token: state.userReducer.token,
+  id: state.userReducer.ID
+})
+
+const mapDispatchToProps = {
+  setToken,
+  setID
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (SignInComponent);

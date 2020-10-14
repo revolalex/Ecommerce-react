@@ -2,49 +2,26 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import "./NavBar.css";
-
+import {deleteToken} from '../store/actions/user'
 import { withRouter } from "react-router-dom";
-
 import CreateProductPage from "./CreateProductPage";
 import SignupComponent from "./SignupComponent";
 import SignInComponent from "./SignInComponent";
 import UserListComponent from "./UserListComponent";
 import ProductCardComponet2 from "./ProductCardComponent2";
-
-
 import ListOfProducts from "./ListOfProductsComponent";
+import { connect } from "react-redux";
 
 class Navbare extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      token: [],
-    };
-    this.DeleteToken = this.DeleteToken.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({
-      token: localStorage.getItem("token"),
-    });
-  }
-
-  DeleteToken() {
-    //reset token
-    this.setState({
-      token: "",
-    });
-    localStorage.setItem("token", "");
-    // check token is empty
-    if (localStorage.getItem("token") ==="[]") {
-      this.props.history.push("/");
-      window.location.reload(false);
-    }
+  deleteToken() {
+    this.props.deleteToken()
+    this.props.history.push('/')
+    window.location.reload(false);
   }
 
   render() {
     let withToken;
-    const testToken = this.state.token;
+    const testToken = this.props.token;
     if (testToken) {
       withToken = (
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -57,7 +34,7 @@ class Navbare extends Component {
               <Nav.Link href="/Users-List">Users List</Nav.Link>
             </Nav>
             <Form inline>
-              <Button variant="danger" onClick={this.DeleteToken}>
+              <Button variant="danger" onClick={this.deleteToken.bind(this)}>
                 Sign Out
               </Button>
             </Form>
@@ -105,4 +82,13 @@ class Navbare extends Component {
     );
   }
 }
-export default withRouter(Navbare);
+
+const mapStateToProps = (state) => ({
+  token: state.userReducer.token
+})
+
+const mapDispatchToProps = {
+  deleteToken
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(Navbare));

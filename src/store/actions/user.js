@@ -11,3 +11,8 @@ export const setUsers = (users) => ({
     type: 'SET_USERS',
     users: users
 })
+
+export const setID = (id) => ({
+    type: 'SET_ID',
+    id: id
+})

@@ -11,7 +11,6 @@ class UserListComponent extends Component {
       data: [],
     };
   }
-
   componentDidMount() {
     axios
       .get(`http://localhost:8080/allUsers/`)
@@ -19,14 +18,11 @@ class UserListComponent extends Component {
         this.setState({
           data: result.data,
         });
-        console.log(result.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
       });
-      
   }
-
   render() {
     return (
       <div id="myRow">

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
+import { connect } from "react-redux";
 
 class CreateProductPage extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class CreateProductPage extends Component {
       submitOk: false,
       headerWithToken: {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + this.props.token,
         },
       },
     };
@@ -81,7 +82,7 @@ class CreateProductPage extends Component {
       alert("Price missing");
     } else {
       try {
-        console.log(productObject);
+        console.log(this.props);
         axios
           .post(
             "http://localhost:8080/products/",
@@ -192,4 +193,9 @@ class CreateProductPage extends Component {
     );
   }
 }
-export default CreateProductPage;
+
+const mapStateToProps = (state) => ({
+  token: state.userReducer.token
+})
+
+export default connect(mapStateToProps,null) (CreateProductPage);

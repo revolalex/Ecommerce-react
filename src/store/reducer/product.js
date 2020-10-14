@@ -1,14 +1,26 @@
 const initialState = {
-    products: []
+    products: [],
+    product: {},
+    id: ""
 }
 
 const productReducer = (state = initialState,action) => {
     switch (action.type) {
-        case "SET_PRODUCT":
+        case "SET_PRODUCTS":
             return{
                 ...state,
-                products: action.product
-            }            
+                products: action.products
+            }
+        case 'SET_PRODUCT':
+            return{
+                ...state,
+                product: action.product
+            }
+        case "SET_ID_PRODUCT":
+            return{
+                ...state,
+                id: action.id
+            }          
         default:
             return  state;
     }

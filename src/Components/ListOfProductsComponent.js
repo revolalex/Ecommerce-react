@@ -1,27 +1,22 @@
 import React, { Component } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import {setProduct} from '../store/actions/product.js'
+import {setProducts,setIdProduct} from '../store/actions/product.js'
 import axios from "axios";
 import "./ListOfProduct.css";
 import {connect} from 'react-redux'
 class ProductListPage extends Component {
-  constructor(props) {
-    super(props);
-    this.productClick = this.productClick.bind(this)
-  }
   componentDidMount() {
     axios
       .get(`http://localhost:8080/products/`)
       .then((result) => {
-        this.props.setProduct(result.data)
+        this.props.setProducts(result.data)
       })
       .catch(() => {
         console.log("Oops, request failed!");
       });
   }
   productClick(id){
-    console.log("IDCLICK",id)
-    localStorage.setItem("productIdClick", JSON.stringify(id));
+    this.props.setIdProduct(id)
   }
 
   render() {
@@ -52,7 +47,7 @@ class ProductListPage extends Component {
           <Card.Body>
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
-            <a href="/productCard2" onClick={()=>{localStorage.setItem("productIdClick", JSON.stringify(product.id))}}>More Info</a>
+            <a href="/productCard2" onClick={this.productClick.bind(this,product.id)}>More Info</a>
           </Card.Body>
           <Card.Footer text="light">{product.prices} €</Card.Footer>
         </Card>
@@ -62,11 +57,13 @@ class ProductListPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.productReducer.products
+  products: state.productReducer.products,
+  idProduct: state.productReducer.id
 })
 
 const mapDispatchToProps = {
-  setProduct
+  setProducts,
+  setIdProduct
 }
 
 export default connect(mapStateToProps,mapDispatchToProps) (ProductListPage);
