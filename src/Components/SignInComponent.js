@@ -27,7 +27,6 @@ class SignInComponent extends Component {
   }
 
   buttonIsClick(e) {
-    
     e.preventDefault();
     let userObject = {
       email: this.state.email,
@@ -37,15 +36,15 @@ class SignInComponent extends Component {
       axios
         .post(`http://localhost:8080/users/sign-in/`, userObject)
         .then((result) => {
-          console.log("SIGNINBUTTON",result);
           if (result.data === "Sorry, email incorrect") {
             alert("Sorry, email incorrect");
           }else if (result.data === "password error") {
             alert("Password error");
-          } else if (result.data.auth === true) {
+          } else {
             this.props.setToken(result.data.token)
+            console.log(result.data.id); // fonctionne bien []
             this.props.setID(result.data.id)
-            console.log("IDSET", this.props.id);
+            console.log("IDSET", this.props.id); // = undefined
             this.props.authTrue()
           }
           

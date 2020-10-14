@@ -46,7 +46,7 @@ class ProductCardComponent2 extends Component {
               <h4>Seller</h4>
               <p>{product.username}</p>
             </div>
-            <a href="t">
+            <a href="/#">
               <span></span>
               <span></span>
               <span></span>

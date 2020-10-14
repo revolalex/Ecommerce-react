@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
-import { setToken } from "../store/actions/user";
-import { setUsers } from "../store/actions/user";
 import { connect } from "react-redux";
 
 class CreateProductPage extends Component {
@@ -31,25 +29,7 @@ class CreateProductPage extends Component {
     this.handlePrices = this.handlePrices.bind(this);
     this.buttonIsClick = this.buttonIsClick.bind(this);
   }
-  UNSAFE_componentWillMount() {
-    try {
-      axios.get(`http://localhost:8080/users/${25}`)
-        .then((result) => {
-          console.log("SUPER",result.data);
-          this.setState({
-            userInfo: result.data
-          })
-          console.log(this.state.userInfo);
-          this.props.setUsers(result.data)
-          
-        })
-        .catch(() => {
-          console.log("Oops, request failed!");
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
   handleCategory(event) {
     this.setState({
       category: event.target.value,
@@ -84,7 +64,7 @@ class CreateProductPage extends Component {
       description: this.state.description,
       url: this.state.url,
       prices: this.state.prices,
-      id_user_affiliate: localStorage.getItem("id"),
+      id_user_affiliate: this.props.id,
     };
 
     if (productObject.category.length < 2) {
@@ -211,21 +191,9 @@ class CreateProductPage extends Component {
   }
 }
 
-// mapStateToProps: called every time the store state changes. 
-// It receives the entire store state, and should return 
-// an object of data this component needs.
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  users: state.userReducer.users,
-});
-// If it’s an object full of action creators, each action 
-// creator will be turned into a prop function that 
-// automatically dispatches its action when called. 
-const mapDispatchToProps = {
-  setToken,
-  setUsers
-};
+  id : state.userReducer.id
+})
 
-// connect function for you to read values from
-//  the Redux store (and re-read the values when the store updates).
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProductPage);
+export default connect(mapStateToProps,null) (CreateProductPage);
