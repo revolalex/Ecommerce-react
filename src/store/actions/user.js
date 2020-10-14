@@ -16,3 +16,11 @@ export const setID = (id) => ({
     type: 'SET_ID',
     id: id
 })
+
+export const authTrue = () => ({
+    type: 'AUTH_TRUE'
+})
+
+export const authFalse = () => ({
+    type: 'AUTH_FALSE'
+})

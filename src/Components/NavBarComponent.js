@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import "./NavBar.css";
-import {deleteToken} from '../store/actions/user'
+import {deleteToken,authFalse} from '../store/actions/user'
 import { withRouter } from "react-router-dom";
 import CreateProductPage from "./CreateProductPage";
 import SignupComponent from "./SignupComponent";
@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 class Navbare extends Component {
   deleteToken() {
     this.props.deleteToken()
+    this.props.authFalse()
     this.props.history.push('/')
     window.location.reload();
   }
@@ -41,6 +42,8 @@ class Navbare extends Component {
         </Navbar>
       );
     } else {
+      console.log(this.props);
+
       withToken = (
         <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="/">React-Ecom</Navbar.Brand>
@@ -65,16 +68,28 @@ class Navbare extends Component {
         <Router id="myNav">
           {withToken}
           <Switch>
-            <Route exact path="/" component={SignupComponent}></Route>
-            <Route path="/sign-in" component={SignInComponent}></Route>
-            <Route path="/addProduct" component={CreateProductPage}></Route>
-            <Route path="/Users-List" component={UserListComponent}></Route>
-            <Route path="/list-of-products" component={ListOfProducts}></Route>
+            <Route exact path="/" >
+              {this.props.auth === true  ? <Redirect to="/Users-list"/> : <SignupComponent/>}
+            </Route>
+            <Route path="/sign-in">
+              {this.props.auth === true ? <Redirect to="/Users-List"/> : <SignInComponent/>}
+            </Route>
+            <Route path="/addProduct">
+              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <CreateProductPage/>}
+            </Route>
+            <Route path="/Users-List">
+              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <UserListComponent/>}
+            </Route>
+            <Route path="/list-of-products">
+              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <ListOfProducts/>}
+            </Route>
             {/* prototype */}
             <Route
               path="/productCard2"
-              component={ProductCardComponet2}
-            ></Route>
+            >
+              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <ProductCardComponet2/>}
+            </Route>
+            <Route render={ () => this.props.auth === false || undefined ? <Redirect to="/"/> : <Redirect to="/Users-List"/> }/>
           </Switch>
         </Router>
       </div>
@@ -83,11 +98,13 @@ class Navbare extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.userReducer.token
+  token: state.userReducer.token,
+  auth: state.userReducer.auth
 })
 
 const mapDispatchToProps = {
-  deleteToken
+  deleteToken,
+  authFalse
 }
 
 export default connect(mapStateToProps,mapDispatchToProps) (withRouter(Navbare));

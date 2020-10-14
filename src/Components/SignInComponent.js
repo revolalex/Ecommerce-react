@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
 import { connect } from "react-redux";
-import {setToken,setID} from "../store/actions/user"
+import {setToken,setID,authTrue} from "../store/actions/user"
 class SignInComponent extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +25,7 @@ class SignInComponent extends Component {
     });
   }
   buttonIsClick(e) {
-    const { history } = this.props;
+    
     e.preventDefault();
     let userObject = {
       email: this.state.email,
@@ -43,9 +43,7 @@ class SignInComponent extends Component {
           }
           this.props.setToken(result.data.token)
           this.props.setID(result.data.id)
-          if (result.data.auth === true) {
-            history.push("/Users-List");
-          }
+          this.props.authTrue()
         })
         .catch((error) => {
           console.log(error);
@@ -102,7 +100,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setToken,
-  setID
+  setID,
+  authTrue
 }
 
 export default connect(mapStateToProps,mapDispatchToProps) (SignInComponent);

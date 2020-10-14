@@ -1,7 +1,8 @@
 const initialStates = {
     token: "",
     users: [],
-    id: ""
+    id: "",
+    auth: false
 }
 
 const userReducer = (state = initialStates,action) => {
@@ -25,6 +26,16 @@ const userReducer = (state = initialStates,action) => {
             return{
                 ...state,
                 id: action.id
+            }
+        case "AUTH_TRUE":
+            return{
+                ...state,
+                auth: true
+            }
+        case "AUTH_FALSE":
+            return{
+                ...state,
+                auth: false
             }
         default:
             return state                 
