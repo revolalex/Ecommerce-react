@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Sign.css";
 import axios from "axios";
-import {setToken,setID,authTrue} from "../store/action/user"
+import {setToken,setID,authTrue} from "../store/actions/user"
 
 class SignInComponent extends Component {
   constructor(props) {
@@ -37,17 +37,18 @@ class SignInComponent extends Component {
       axios
         .post(`http://localhost:8080/users/sign-in/`, userObject)
         .then((result) => {
+          console.log("SIGNINBUTTON",result);
           if (result.data === "Sorry, email incorrect") {
             alert("Sorry, email incorrect");
-          }
-          if (result.data === "password error") {
+          }else if (result.data === "password error") {
             alert("Password error");
+          } else if (result.data.auth === true) {
+            this.props.setToken(result.data.token)
+            this.props.setID(result.data.id)
+            console.log("IDSET", this.props.id);
+            this.props.authTrue()
           }
-          this.props.setToken(result.data.token)
-          this.props.setID(result.data.id)
-          this.props.authTrue()
-          // this.props.history.push("/addProduct");
-          //   window.location.reload(false);
+          
         })
         .catch((error) => {
           console.log(error);

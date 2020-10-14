@@ -47,6 +47,11 @@ class Navbare extends Component {
               <Nav.Link href="/">Sign-Up</Nav.Link>
               <Nav.Link href="/sign-in">Sign-In</Nav.Link>
             </Nav>
+            <Form inline>
+            <Button variant="danger" onClick={this.deleteToken.bind(this)}>
+                Sign Out
+              </Button>
+            </Form>
           </Navbar.Collapse>
         </Navbar>
       );

@@ -1,28 +1,17 @@
+
 import React, { Component } from "react";
 import axios from "axios";
-
 import "./productCard2.css";
+import { connect } from "react-redux";
+import {setProduct} from '../store/actions/product'
 
-export default class ProductCardComponent2 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: "",
-      product: [],
-    };
-  }
+class ProductCardComponent2 extends Component {
+
   componentDidMount() {
-    let id = localStorage.getItem("productIdClick");
-    console.log("ID",id);
     axios
-      .get(`http://localhost:8080/products/${id}`)
+      .get(`http://localhost:8080/products/${this.props.id}`)
       .then((result) => {
-        console.log(result);
-        this.setState({
-          product: result.data,
-        });
-        console.log(this.state.product);
-        // localStorage.setItem("product", JSON.stringify(this.state.data));
+        this.props.setProduct(result.data)
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -32,14 +21,13 @@ export default class ProductCardComponent2 extends Component {
   render() {
     return (
       <div className="myRow2">
-        {this.state.product.map((product) => this.renderProduct(product))}
+        {this.renderProduct(this.props.product[0])}
       </div>
     );
   }
 
   renderProduct(product) {
     return (
-      // <div className="productDiv" key={product.id}>
         <div className="login-box2" key={product.id}>
           <h2>{product.name}</h2>
           <img className="cardProductImg2" src={product.url} alt="" />
@@ -67,7 +55,17 @@ export default class ProductCardComponent2 extends Component {
             </a>
           </form>
         </div>
-      // </div>
     );
   }
 }
+
+const mapDispatchToProps = {
+  setProduct
+}
+
+const mapStateToProps = (state) => ({
+  product: state.productReducer.product,
+  id: state.productReducer.id
+})
+
+export default connect(mapStateToProps,mapDispatchToProps) (ProductCardComponent2)

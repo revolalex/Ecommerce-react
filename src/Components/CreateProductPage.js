@@ -20,7 +20,7 @@ class CreateProductPage extends Component {
       submitOk: false,
       headerWithToken: {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + this.props.token,
         },
       },
     };
@@ -32,15 +32,8 @@ class CreateProductPage extends Component {
     this.buttonIsClick = this.buttonIsClick.bind(this);
   }
   UNSAFE_componentWillMount() {
-    this.setState({
-      token: localStorage.getItem("token"),
-    });
-    /* use redux store to record token stock in localStorage*/ 
-    this.props.setToken(localStorage.getItem("token"))
-
     try {
-      let id = localStorage.getItem("id")
-      axios.get(`http://localhost:8080/users/${id}`)
+      axios.get(`http://localhost:8080/users/${25}`)
         .then((result) => {
           console.log("SUPER",result.data);
           this.setState({

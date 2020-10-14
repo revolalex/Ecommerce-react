@@ -77,7 +77,7 @@ const appRouter = async function(app, connection) {
 
     connection.query(mailUser, [email], function(err, results) {
       if (err) throw err;
-      console.log("result sign-in ==>", results);
+      // console.log("result sign-in ==>", results);
       // handle email error
       if (!Array.isArray(results) || !results.length) {
         console.log("email error");
