@@ -7,7 +7,7 @@ import CreateProductPage from "./CreateProductPage";
 import UserListComponent from "./UserListComponent";
 import ListOfProducts from "./ListOfProductsComponent";
 import ProductCardComponent2 from "./ProductCardComponent2";
-import { deleteToken, authFalse } from "../store/action/user";
+import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";
 
 class MyRouter extends Component {

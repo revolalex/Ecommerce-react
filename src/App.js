@@ -6,8 +6,8 @@ import "./App.css";
 // import AddingProductComponent from "./Components/AddingProductComponent"
 // import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setProducts } from "./store/action/products";
-import { setToken, deleteToken, setUsers } from "./store/action/user";
+import { setProducts } from "./store/actions/product";
+import { setToken, deleteToken, setUsers } from "./store/actions/user";
 
 class App extends Component {
   render() {

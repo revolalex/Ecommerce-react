@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
-import { setToken } from "../store/action/user";
-import { setUsers } from "../store/action/user";
+import { setToken } from "../store/actions/user";
+import { setUsers } from "../store/actions/user";
 import { connect } from "react-redux";
 
 class CreateProductPage extends Component {

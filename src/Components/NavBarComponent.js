@@ -3,7 +3,7 @@ import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import "./NavBar.css";
 import { withRouter } from "react-router-dom";
 import MyRouter from "./Router";
-import {deleteToken,authFalse} from '../store/action/user'
+import {deleteToken,authFalse} from '../store/actions/user'
 import { connect } from "react-redux";
 
 class Navbare extends Component {
@@ -47,11 +47,6 @@ class Navbare extends Component {
               <Nav.Link href="/">Sign-Up</Nav.Link>
               <Nav.Link href="/sign-in">Sign-In</Nav.Link>
             </Nav>
-            <Form inline>
-            <Button variant="danger" onClick={this.deleteToken.bind(this)}>
-                Sign Out
-              </Button>
-            </Form>
           </Navbar.Collapse>
         </Navbar>
       );
