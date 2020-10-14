@@ -91,12 +91,10 @@ class SignupComponent extends Component {
     } else if (userObject.password !== this.state.confirmPassword) {
       alert("confirm password error");
     } else {
-      console.log(userObject);
       try {
         axios
           .post(`http://localhost:8080/users/sign-up/`, userObject)
           .then((result) => {
-            console.log("RESULT", result);
             if (result.data === "Utilisateur enregistré") {
               this.setState({
                 submitOk: true,

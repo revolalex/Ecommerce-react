@@ -16,9 +16,8 @@ class Navbare extends Component {
   deleteToken() {
     this.props.deleteToken()
     this.props.history.push('/')
-    window.location.reload(false);
+    window.location.reload();
   }
-
   render() {
     let withToken;
     const testToken = this.props.token;

@@ -3,21 +3,13 @@ import { Card, Col, Row, Container } from "react-bootstrap";
 import "./UserList.css";
 import axios from "axios";
 import { connect } from "react-redux";
-
+import {setUsers} from '../store/actions/user'
 class UserListComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-    };
-  }
   componentDidMount() {
     axios
       .get(`http://localhost:8080/allUsers/`)
       .then((result) => {
-        this.setState({
-          data: result.data,
-        });
+        this.props.setUsers(result.data)
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -28,7 +20,7 @@ class UserListComponent extends Component {
       <div id="myRow">
         <Container className="testContainer">
           <Row className="justify-content-md-center">
-            {this.state.data.map((user) => this.renderProduct(user))}
+            {this.props.users.map((user) => this.renderProduct(user))}
           </Row>
         </Container>
       </div>
@@ -59,9 +51,13 @@ class UserListComponent extends Component {
     );
   }
 }
+const mapDispatchToProps = {
+  setUsers
+}
 
 const mapStateToProps = (state) => ({
-  products: state.productReducer.products
+  products: state.productReducer.products,
+  users: state.userReducer.users
 })
 
-export default connect(mapStateToProps)(UserListComponent)
+export default connect(mapStateToProps,mapDispatchToProps)(UserListComponent)
