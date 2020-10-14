@@ -7,13 +7,11 @@ class CreateProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: [],
       category: "",
       name: "",
       description: "",
       url: "",
       prices: "",
-      id_user_affiliate: "",
       submitOk: false,
       headerWithToken: {
         headers: {
@@ -28,11 +26,7 @@ class CreateProductPage extends Component {
     this.handlePrices = this.handlePrices.bind(this);
     this.buttonIsClick = this.buttonIsClick.bind(this);
   }
-  UNSAFE_componentWillMount() {
-    this.setState({
-      token: localStorage.getItem("token"),
-    });
-  }
+
   handleCategory(event) {
     this.setState({
       category: event.target.value,
@@ -67,7 +61,7 @@ class CreateProductPage extends Component {
       description: this.state.description,
       url: this.state.url,
       prices: this.state.prices,
-      id_user_affiliate: localStorage.getItem("id"),
+      id_user_affiliate: this.props.id,
     };
 
     if (productObject.category.length < 2) {
@@ -91,11 +85,9 @@ class CreateProductPage extends Component {
           )
           .then((result) => {
             console.log(result);
-
             this.setState({
               submitOk: true,
             });
-
             // reset input
             this.setState({
               category: "",
@@ -195,7 +187,8 @@ class CreateProductPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.userReducer.token
+  token: state.userReducer.token,
+  id : state.userReducer.id
 })
 
 export default connect(mapStateToProps,null) (CreateProductPage);

@@ -42,8 +42,6 @@ class Navbare extends Component {
         </Navbar>
       );
     } else {
-      console.log(this.props);
-
       withToken = (
         <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="/">React-Ecom</Navbar.Brand>

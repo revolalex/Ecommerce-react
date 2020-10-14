@@ -25,7 +25,6 @@ class SignInComponent extends Component {
     });
   }
   buttonIsClick(e) {
-    
     e.preventDefault();
     let userObject = {
       email: this.state.email,
@@ -37,13 +36,14 @@ class SignInComponent extends Component {
         .then((result) => {
           if (result.data === "Sorry, email incorrect") {
             alert("Sorry, email incorrect");
-          }
-          if (result.data === "password error") {
+          }else if (result.data === "password error") {
             alert("Password error");
+          } else {
+            this.props.setToken(result.data.token)
+            this.props.setID(result.data.id)
+            this.props.authTrue()
           }
-          this.props.setToken(result.data.token)
-          this.props.setID(result.data.id)
-          this.props.authTrue()
+          
         })
         .catch((error) => {
           console.log(error);
