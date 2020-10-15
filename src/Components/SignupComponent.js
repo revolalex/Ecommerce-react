@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
 import AnimationPlane from "./AnimationPlane";
+import ButtonComponent from "./ButtonComponent"
 
 class SignupComponent extends Component {
   constructor(props) {
@@ -243,13 +244,8 @@ class SignupComponent extends Component {
               </input>
               <label>Confirm Password {testConfirmPassword}</label>
             </div>
-            <a href="/#" onClick={this.buttonIsClick} type="submit">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Submit
-            </a>
+            <ButtonComponent click={this.buttonIsClick} />
+
             {submitUserTest}
           </form>
         </div>

@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
 import { connect } from "react-redux";
+import ButtonComponent from "./ButtonComponent";
 
 class CreateProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo:[],
+      userInfo: [],
       token: [],
       category: "",
       name: "",
@@ -176,13 +177,7 @@ class CreateProductPage extends Component {
               <label>Picture</label>
               <img className="uploadImg" src={this.state.url} alt="" />
             </div>
-            <a href="/#" onClick={this.buttonIsClick}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Submit
-            </a>
+            <ButtonComponent click={this.buttonIsClick} />
             {submitProduct}
           </form>
         </div>
@@ -193,7 +188,7 @@ class CreateProductPage extends Component {
 
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  id : state.userReducer.id
-})
+  id: state.userReducer.id,
+});
 
-export default connect(mapStateToProps,null) (CreateProductPage);
+export default connect(mapStateToProps, null)(CreateProductPage);
