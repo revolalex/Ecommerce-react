@@ -3,17 +3,15 @@ import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import "./NavBar.css";
 import { withRouter } from "react-router-dom";
 import MyRouter from "./Router";
-import {deleteToken,authFalse} from '../store/actions/user'
+import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";
-
+import WaveAnimationComponent from "./WaveAnimation";
 
 class Navbare extends Component {
-
   deleteToken() {
-    this.props.deleteToken()
-    this.props.authFalse()
-    this.props.history.push('/')
-    window.location.reload();
+    this.props.authFalse();
+    this.props.deleteToken();
+    this.props.history.push("/");
   }
 
   render() {
@@ -32,9 +30,7 @@ class Navbare extends Component {
               <Nav.Link href=""></Nav.Link>
             </Nav>
             <Form inline>
-            
-              
-            <Button variant="danger" onClick={this.deleteToken.bind(this)}>
+              <Button variant="danger" onClick={this.deleteToken.bind(this)}>
                 Sign Out
               </Button>
             </Form>
@@ -58,11 +54,7 @@ class Navbare extends Component {
 
     return (
       <div>
-        <div className="waveBox">
-          <div className="wave -one"></div>
-          <div className="wave -two"></div>
-          <div className="wave -three"></div>
-        </div>
+        <WaveAnimationComponent />
         {withToken}
         <MyRouter />
       </div>
@@ -71,11 +63,14 @@ class Navbare extends Component {
 }
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  auth: state.userReducer.auth
-})
+  auth: state.userReducer.auth,
+});
 
 const mapDispatchToProps = {
   deleteToken,
-  authFalse
-}
-export default connect(mapStateToProps,mapDispatchToProps) (withRouter(Navbare));
+  authFalse,
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Navbare));
