@@ -67,6 +67,7 @@ class Navbare extends Component {
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
   auth: state.userReducer.auth,
+  
 });
 
 const mapDispatchToProps = {

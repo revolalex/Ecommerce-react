@@ -1,9 +1,10 @@
-
 import React, { Component } from "react";
 import axios from "axios";
 import "./productCard2.css";
 import { connect } from "react-redux";
 import {setProductClick} from '../store/actions/product'
+import {increaseCounter, decreaseCounter} from"../store/actions/cart"
+
 
 class ProductCardComponent2 extends Component {
 
@@ -16,6 +17,15 @@ class ProductCardComponent2 extends Component {
       .catch(() => {
         console.log("Oops, request failed!");
       });
+  }
+  buttonIsClick(e){
+    e.preventDefault();
+    this.props.increaseCounter()
+  }
+  removeButtonIsClick(e){
+    e.preventDefault()
+    this.props.decreaseCounter()
+
   }
 
   render() {
@@ -46,12 +56,19 @@ class ProductCardComponent2 extends Component {
               <h4>Seller</h4>
               <p>{product.username}</p>
             </div>
-            <a href="/#">
+            <a href="/#" onClick={this.buttonIsClick.bind(this)}>
               <span></span>
               <span></span>
               <span></span>
               <span></span>
               Buy {product.prices} $
+            </a>
+            <a href="/#" onClick={this.removeButtonIsClick.bind(this)}>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Remove
             </a>
           </form>
         </div>
@@ -60,10 +77,13 @@ class ProductCardComponent2 extends Component {
 }
 
 const mapDispatchToProps = {
-  setProductClick
+  setProductClick,
+  increaseCounter,
+  decreaseCounter
 }
 
 const mapStateToProps = (state) => ({
+  counter: state.cartReducer.counter,
   product: state.productReducer.product,
   id: state.productReducer.id
 })

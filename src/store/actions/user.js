@@ -1,26 +1,26 @@
 export const setToken = (token) => ({
-    type: 'SET_TOKEN',
-    token: token
-})
+  type: "SET_TOKEN",
+  token: token,
+});
 
 export const deleteToken = () => ({
-    type: 'DELETE_TOKEN'
-})
+  type: "DELETE_TOKEN",
+});
 
 export const setUsers = (users) => ({
-    type: 'SET_USERS',
-    users: users
-})
+  type: "SET_USERS",
+  users: users,
+});
 
 export const setID = (id) => ({
-    type: 'SET_ID',
-    id: id
-})
+  type: "SET_ID",
+  id: id,
+});
 
 export const authTrue = () => ({
-    type: 'AUTH_TRUE'
-})
+  type: "AUTH_TRUE",
+});
 
 export const authFalse = () => ({
-    type: 'AUTH_FALSE'
-})
+  type: "AUTH_FALSE",
+});
