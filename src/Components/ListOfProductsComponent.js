@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import {setProducts,setIdProduct} from '../store/actions/product.js'
+import {setListOfProducts,setIdProduct} from '../store/actions/product.js'
 import axios from "axios";
 import "./ListOfProduct.css";
 import {connect} from 'react-redux'
@@ -9,7 +9,7 @@ class ProductListPage extends Component {
     axios
       .get(`http://localhost:8080/products/`)
       .then((result) => {
-        this.props.setProducts(result.data)
+        this.props.setListOfProducts(result.data)
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  setProducts,
+  setListOfProducts: setListOfProducts,
   setIdProduct
 }
 

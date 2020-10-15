@@ -6,7 +6,7 @@ import "./App.css";
 // import AddingProductComponent from "./Components/AddingProductComponent"
 // import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setProducts } from "./store/actions/product";
+import { setListOfProducts } from "./store/actions/product";
 import { setToken, deleteToken, setUsers } from "./store/actions/user";
 
 class App extends Component {
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  setProducts,
+  setListOfProducts,
   setToken,
   deleteToken,
   setUsers,

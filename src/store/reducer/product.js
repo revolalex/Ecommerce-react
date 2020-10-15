@@ -6,12 +6,12 @@ const initialState = {
 
 const productReducer = (state = initialState,action) => {
   switch (action.type) {
-      case "SET_PRODUCTS":
+      case "SET_LIST_OF_PRODUCTS":
           return{
               ...state,
               products: action.products
           }
-      case 'SET_PRODUCT':
+      case 'SET_PRODUCT_CLICK':
           return{
               ...state,
               product: action.product

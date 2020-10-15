@@ -1,10 +1,10 @@
-export const setProducts = (products) => ({
-    type: "SET_PRODUCTS",
+export const setListOfProducts = (products) => ({
+    type: "SET_LIST_OF_PRODUCTS",
     products: products
 })
 
-export const setProduct = (product) => ({
-    type: "SET_PRODUCT",
+export const setProductClick = (product) => ({
+    type: "SET_PRODUCT_CLICK",
     product: product
 })
 

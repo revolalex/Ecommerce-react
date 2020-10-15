@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./productCard2.css";
 import { connect } from "react-redux";
-import {setProduct} from '../store/actions/product'
+import {setProductClick} from '../store/actions/product'
 
 class ProductCardComponent2 extends Component {
 
@@ -11,7 +11,7 @@ class ProductCardComponent2 extends Component {
     axios
       .get(`http://localhost:8080/products/${this.props.id}`)
       .then((result) => {
-        this.props.setProduct(result.data)
+        this.props.setProductClick(result.data)
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -60,7 +60,7 @@ class ProductCardComponent2 extends Component {
 }
 
 const mapDispatchToProps = {
-  setProduct
+  setProductClick
 }
 
 const mapStateToProps = (state) => ({
