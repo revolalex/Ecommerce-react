@@ -7,6 +7,7 @@ import CreateProductPage from "./CreateProductPage";
 import UserListComponent from "./UserListComponent";
 import ListOfProducts from "./ListOfProductsComponent";
 import ProductCardComponent2 from "./ProductCardComponent2";
+import BasketComponent from "./BasketComponent"
 import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";
 
@@ -50,12 +51,18 @@ class MyRouter extends Component {
               <ListOfProducts />
             )}
           </Route>
-          {/* prototype */}
           <Route path="/productCard2">
             {this.props.auth === false || undefined ? (
               <Redirect to="/sign-in" />
             ) : (
               <ProductCardComponent2 />
+            )}
+          </Route>
+          <Route path="/basket">
+            {this.props.auth === false || undefined ? (
+              <Redirect to="/sign-in" />
+            ) : (
+              <BasketComponent />
             )}
           </Route>
           <Route
