@@ -59,8 +59,15 @@ const appRouter = async function(app, connection) {
   });
 
   // Get all users with all info
+  // await app.get("/allUsers", function(req, res) {
+  //   let getUserInfo = "SELECT * FROM users";
+  //   connection.query(getUserInfo, function(err, results) {
+  //     if (err) throw err;
+  //     res.send(results);
+  //   });
+  // });
   await app.get("/allUsers", function(req, res) {
-    let getUserInfo = "SELECT * FROM users";
+    let getUserInfo = "SELECT id,firstName,lastName,url,email FROM users";
     connection.query(getUserInfo, function(err, results) {
       if (err) throw err;
       res.send(results);

@@ -6,6 +6,7 @@ import MyRouter from "./Router";
 import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";
 import WaveAnimationComponent from "./WaveAnimation";
+import CartComponent from "./CartComponent";
 
 class Navbare extends Component {
   deleteToken() {
@@ -27,7 +28,9 @@ class Navbare extends Component {
               <Nav.Link href="/addProduct">Add Product</Nav.Link>
               <Nav.Link href="/list-of-products">Products List</Nav.Link>
               <Nav.Link href="/Users-List">Users List</Nav.Link>
-              <Nav.Link href=""></Nav.Link>
+              <Form inline>
+                <CartComponent />
+              </Form>
             </Nav>
             <Form inline>
               <Button variant="danger" onClick={this.deleteToken.bind(this)}>
