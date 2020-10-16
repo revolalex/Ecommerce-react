@@ -1,23 +1,14 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import "./NavBar.css";
 import {deleteToken,authFalse} from '../store/actions/user'
-import { withRouter } from "react-router-dom";
-import CreateProductPage from "./CreateProductPage";
-import SignupComponent from "./SignupComponent";
-import SignInComponent from "./SignInComponent";
-import UserListComponent from "./UserListComponent";
-import ProductCardComponet2 from "./ProductCardComponent2";
-import ListOfProducts from "./ListOfProductsComponent";
 import { connect } from "react-redux";
+import {withRouter} from "react-router-dom"
 
 class Navbare extends Component {
   deleteToken() {
     this.props.deleteToken()
     this.props.authFalse()
-    this.props.history.push('/')
-    window.location.reload();
   }
   render() {
     let withToken;
@@ -63,33 +54,7 @@ class Navbare extends Component {
           <div className="wave -two"></div>
           <div className="wave -three"></div>
         </div>
-        <Router id="myNav">
-          {withToken}
-          <Switch>
-            <Route exact path="/" >
-              {this.props.auth === true  ? <Redirect to="/Users-list"/> : <SignupComponent/>}
-            </Route>
-            <Route path="/sign-in">
-              {this.props.auth === true ? <Redirect to="/Users-List"/> : <SignInComponent/>}
-            </Route>
-            <Route path="/addProduct">
-              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <CreateProductPage/>}
-            </Route>
-            <Route path="/Users-List">
-              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <UserListComponent/>}
-            </Route>
-            <Route path="/list-of-products">
-              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <ListOfProducts/>}
-            </Route>
-            {/* prototype */}
-            <Route
-              path="/productCard2"
-            >
-              {this.props.auth === false || undefined ? <Redirect to="/sign-in"/> : <ProductCardComponet2/>}
-            </Route>
-            <Route render={ () => this.props.auth === false || undefined ? <Redirect to="/"/> : <Redirect to="/Users-List"/> }/>
-          </Switch>
-        </Router>
+        {withToken}
       </div>
     );
   }
