@@ -11,7 +11,7 @@ import {PersistGate} from "redux-persist/integration/react";
 import { createStore } from 'redux'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import indexReducer from "./store/reducer/index";
- 
+import { debugContextDevtool } from 'react-context-devtool';
 const persistConfig = {
   key: 'root',
   storage,
@@ -35,6 +35,8 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+debugContextDevtool(document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
