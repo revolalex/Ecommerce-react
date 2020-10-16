@@ -12,7 +12,7 @@ class Navbare extends Component {
   }
   render() {
     let withToken;
-    const testToken = this.props.token;
+    const testToken = this.props.auth;
     if (testToken) {
       withToken = (
         <Navbar bg="dark" variant="dark" expand="lg">

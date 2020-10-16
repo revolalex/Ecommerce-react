@@ -3,6 +3,7 @@ import axios from "axios";
 import "./productCard2.css";
 import { connect } from "react-redux";
 import {setProduct} from '../store/actions/product'
+import Button from './button'
 class ProductCardComponent2 extends Component {
   componentDidMount() {
     axios
@@ -44,13 +45,7 @@ class ProductCardComponent2 extends Component {
               <h4>Seller</h4>
               <p>{product.firstName} {product.lastName}</p>
             </div>
-            <a href="/productCard2">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Buy {product.prices} $
-            </a>
+            <Button link="/productCard2" text="Buy"/>
           </form>
         </div>
     );

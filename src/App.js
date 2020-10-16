@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { setProduct } from "./store/actions/product";
 import { setToken, deleteToken } from "./store/actions/user";
 import Navbar from "./Components/NavBarComponent";
-import Router from "./Components/Router2"
+import Router from "./Components/Router"
 class App extends Component {
   render() {
     return (

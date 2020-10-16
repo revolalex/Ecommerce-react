@@ -3,6 +3,7 @@ import "./Sign.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import {setToken,setID,authTrue} from "../store/actions/user"
+import Button from './button'
 class SignInComponent extends Component {
   constructor(props) {
     super(props);
@@ -79,13 +80,7 @@ class SignInComponent extends Component {
               ></input>
               <label>Password</label>
             </div>
-            <a href="/#" onClick={this.buttonIsClick}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Submit
-            </a>
+            <Button click={this.buttonIsClick} text="Sign-in"/>
           </form>
         </div>
       </div>

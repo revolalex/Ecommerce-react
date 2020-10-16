@@ -55,7 +55,6 @@ class CreateProductPage extends Component {
     });
   }
   buttonIsClick(e) {
-    console.log("HEADER REQUEST POST", this.state.headerWithToken);
     e.preventDefault();
     let productObject = {
       category: this.state.category,
@@ -83,7 +82,6 @@ class CreateProductPage extends Component {
         break
       default:
         try {
-          console.log(this.props);
           axios
             .post(
               "http://localhost:8080/products/",
@@ -91,7 +89,6 @@ class CreateProductPage extends Component {
               this.state.headerWithToken
             )
             .then((result) => {
-              console.log(result);
               this.setState({
                 submitOk: true,
               });
@@ -168,7 +165,7 @@ class CreateProductPage extends Component {
             {formInput.map((elem)=>{
               return <UserBox props={elem} key={elem.id}/>
             })}
-            <Button click={this.buttonIsClick}/>
+            <Button text="Create a product"click={this.buttonIsClick}/>
             {submitProduct}
           </form>
         </div>

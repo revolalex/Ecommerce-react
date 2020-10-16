@@ -246,7 +246,7 @@ class SignupComponent extends Component {
             {formInput.map((elem) => {
               return <UserBox2 form={elem} key={elem.id}/>
             })}
-            <Button click={this.buttonIsClick}/>
+            <Button text="Sign-up" click={this.buttonIsClick}/>
             {submitUserTest}
           </form>
         </div>

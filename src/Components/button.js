@@ -3,12 +3,12 @@ import React, {Component} from 'react'
 class Button extends Component {
     render(){
         return(
-            <a href="/#" onClick={this.props.click}>
+            <a href={ this.props.link === undefined ? "/#" : this.props.link} onClick={this.props.click === undefined ? this.props.lol : this.props.click }>
               <span></span>
               <span></span>
               <span></span>
               <span></span>
-              Submit
+              {this.props.text}
             </a>
         )
     }
