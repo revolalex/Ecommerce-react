@@ -1,5 +1,5 @@
 const initialState = {
-  product: {},
+  productBasket: [],
   totalPriceCart: 0,
   counter: 0,
 };
@@ -9,12 +9,12 @@ const cartReducer = (state = initialState, action) => {
     case "ADD_PRODUCT_TO_CART":
       return {
         ...state,
-        product: action.products,
+        productBasket: [...state.productBasket, action.productBasket ]
       };
     case "DELETE_PRODUCT_FROM_CART":
       return {
         ...state,
-        product: action.product,
+        productBasket: action.productBasket,
       };
     case "INCREASE_COUNTER":
       return {

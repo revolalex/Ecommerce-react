@@ -2,30 +2,32 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./productCard2.css";
 import { connect } from "react-redux";
-import {setProductClick} from '../store/actions/product'
-import {increaseCounter, decreaseCounter} from"../store/actions/cart"
-
+import { setProductClick } from "../store/actions/product";
+import {
+  increaseCounter,
+  decreaseCounter,
+  addProductToCart,
+} from "../store/actions/cart";
 
 class ProductCardComponent2 extends Component {
-
   componentDidMount() {
     axios
       .get(`http://localhost:8080/products/${this.props.id}`)
       .then((result) => {
-        this.props.setProductClick(result.data)
+        this.props.setProductClick(result.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
       });
   }
-  buttonIsClick(e){
+  addButtonIsClick(e) {
     e.preventDefault();
-    this.props.increaseCounter()
+    this.props.increaseCounter();
+    this.props.addProductToCart(this.props.product[0]);
   }
-  removeButtonIsClick(e){
-    e.preventDefault()
-    this.props.decreaseCounter()
-
+  removeButtonIsClick(e) {
+    e.preventDefault();
+    this.props.decreaseCounter();
   }
 
   render() {
@@ -37,42 +39,42 @@ class ProductCardComponent2 extends Component {
   }
 
   renderProduct(product) {
-    console.log(this.props.product[0])
+    console.log(this.props.product[0]);
     return (
-        <div className="login-box2" >
-          <h2>{product.name}</h2>
-          <img className="cardProductImg2" src={product.url} alt="" />
-          <form>
-            <div className="user-box2">
-              <h4>Description:</h4>
-              <p>{product.description}</p>
-            </div>
-            <div className="user-box2">
-              <h4>Category</h4>
-              <p>{product.category}</p>
-            </div>
-            <div className="user-box2">
-              <h4>Price</h4>
-              <p>{product.prices}$</p>
-              <h4>Seller</h4>
-              <p>{product.username}</p>
-            </div>
-            <a href="/#" onClick={this.buttonIsClick.bind(this)}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Buy {product.prices} $
-            </a>
-            <a href="/#" onClick={this.removeButtonIsClick.bind(this)}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Remove
-            </a>
-          </form>
-        </div>
+      <div className="login-box2">
+        <h2>{product.name}</h2>
+        <img className="cardProductImg2" src={product.url} alt="" />
+        <form>
+          <div className="user-box2">
+            <h4>Description:</h4>
+            <p>{product.description}</p>
+          </div>
+          <div className="user-box2">
+            <h4>Category</h4>
+            <p>{product.category}</p>
+          </div>
+          <div className="user-box2">
+            <h4>Price</h4>
+            <p>{product.prices}$</p>
+            <h4>Seller</h4>
+            <p>{product.username}</p>
+          </div>
+          <a href="/#" onClick={this.addButtonIsClick.bind(this)}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Buy {product.prices} $
+          </a>
+          <a href="/#" onClick={this.removeButtonIsClick.bind(this)}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Remove
+          </a>
+        </form>
+      </div>
     );
   }
 }
@@ -80,13 +82,18 @@ class ProductCardComponent2 extends Component {
 const mapDispatchToProps = {
   setProductClick,
   increaseCounter,
-  decreaseCounter
-}
+  decreaseCounter,
+  addProductToCart,
+};
 
 const mapStateToProps = (state) => ({
   counter: state.cartReducer.counter,
   product: state.productReducer.product,
-  id: state.productReducer.id
-})
+  id: state.productReducer.id,
+  productBasket: state.cartReducer.productBasket,
+});
 
-export default connect(mapStateToProps,mapDispatchToProps) (ProductCardComponent2)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductCardComponent2);
