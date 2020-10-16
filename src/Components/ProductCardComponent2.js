@@ -30,15 +30,16 @@ class ProductCardComponent2 extends Component {
 
   render() {
     return (
-      <div className="myRow2">
+      <div className="myRow2" key={this.props.product[0].name}>
         {this.renderProduct(this.props.product[0])}
       </div>
     );
   }
 
   renderProduct(product) {
+    console.log(this.props.product[0])
     return (
-        <div className="login-box2" key={product.id}>
+        <div className="login-box2" >
           <h2>{product.name}</h2>
           <img className="cardProductImg2" src={product.url} alt="" />
           <form>
