@@ -8,6 +8,7 @@ import {
   decreaseCounter,
   addProductToCart,
 } from "../store/actions/cart";
+import ButtonComponent from "./ButtonComponent";
 
 class ProductCardComponent2 extends Component {
   componentDidMount() {
@@ -59,20 +60,22 @@ class ProductCardComponent2 extends Component {
             <h4>Seller</h4>
             <p>{product.username}</p>
           </div>
-          <a href="/#" onClick={this.addButtonIsClick.bind(this)}>
+          <ButtonComponent text= {"Buy" + product.prices + "$"} click={this.addButtonIsClick.bind(this)} />
+          <ButtonComponent text= {"Remove"} click={this.removeButtonIsClick.bind(this)} />
+          {/* <a href="/#" onClick={this.addButtonIsClick.bind(this)}>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
             Buy {product.prices} $
-          </a>
-          <a href="/#" onClick={this.removeButtonIsClick.bind(this)}>
+          </a> */}
+          {/* <a href="/#" onClick={this.removeButtonIsClick.bind(this)}>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
             Remove
-          </a>
+          </a> */}
         </form>
       </div>
     );

@@ -68,19 +68,19 @@ class CreateProductPage extends Component {
     switch (true) {
       case productObject.category.length < 2:
         alert("category error: min 2 characters");
-        break
+        break;
       case productObject.name.length < 3:
         alert("name error: min 3 characters");
-        break
+        break;
       case productObject.description.length < 10:
         alert("description required min 10 characters");
-        break
+        break;
       case productObject.url.length < 10:
         alert("url of product picture required min 10 characters");
-        break
+        break;
       case productObject.prices.length < 1:
         alert("Price missing");
-        break
+        break;
       default:
         try {
           console.log(this.props);
@@ -117,42 +117,46 @@ class CreateProductPage extends Component {
   render() {
     const formInput = [
       {
-        type:'text',
-        name:"category",
+        type: "text",
+        name: "category",
         value: this.state.category,
         onChange: this.handleCategory,
         label: "Category",
-        id:1
-      },{
-        type:'text',
-        name:"descrition",
+        id: 1,
+      },
+      {
+        type: "text",
+        name: "descrition",
         value: this.state.description,
         onChange: this.handleDescription,
         label: "Description",
-        id:2
-      },{
-        type:'text',
-        name:"name",
+        id: 2,
+      },
+      {
+        type: "text",
+        name: "name",
         value: this.state.name,
         onChange: this.handleName,
         label: "Name",
-        id:3
-      },{
-        type:'number',
-        name:"prices",
+        id: 3,
+      },
+      {
+        type: "number",
+        name: "prices",
         value: this.state.prices,
         onChange: this.handlePrices,
         label: "Prices",
-        id:4
-      },{
-        type:'text',
-        name:"picture",
+        id: 4,
+      },
+      {
+        type: "text",
+        name: "picture",
         value: this.state.url,
         onChange: this.handleUrl,
         label: "Picture",
-        id:5
-      }
-    ]
+        id: 5,
+      },
+    ];
     let submitProduct;
     const submitTestDone = this.state.submitOk;
     if (submitTestDone) {
@@ -165,14 +169,16 @@ class CreateProductPage extends Component {
         <div className="login-box">
           <h2>Add an article</h2>
           <form>
-            {formInput.map((elem)=>{
-              return <UserBox props={elem} key={elem.id}/>
+            {formInput.map((elem) => {
+              return <UserBox props={elem} key={elem.id} />;
             })}
             <img className="uploadImg" src={this.state.url} alt="" />
-            <ButtonComponent click={this.buttonIsClick}/>
-            
+            <ButtonComponent
+              click={this.buttonIsClick}
+              text="Create a Product"
+            />
+
             {submitProduct}
-            
           </form>
         </div>
       </div>
@@ -182,16 +188,7 @@ class CreateProductPage extends Component {
 
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  id : state.userReducer.id
-})
+  id: state.userReducer.id,
+});
 
-export default connect(mapStateToProps,null) (CreateProductPage);
-
-
-
-
-
-
-
-
-
+export default connect(mapStateToProps, null)(CreateProductPage);

@@ -14,7 +14,7 @@ const cartReducer = (state = initialState, action) => {
     case "DELETE_PRODUCT_FROM_CART":
       return {
         ...state,
-        productBasket: action.productBasket,
+        productBasket: state.productBasket.filter(product => product !== action.product)
       };
     case "INCREASE_COUNTER":
       return {

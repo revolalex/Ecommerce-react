@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import {setListOfProducts,setIdProduct} from '../store/actions/product.js'
+import { setListOfProducts, setIdProduct } from "../store/actions/product.js";
 import axios from "axios";
 import "./ListOfProduct.css";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 class ProductListPage extends Component {
   componentDidMount() {
     axios
       .get(`http://localhost:8080/products/`)
       .then((result) => {
-        this.props.setListOfProducts(result.data)
+        this.props.setListOfProducts(result.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
       });
   }
-  productClick(id){
-    this.props.setIdProduct(id)
+  productClick(id) {
+    this.props.setIdProduct(id);
     console.log(this.props.products.id);
   }
 
@@ -41,14 +41,18 @@ class ProductListPage extends Component {
           bg="dark"
           text="light"
           style={{ width: "18rem" }}
-          
         >
           <Card.Header>{product.category}</Card.Header>
           <Card.Img className="testImg" variant="top" src={product.url} />
           <Card.Body>
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
-            <a href="/productCard2" onClick={this.productClick.bind(this,product.id)}>More Info</a>
+            <a
+              href="/productCard2"
+              onClick={this.productClick.bind(this, product.id)}
+            >
+              More Info
+            </a>
           </Card.Body>
           <Card.Footer text="light">{product.prices} €</Card.Footer>
         </Card>
@@ -59,12 +63,12 @@ class ProductListPage extends Component {
 
 const mapStateToProps = (state) => ({
   products: state.productReducer.products,
-  idProduct: state.productReducer.id
-})
+  idProduct: state.productReducer.id,
+});
 
 const mapDispatchToProps = {
   setListOfProducts: setListOfProducts,
-  setIdProduct
-}
+  setIdProduct,
+};
 
-export default connect(mapStateToProps,mapDispatchToProps) (ProductListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListPage);

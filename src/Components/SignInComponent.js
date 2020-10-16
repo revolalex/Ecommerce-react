@@ -84,7 +84,7 @@ class SignInComponent extends Component {
               ></input>
               <label>Password</label>
             </div>
-            <ButtonComponent click={this.buttonIsClick} />
+            <ButtonComponent click={this.buttonIsClick} text= "Sign-in" />
           </form>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { increaseCounter, decreaseCounter } from "../store/actions/cart";
+import { increaseCounter, decreaseCounter, deleteProductFromCart } from "../store/actions/cart";
 import { connect } from "react-redux";
 import "./BasketComponent.css";
 import {
@@ -16,11 +16,16 @@ class BasketComponent extends Component {
   addClick(e) {
     e.preventDefault();
     this.props.increaseCounter();
-    console.log("ICI", this.props.productBasket);
   }
   decrementClick(e) {
     e.preventDefault();
     this.props.decreaseCounter();
+  }
+  deleteClick(e){
+    e.preventDefault();
+    this.props.deleteProductFromCart(this.props.productBasket)
+    console.log("ICI",this.props.productBasket);
+
   }
 
   renderProduct(product) {
@@ -63,6 +68,7 @@ class BasketComponent extends Component {
                     className="trashBasket"
                     src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
                     alt="trash"
+                    onClick={this.deleteClick.bind(this)}
                   />
                 </Button>
               </Form>
@@ -75,7 +81,7 @@ class BasketComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div >
         {this.props.productBasket.map((product) => this.renderProduct(product))}
       </div>
 
@@ -86,6 +92,7 @@ class BasketComponent extends Component {
 const mapDispatchToProps = {
   increaseCounter,
   decreaseCounter,
+  deleteProductFromCart
 };
 
 const mapStateToProps = (state) => ({
