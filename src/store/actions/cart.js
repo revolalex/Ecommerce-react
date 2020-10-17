@@ -7,10 +7,16 @@ export const deleteProductFromCart = (product) => ({
   type: "DELETE_PRODUCT_FROM_CART",
   productBasket: product,
 });
+export const resetCart = ()=>({
+  type: "RESET_CART"
+})
 
+
+// Not use 
 export const increaseCounter = () => ({
   type: "INCREASE_COUNTER",
 });
 export const decreaseCounter = () => ({
   type: "DECREASE_COUNTER",
 });
+

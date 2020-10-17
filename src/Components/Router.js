@@ -7,7 +7,7 @@ import CreateProductPage from "./CreateProductPage";
 import UserListComponent from "./UserListComponent";
 import ListOfProducts from "./ListOfProductsComponent";
 import ProductCardComponent2 from "./ProductCardComponent2";
-import BasketComponent from "./BasketComponent"
+import BasketComponent from "./BasketComponent";
 import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";
 

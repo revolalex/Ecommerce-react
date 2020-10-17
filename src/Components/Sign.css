@@ -8,7 +8,7 @@ body {
   background: linear-gradient(#141e30, #243b55);
 }
 .login-box {
-  margin: auto; 
+  margin: auto;
   margin-top: 10vh;
   width: 400px;
   padding: 40px;
@@ -19,23 +19,6 @@ body {
   background: linear-gradient(#243b55, #141e30);
   opacity: 0.9;
 }
-
-/* .login-box {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  padding: 40px;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-  margin-top: 50vh;
-  height: 100%;
-  background: linear-gradient(#243b55, #141e30);
-  opacity: 0.9;
-} */
 
 .login-box h2 {
   margin: 0 0 30px;
@@ -77,7 +60,7 @@ body {
   color: #03e9f4;
   font-size: 12px;
 }
-
+/* 
 .login-box form a {
   position: relative;
   display: inline-block;
@@ -182,7 +165,7 @@ body {
   100% {
     bottom: 100%;
   }
-}
+} */
 
 /************** Media Queries *******************/
 @media only screen and (max-width: 600px) {
@@ -247,7 +230,3 @@ body {
   font-size: 0.8em;
   padding-left: 60px;
 }
-
-
-
-

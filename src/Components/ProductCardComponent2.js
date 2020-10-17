@@ -3,11 +3,7 @@ import axios from "axios";
 import "./productCard2.css";
 import { connect } from "react-redux";
 import { setProductClick } from "../store/actions/product";
-import {
-  increaseCounter,
-  decreaseCounter,
-  addProductToCart,
-} from "../store/actions/cart";
+import { addProductToCart } from "../store/actions/cart";
 import ButtonComponent from "./ButtonComponent";
 
 class ProductCardComponent2 extends Component {
@@ -23,12 +19,7 @@ class ProductCardComponent2 extends Component {
   }
   addButtonIsClick(e) {
     e.preventDefault();
-    this.props.increaseCounter();
     this.props.addProductToCart(this.props.product[0]);
-  }
-  removeButtonIsClick(e) {
-    e.preventDefault();
-    this.props.decreaseCounter();
   }
 
   render() {
@@ -60,22 +51,10 @@ class ProductCardComponent2 extends Component {
             <h4>Seller</h4>
             <p>{product.username}</p>
           </div>
-          <ButtonComponent text= {"Buy" + product.prices + "$"} click={this.addButtonIsClick.bind(this)} />
-          <ButtonComponent text= {"Remove"} click={this.removeButtonIsClick.bind(this)} />
-          {/* <a href="/#" onClick={this.addButtonIsClick.bind(this)}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Buy {product.prices} $
-          </a> */}
-          {/* <a href="/#" onClick={this.removeButtonIsClick.bind(this)}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Remove
-          </a> */}
+          <ButtonComponent
+            text={"Buy" + product.prices + "$"}
+            click={this.addButtonIsClick.bind(this)}
+          />
         </form>
       </div>
     );
@@ -84,8 +63,6 @@ class ProductCardComponent2 extends Component {
 
 const mapDispatchToProps = {
   setProductClick,
-  increaseCounter,
-  decreaseCounter,
   addProductToCart,
 };
 

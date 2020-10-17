@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
 import UserBox2 from "./UserBox2";
-import ButtonComponent from './ButtonComponent'
+import ButtonComponent from "./ButtonComponent";
 import AnimationPlane from "./AnimationPlane";
 class SignupComponent extends Component {
   constructor(props) {
@@ -86,19 +86,19 @@ class SignupComponent extends Component {
         break;
       case userObject.lastName.length < 3:
         alert("last name error: min 3 character");
-        break
+        break;
       case userObject.url.length < 10:
         alert("url profile picture require");
-        break
+        break;
       case userObject.password < 8:
         alert("password minimun 8 character");
-        break
+        break;
       case !userObject.email.match(mailformat):
         alert("email incorrect");
-        break
+        break;
       case userObject.password !== this.state.confirmPassword:
         alert("confirm password error");
-        break
+        break;
       default:
         try {
           axios
@@ -128,8 +128,8 @@ class SignupComponent extends Component {
         } catch (error) {
           console.log(error);
         }
-      }
     }
+  }
   render() {
     let testConfirmPassword;
     const passwordMatch = this.state.passTest;
@@ -183,60 +183,60 @@ class SignupComponent extends Component {
     }
     const formInput = [
       {
-        type:'text',
-        name:'firstName',
+        type: "text",
+        name: "firstName",
         value: this.state.firstName,
         onChange: this.handleFirstName,
         label: "First Name",
         label2: requireFirstName,
-        id: 1
+        id: 1,
       },
       {
-        type: 'text',
-        name: ' lastName',
+        type: "text",
+        name: " lastName",
         value: this.state.lastName,
         onChange: this.handleLastName,
-        label:"Last Name",
+        label: "Last Name",
         label2: requireLastName,
-        id: 2
+        id: 2,
       },
       {
-        type: 'text',
-        name:'url',
+        type: "text",
+        name: "url",
         value: this.state.url,
         onChange: this.handleImgProfile,
         label: "Profil Picture Url",
-        label2:requireUrl,
-        id: 3
+        label2: requireUrl,
+        id: 3,
       },
       {
-        type: 'text',
-        name:'email',
+        type: "text",
+        name: "email",
         value: this.state.email,
         onChange: this.handleEmail,
         label: "Email",
-        label2:emailTestFormat,
-        id: 4
+        label2: emailTestFormat,
+        id: 4,
       },
       {
-        type: 'text',
-        name:'password',
+        type: "text",
+        name: "password",
         value: this.state.password,
         onChange: this.handlePassword,
         label: "Password",
-        label2:passwordCharCheck,
-        id: 5
+        label2: passwordCharCheck,
+        id: 5,
       },
       {
-        type: 'text',
-        name:'confirmPassword',
+        type: "text",
+        name: "confirmPassword",
         value: this.state.confirmPassword,
         onChange: this.handlePasswordConfirm,
         label: "Confirm Password",
-        label2:testConfirmPassword,
-        id: 6
+        label2: testConfirmPassword,
+        id: 6,
       },
-    ]
+    ];
     return (
       <div>
         <div className="login-box">
@@ -244,19 +244,18 @@ class SignupComponent extends Component {
           <img className="profileImg" src={this.state.url} alt="" />
           <form>
             {formInput.map((elem) => {
-              return <UserBox2 form={elem} key={elem.id}/>
+              return <UserBox2 form={elem} key={elem.id} />;
             })}
-            <ButtonComponent text="Sign-up" click={this.buttonIsClick}/>
+            <ButtonComponent text="Sign-up" click={this.buttonIsClick} />
             {submitUserTest}
           </form>
         </div>
-        <AnimationPlane/>
+        <AnimationPlane />
       </div>
     );
   }
 }
 export default SignupComponent;
-
 
 // import React, { Component } from "react";
 // import "./Sign.css";

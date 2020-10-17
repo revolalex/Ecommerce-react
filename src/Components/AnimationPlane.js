@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import "./AnimationPlane.css";
 
 class AnimationPlane extends Component {

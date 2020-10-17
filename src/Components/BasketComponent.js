@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { increaseCounter, decreaseCounter, deleteProductFromCart } from "../store/actions/cart";
+import { deleteProductFromCart } from "../store/actions/cart";
 import { connect } from "react-redux";
 import "./BasketComponent.css";
 import {
@@ -13,24 +13,13 @@ import {
 } from "react-bootstrap";
 
 class BasketComponent extends Component {
-  addClick(e) {
-    e.preventDefault();
-    this.props.increaseCounter();
-  }
-  decrementClick(e) {
-    e.preventDefault();
-    this.props.decreaseCounter();
-  }
-  deleteClick(e){
-    e.preventDefault();
-    this.props.deleteProductFromCart(this.props.productBasket)
-    console.log("ICI",this.props.productBasket);
-
+  deleteClick(index) {
+    this.props.deleteProductFromCart(this.props.productBasket[index]);
   }
 
-  renderProduct(product) {
+  renderProduct(product, index) {
     return (
-      <Container className="basketCard">
+      <Container className="basketCard" key={index}>
         <Row>
           <Col md={4}>
             <img
@@ -50,25 +39,18 @@ class BasketComponent extends Component {
                   Price : {product.prices}$
                 </ListGroup.Item>
                 <ListGroup.Item variant="info">
-                  Total : {this.props.counter * 50}
+                  Total : {product.prices}
                 </ListGroup.Item>
               </ListGroup>
               <Form inline>
-                <Button variant="info" onClick={this.addClick.bind(this)}>
-                  +1
-                </Button>
-                <Button
-                  variant="warning"
-                  onClick={this.decrementClick.bind(this)}
-                >
-                  -1
-                </Button>
+                <Button variant="info">+1</Button>
+                <Button variant="warning">-1</Button>
                 <Button variant="danger">
                   <img
                     className="trashBasket"
                     src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
                     alt="trash"
-                    onClick={this.deleteClick.bind(this)}
+                    onClick={this.deleteClick.bind(this, index)}
                   />
                 </Button>
               </Form>
@@ -81,22 +63,20 @@ class BasketComponent extends Component {
 
   render() {
     return (
-      <div >
-        {this.props.productBasket.map((product) => this.renderProduct(product))}
+      <div>
+        {this.props.productBasket.map((product, index) =>
+          this.renderProduct(product, index)
+        )}
       </div>
-
     );
   }
 }
 
 const mapDispatchToProps = {
-  increaseCounter,
-  decreaseCounter,
-  deleteProductFromCart
+  deleteProductFromCart,
 };
 
 const mapStateToProps = (state) => ({
-  counter: state.cartReducer.counter,
   productBasket: state.cartReducer.productBasket,
 });
 

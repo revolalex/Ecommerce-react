@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Sign.css";
 import axios from "axios";
-import {setToken,setID,authTrue} from "../store/actions/user"
-import ButtonComponent from "./ButtonComponent"
+import { setToken, setID, authTrue } from "../store/actions/user";
+import ButtonComponent from "./ButtonComponent";
 
 class SignInComponent extends Component {
   constructor(props) {
@@ -39,16 +39,15 @@ class SignInComponent extends Component {
         .then((result) => {
           if (result.data === "Sorry, email incorrect") {
             alert("Sorry, email incorrect");
-          }else if (result.data === "password error") {
+          } else if (result.data === "password error") {
             alert("Password error");
           } else {
-            this.props.setToken(result.data.token)
+            this.props.setToken(result.data.token);
             console.log(result.data.id); // fonctionne bien []
-            this.props.setID(result.data.id)
+            this.props.setID(result.data.id);
             console.log("IDSET", this.props.id); // = undefined
-            this.props.authTrue()
+            this.props.authTrue();
           }
-          
         })
         .catch((error) => {
           console.log(error);
@@ -84,7 +83,7 @@ class SignInComponent extends Component {
               ></input>
               <label>Password</label>
             </div>
-            <ButtonComponent click={this.buttonIsClick} text= "Sign-in" />
+            <ButtonComponent click={this.buttonIsClick} text="Sign-in" />
           </form>
         </div>
       </div>
@@ -94,12 +93,12 @@ class SignInComponent extends Component {
 
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  id: state.userReducer.ID
-})
+  id: state.userReducer.ID,
+});
 
 const mapDispatchToProps = {
   setToken,
   setID,
-  authTrue
-}
+  authTrue,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(SignInComponent);
