@@ -248,11 +248,12 @@ class EditProfilComponent extends Component {
             {formInput.map((elem) => {
               return <UserBox2 form={elem} key={elem.id} />;
             })}
+            {newUrl}
             <ButtonComponent
               text="Edit Your Profile"
               click={this.buttonIsClick}
             />
-            {newUrl}
+            
             {submitUserTest}
           </form>
         </div>

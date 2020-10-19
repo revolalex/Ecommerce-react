@@ -1,7 +1,6 @@
-import { Card, Col, Container, Row, Button, Form } from "react-bootstrap";
+import { Card, Col, Row, Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import "../Styles/ProductEditComponent.css";
 import axios from "axios";
 
@@ -12,8 +11,8 @@ class ProductEditComponent extends Component {
       productOfThisUser: [],
     };
   }
-  componentDidMount() {
-    axios
+  async componentDidMount() {
+    await axios
       .get(`http://localhost:8080/productid/${this.props.id}`)
       .then((result) => {
         console.log("DATA", result.data);
@@ -27,10 +26,43 @@ class ProductEditComponent extends Component {
   }
   renderProduct(product, index) {
     return (
-      <Container className="basketCard2" key={index}>
+      <div className="login-box-Edit">
+        <Row className="changeUrlP">
+          <Col sm={2}>
+            <img
+              className="basketImg2"
+              src={product.url}
+              alt={product.name}
+            ></img>
+          </Col>
+          <Col sm={5}>
+            <Card.Body>
+              <Card.Title className="productNameTitle">{product.name}</Card.Title>
+              <Card.Text>
+                Category:
+                <br />
+                {product.category}
+              </Card.Text>
+            </Card.Body>
+          </Col>
+          <Col sm={5}>
+            <Card.Body>
+              <Card.Text className="productNameTitle">Price: {product.prices} $</Card.Text>
+              <Form center>
+                <Button variant="info">Edit</Button>
+                <Button variant="danger">
+                  <img
+                    className="trashBasket2"
+                    src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
+                    alt="trash"
+                  />
+                </Button>
+              </Form>
+            </Card.Body>
+          </Col>
+        </Row>
 
-
-          
+        {/* <Container className="basketCard2" key={index}>
         <Row>
           <Col md={2}>
             <img
@@ -56,7 +88,8 @@ class ProductEditComponent extends Component {
             </Card.Body>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
+      </div>
     );
   }
 
