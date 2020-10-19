@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-// import axios from "axios";
 import { connect } from "react-redux";
 import ButtonComponent from "./ButtonComponent";
 import UserBox2 from "./UserBox2";
 import "./EditProfilComponent.css";
 
-class EditProfileComponent extends Component {
+class EditProfilComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,23 +27,23 @@ class EditProfileComponent extends Component {
     if (passwordMatch) {
       testConfirmPassword = <p></p>;
     } else {
-      testConfirmPassword = <span id="formTestPass">Password not match</span>;
+      testConfirmPassword = <span id="formTestPass2">Password not match</span>;
     }
 
     let submitUserTest;
     const submitTestDone = this.state.submitOk;
     if (submitTestDone) {
-      submitUserTest = <p id="submitOk">User Created, please sign-in !</p>;
+      submitUserTest = <p id="submitOk2">User Created, please sign-in !</p>;
     } else {
-      submitUserTest = <p id="submitOk"></p>;
+      submitUserTest = <p id="submitOk2"></p>;
     }
 
     let passwordCharCheck;
     if (this.state.password.length > 7) {
-      passwordCharCheck = <p id="formTest"></p>;
+      passwordCharCheck = <p id="formTest2"></p>;
     } else {
       passwordCharCheck = (
-        <span id="formTest">
+        <span id="formTest2">
           Min 8 characters, need {8 - this.state.password.length} more
         </span>
       );
@@ -53,28 +52,28 @@ class EditProfileComponent extends Component {
     let requireFirstName;
     if (this.state.firstName.length < 3) {
       requireFirstName = (
-        <span id="formTestNames">{this.props.user.firstName}</span>
+        <span id="formTestNames2">{this.props.user.firstName}</span>
       );
     }
 
     let requireLastName;
     if (this.state.lastName.length < 3) {
       requireLastName = (
-        <span id="formTestNames">{this.props.user.lastName}</span>
+        <span id="formTestNames2">{this.props.user.lastName}</span>
       );
     }
 
     let requireUrl;
     if (this.state.url.length < 10) {
-      requireUrl = <span id="formTestUrl">Require</span>;
+      requireUrl = <span id="formTestUrl2">Require</span>;
     }
 
     let emailTestFormat;
     var mailformat = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
     if (this.state.email.match(mailformat)) {
-      emailTestFormat = <span id="formTestEmail"></span>;
+      emailTestFormat = <span id="formTestEmail2"></span>;
     } else {
-      emailTestFormat = <span id="formTestEmail">{this.props.user.email}</span>;
+      emailTestFormat = <span id="formTestEmail2">{this.props.user.email}</span>;
     }
     const formInput = [
       {
@@ -82,7 +81,7 @@ class EditProfileComponent extends Component {
         name: "firstName",
         value: this.state.firstName,
         onChange: this.handleFirstName,
-        label: "First Name",
+        label: "First Name :",
         label2: requireFirstName,
         id: 1,
       },
@@ -91,7 +90,7 @@ class EditProfileComponent extends Component {
         name: " lastName",
         value: this.state.lastName,
         onChange: this.handleLastName,
-        label: "Last Name",
+        label: "Last Name :",
         label2: requireLastName,
         id: 2,
       },
@@ -100,7 +99,7 @@ class EditProfileComponent extends Component {
         name: "url",
         value: this.state.url,
         onChange: this.handleImgProfile,
-        label: "Profil Picture Url",
+        label: "Profil Picture Url :",
         label2: requireUrl,
         id: 3,
       },
@@ -109,7 +108,7 @@ class EditProfileComponent extends Component {
         name: "email",
         value: this.state.email,
         onChange: this.handleEmail,
-        label: "Email",
+        label: "Email :",
         label2: emailTestFormat,
         id: 4,
       },
@@ -118,7 +117,7 @@ class EditProfileComponent extends Component {
         name: "password",
         value: this.state.password,
         onChange: this.handlePassword,
-        label: "Password",
+        label: "New Password :",
         label2: passwordCharCheck,
         id: 5,
       },
@@ -135,9 +134,9 @@ class EditProfileComponent extends Component {
     console.log(this.props.user);
     return (
       <div>
-        <div className="login-box">
+        <div className="login-box-Edit">
           <h2>Edit Your Profil</h2>
-          <img className="profileImg" src={this.props.user.url} alt="" />
+          <img className="profileImgEdit" src={this.props.user.url} alt="profil" />
           <form>
             {formInput.map((elem) => {
               return <UserBox2 form={elem} key={elem.id} />;
@@ -163,4 +162,4 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditProfileComponent);
+)(EditProfilComponent);

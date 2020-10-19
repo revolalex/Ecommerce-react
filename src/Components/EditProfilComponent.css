@@ -1,0 +1,122 @@
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+}
+.profileImgEdit{
+    width: 20%;
+    margin-left: 40%;
+    margin-bottom: 40px;
+}
+.login-box-Edit {
+  margin: auto;
+  margin-top: 10vh;
+  width: 70%;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  background: linear-gradient(#243b55, #141e30);
+  opacity: 0.9;
+}
+
+.login-box-Edit h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box-Edit .user-box {
+  position: relative;
+}
+
+.login-box-Edit .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box-Edit .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.login-box-Edit .user-box input:focus ~ label,
+.login-box-Edit .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+/************** Media Queries *******************/
+@media only screen and (max-width: 600px) {
+    .login-box-Edit {
+    top: 80%;
+    left: 50%;
+    padding: 40px;
+    margin-bottom: 40%;
+  }
+  html {
+    height: 150%;
+  }
+}
+
+/*********** Uplaoad url image ***********/
+.uploadImg {
+  max-width: 300px;
+  max-height: 150px;
+  margin-left: 50px;
+}
+
+#buttonNotVisible {
+  display: none;
+}
+#submitOk {
+  color: #03e9f4;
+  float: right;
+}
+
+/************** Sentence of validation in form ****************************/
+
+#submitOk2 {
+  color: #03e9f4;
+  font-size: 0.8em;
+}
+#formTest2 {
+  color: #03e9f4;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+#formTestNames2 {
+  color: #03e9f4;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+#formTestEmail2{
+  color: #03e9f4;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+#formTestUrl2{
+    color: #03e9f4;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
