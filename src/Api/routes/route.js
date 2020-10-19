@@ -149,16 +149,15 @@ const appRouter = async function(app, connection) {
   // must add middleware for jwt allow acces
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
   await app.post("/products/", auth, function(req, res) {
-    let category = req.body.category.charAt(0).toUpperCase() + req.body.category.slice(1);
+    let category =
+      req.body.category.charAt(0).toUpperCase() + req.body.category.slice(1);
     let prices = req.body.prices;
     let name = req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1);
-    let description = req.body.description.charAt(0).toUpperCase() + req.body.description.slice(1);
+    let description =
+      req.body.description.charAt(0).toUpperCase() +
+      req.body.description.slice(1);
     let url = req.body.url;
     let id_user_affiliate = req.body.id_user_affiliate;
-
-
-    // let capitalLastName =
-    //     lastName.charAt(0).toUpperCase() + lastName.slice(1);
 
     const productObject = {
       category: category,
