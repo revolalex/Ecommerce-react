@@ -11,6 +11,10 @@ export const setUsers = (users) => ({
   type: "SET_USERS",
   users: users,
 });
+export const setUser = (user) => ({
+  type: "SET_USER",
+  user: user,
+});
 
 export const setID = (id) => ({
   type: "SET_ID",

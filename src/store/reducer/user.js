@@ -1,8 +1,9 @@
 const initialStates = {
-  token: "",
   users: [],
+  token: "",
   id: "",
   auth: false,
+  user: {},
 };
 
 const userReducer = (state = initialStates, action) => {
@@ -21,6 +22,11 @@ const userReducer = (state = initialStates, action) => {
       return {
         ...state,
         users: action.users,
+      };
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user,
       };
     case "SET_ID":
       return {

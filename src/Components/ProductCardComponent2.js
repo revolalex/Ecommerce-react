@@ -67,21 +67,21 @@ class ProductCardComponent2 extends Component {
               <Col className="md-4">
                 <Card.Img className="cardImgProduct" src={product.url} />
               </Col>
-              <Col class="md-8">
+              <Col className="md-8">
                 <Card.Body>
                   <Card.Title className="titleCard">
                     <h2>{product.name}</h2>
                   </Card.Title>
-                  <Card.Text className="subTitleCard">
-                    <h4>Description:</h4>
+                  <Card.Body className="subTitleCard">
+                    <h4 >Description:</h4>
                     <p>{product.description}</p>
                     <h4>Category:</h4>
                     <p>{product.category}</p>
-                    <h4>Price:</h4>
+                    <h4 >Price:</h4>
                     <p>{product.prices}</p>
-                    <h4>Seller:</h4>
+                    <h4 >Seller:</h4>
                     <p>{product.username}</p>
-                  </Card.Text>
+                  </Card.Body>
                   <ButtonComponent
                     text={"Buy" + product.prices + "$"}
                     click={this.addButtonIsClick.bind(this)}
@@ -117,51 +117,3 @@ export default connect(
   mapDispatchToProps
 )(ProductCardComponent2);
 
-{
-  /*  */
-}
-
-{
-  /* <div class="container-fluid ">
-<div class="row ">
-  <div class="col-12 mt-3 ">
-    <div class="card login-box2">
-      <div class="card-horizontal ">
-        <div class="img-square-wrapper ">
-          <img
-            className="cardProductImg2"
-            src={product.url}
-            alt="product"
-          />
-        </div>
-        <div class="card-body ">
-          <div className="user-box2">
-            <h4>Description:</h4>
-            <p>{product.description}</p>
-          </div>
-          <div className="user-box2">
-            <h4>Category</h4>
-            <p>{product.category}</p>
-          </div>
-          <div className="user-box2">
-            <h4>Price</h4>
-            <p>{product.prices}$</p>
-            <h4>Seller</h4>
-            <p>{product.username}</p>
-          </div>
-          <ButtonComponent
-            text={"Buy" + product.prices + "$"}
-            click={this.addButtonIsClick.bind(this)}
-          />
-        </div>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">
-          Sell by: {product.username}
-        </small>
-      </div>
-    </div>
-  </div>
-</div>
-</div> */
-}

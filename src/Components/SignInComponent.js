@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Sign.css";
 import axios from "axios";
-import { setToken, setID, authTrue } from "../store/actions/user";
+import { setToken, setID, authTrue, setUser } from "../store/actions/user";
 import ButtonComponent from "./ButtonComponent";
 
 class SignInComponent extends Component {
@@ -11,6 +11,7 @@ class SignInComponent extends Component {
     this.state = {
       email: "",
       password: "",
+      idOfUserConnect: "",
     };
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -27,14 +28,14 @@ class SignInComponent extends Component {
     });
   }
 
-  buttonIsClick(e) {
+  async buttonIsClick(e) {
     e.preventDefault();
     let userObject = {
       email: this.state.email,
       password: this.state.password,
     };
     try {
-      axios
+      await axios
         .post(`http://localhost:8080/users/sign-in/`, userObject)
         .then((result) => {
           if (result.data === "Sorry, email incorrect") {
@@ -42,12 +43,31 @@ class SignInComponent extends Component {
           } else if (result.data === "password error") {
             alert("Password error");
           } else {
+            console.log("HERE", result.data);
             this.props.setToken(result.data.token);
             console.log(result.data.id); // fonctionne bien []
+            this.setState({
+              idOfUserConnect: result.data.id,
+            });
+            console.log("STATE", this.state.idOfUserConnect);
             this.props.setID(result.data.id);
             console.log("IDSET", this.props.id); // = undefined
             this.props.authTrue();
           }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      await axios
+        .get(`http://localhost:8080/users/${this.state.idOfUserConnect}`)
+        .then((result) => {
+          console.log("ICI", result.data[0]);
+          this.props.setUser(result.data[0]);
         })
         .catch((error) => {
           console.log(error);
@@ -100,5 +120,6 @@ const mapDispatchToProps = {
   setToken,
   setID,
   authTrue,
+  setUser,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SignInComponent);

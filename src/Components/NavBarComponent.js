@@ -7,6 +7,7 @@ import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";
 import WaveAnimationComponent from "./WaveAnimation";
 import CartComponent from "./CartComponent";
+import ProfilPictureComoponent from "./ProfilPictureComponent";
 
 class Navbare extends Component {
   deleteToken() {
@@ -33,6 +34,7 @@ class Navbare extends Component {
               </Form>
             </Nav>
             <Form inline>
+              <ProfilPictureComoponent />
               <Button variant="danger" onClick={this.deleteToken.bind(this)}>
                 Sign Out
               </Button>
