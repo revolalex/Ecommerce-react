@@ -7,10 +7,10 @@ body {
   font-family: sans-serif;
   background: linear-gradient(#141e30, #243b55);
 }
-.profileImgEdit{
-    width: 20%;
-    margin-left: 40%;
-    margin-bottom: 40px;
+.profileImgEdit {
+  width: 20%;
+  margin-left: 40%;
+  margin-bottom: 40px;
 }
 .login-box-Edit {
   margin: auto;
@@ -23,6 +23,7 @@ body {
   border-radius: 10px;
   background: linear-gradient(#243b55, #141e30);
   opacity: 0.9;
+  margin-bottom: 10vh;
 }
 
 .login-box-Edit h2 {
@@ -68,7 +69,7 @@ body {
 
 /************** Media Queries *******************/
 @media only screen and (max-width: 600px) {
-    .login-box-Edit {
+  .login-box-Edit {
     top: 80%;
     left: 50%;
     padding: 40px;
@@ -110,13 +111,25 @@ body {
   font-size: 0.8em;
   margin-left: 10px;
 }
-#formTestEmail2{
+#formTestEmail2 {
   color: #03e9f4;
   font-size: 0.8em;
   margin-left: 10px;
 }
-#formTestUrl2{
-    color: #03e9f4;
-    font-size: 0.8em;
-    margin-left: 10px;
+#formTestUrl2 {
+  color: #03e9f4;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+.changeUrlP {
+  color: white;
+  text-align: center;
+}
+#newUrlImg {
+  width: 20%;
+  margin-left: 40%;
+  margin-bottom: 40px;
+}
+.editDiv {
+
 }
