@@ -1,6 +1,6 @@
-.basketCard{
+.basketCard2{
     background: linear-gradient( #141e30, #243b55,);
-    margin: 10% 10% 10% 10%;
+    margin: 10% 20% 10% 20%;
     opacity: 0.8;
     background: rgba(0, 0, 0, 0.8);
     box-sizing: border-box;
@@ -8,18 +8,18 @@
     border-radius: 10px;
     background: linear-gradient(#243b55, #141e30);
 }
-.basketCard:hover{
+.basketCard2:hover{
     opacity: 1;
 }
-.basketImg{
+.basketImg2{
     margin: 10% 10% 10% 10%;
     height: 140px;
     width: auto;
 }
-.textCard{
+.textCard2{
     color: white;
 }
-.trashBasket{
+.trashBasket2{
     height: 20px;
 }
 Form Button{

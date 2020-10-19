@@ -22,14 +22,14 @@ class BasketComponent extends Component {
     return (
       <Container className="basketCard" key={index}>
         <Row>
-          <Col md={4}>
+          <Col md={2}>
             <img
               className="basketImg"
               src={product.url}
               alt={product.name}
             ></img>
           </Col>
-          <Col md={8}>
+          <Col md={10}>
             <Card.Body>
               <Card.Title className="textCard">{product.name}</Card.Title>
               <ListGroup horizontal>

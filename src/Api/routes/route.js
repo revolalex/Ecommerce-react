@@ -172,6 +172,20 @@ const appRouter = async function(app, connection) {
       res.send(results);
     });
   });
+  
+
+  await app.get("/productid/:id", function(req, res) {
+    let id = req.params.id;
+    let productInfo = `SELECT * FROM ecomreact.products where id_user_affiliate = ${id};`;
+
+    connection.query(productInfo, function(err, results) {
+      if (err) throw err;
+      res.send(results);
+    });
+  });
+
+
+
   // POST /product/:id => Delete this specific product from the database
   await app.post("/product/:id",auth ,(req,res) => {
     let sql = `DELETE FROM products WHERE id = ${req.params.id}`

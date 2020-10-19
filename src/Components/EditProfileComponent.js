@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ButtonComponent from "./ButtonComponent";
 import UserBox2 from "./UserBox2";
 import "./EditProfilComponent.css";
+import ProductEditComponent from "./ProductEditComponent"
 
 class EditProfilComponent extends Component {
   constructor(props) {
@@ -255,6 +256,7 @@ class EditProfilComponent extends Component {
             {submitUserTest}
           </form>
         </div>
+        <ProductEditComponent/>
       </div>
     );
   }
