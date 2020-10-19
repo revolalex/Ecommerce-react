@@ -172,5 +172,28 @@ const appRouter = async function(app, connection) {
       res.send(results);
     });
   });
+  // POST /product/:id => Delete this specific product from the database
+  await app.post("/product/:id",auth ,(req,res) => {
+    let sql = `DELETE FROM products WHERE id = ${req.params.id}`
+    connection.query(sql, (err) => {
+      if (err) {
+        console.log(err)
+        res.sendStatus(500)
+      }else res.send("Deleted")
+    })
+  })
+
+  // POST /productEdit/:id => Update this specific product from the database
+  await app.post('/productEdit/:id',auth,(req,res) => { 
+    if(req.body.idUser === req.body.id_user_affiliate){
+        let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.price}',url = '${req.body.url}' WHERE id = ${req.params.id}`
+        connection.query(sql, (err) => {
+          if (err) {
+            console.log(err)
+            res.sendStatus(500)
+          } else res.send('Updated')
+        })
+      } 
+    })
 };
 module.exports = appRouter;

@@ -1,6 +1,7 @@
 const initialStates = {
     token: "",
     users: [],
+    user:{},
     id: "",
     auth: false
 }

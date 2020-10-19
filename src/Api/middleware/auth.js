@@ -4,7 +4,7 @@ const config = require("../routes/modules/config");
 module.exports  = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    var decodedToken = await jwt.verify(token, config.secret);
+    var decodedToken = jwt.verify(token, config.secret);
     if (decodedToken) {
       next();
     } else {

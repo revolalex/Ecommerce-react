@@ -3,7 +3,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  port:3307,
+  port:3308,
   database: "ecomreact",
 });
 
