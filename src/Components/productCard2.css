@@ -83,4 +83,9 @@ body {
     display: none;
   }
 }
+@media screen and (min-width: 1000px) {
+  .smallScreen {
+    display: none;
+  }
+}
 
