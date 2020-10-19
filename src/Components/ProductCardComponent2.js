@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { setProductClick } from "../store/actions/product";
 import { addProductToCart } from "../store/actions/cart";
 import ButtonComponent from "./ButtonComponent";
+import { Card, Row, Col } from "react-bootstrap";
 
 class ProductCardComponent2 extends Component {
   componentDidMount() {
@@ -18,8 +19,10 @@ class ProductCardComponent2 extends Component {
       });
   }
   addButtonIsClick(e) {
+    let poductAdded = this.props.product[0].name
     e.preventDefault();
     this.props.addProductToCart(this.props.product[0]);
+    alert(`${poductAdded}, has been added to your basket`)
   }
 
   render() {
@@ -31,31 +34,67 @@ class ProductCardComponent2 extends Component {
   }
 
   renderProduct(product) {
-    console.log(this.props.product[0]);
     return (
-      <div className="login-box2">
-        <h2>{product.name}</h2>
-        <img className="cardProductImg2" src={product.url} alt="" />
-        <form>
-          <div className="user-box2">
-            <h4>Description:</h4>
-            <p>{product.description}</p>
-          </div>
-          <div className="user-box2">
-            <h4>Category</h4>
-            <p>{product.category}</p>
-          </div>
-          <div className="user-box2">
-            <h4>Price</h4>
-            <p>{product.prices}$</p>
-            <h4>Seller</h4>
-            <p>{product.username}</p>
-          </div>
-          <ButtonComponent
-            text={"Buy" + product.prices + "$"}
-            click={this.addButtonIsClick.bind(this)}
-          />
-        </form>
+      <div>
+        <div className="login-box2 smallScreen">
+          <h2>{product.name}</h2>
+          <img className="cardProductImg2" src={product.url} alt="product" />
+          <form>
+            <div className="user-box2">
+              <h4>Description:</h4>
+              <p>{product.description}</p>
+            </div>
+            <div className="user-box2">
+              <h4>Category</h4>
+              <p>{product.category}</p>
+            </div>
+            <div className="user-box2">
+              <h4>Price</h4>
+              <p>{product.prices}$</p>
+              <h4>Seller</h4>
+              <p>{product.username}</p>
+            </div>
+            <ButtonComponent
+              text={"Buy" + product.prices + "$"}
+              click={this.addButtonIsClick.bind(this)}
+            />
+          </form>
+        </div>
+
+        <div className="bigScreen">
+          <Card className="mb-3 login-box2">
+            <Row className="no-gutters">
+              <Col className="md-4">
+                <Card.Img className="cardImgProduct" src={product.url} />
+              </Col>
+              <Col class="md-8">
+                <Card.Body>
+                  <Card.Title className="titleCard">
+                    <h2>{product.name}</h2>
+                  </Card.Title>
+                  <Card.Text className="subTitleCard">
+                    <h4>Description:</h4>
+                    <p>{product.description}</p>
+                    <h4>Category:</h4>
+                    <p>{product.category}</p>
+                    <h4>Price:</h4>
+                    <p>{product.prices}</p>
+                    <h4>Seller:</h4>
+                    <p>{product.username}</p>
+                  </Card.Text>
+                  <ButtonComponent
+                    text={"Buy" + product.prices + "$"}
+                    click={this.addButtonIsClick.bind(this)}
+                    className="downButton"
+                  />
+                </Card.Body>
+              </Col>
+            </Row>
+          </Card>
+        </div>
+
+
+        
       </div>
     );
   }
@@ -77,3 +116,52 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProductCardComponent2);
+
+{
+  /*  */
+}
+
+{
+  /* <div class="container-fluid ">
+<div class="row ">
+  <div class="col-12 mt-3 ">
+    <div class="card login-box2">
+      <div class="card-horizontal ">
+        <div class="img-square-wrapper ">
+          <img
+            className="cardProductImg2"
+            src={product.url}
+            alt="product"
+          />
+        </div>
+        <div class="card-body ">
+          <div className="user-box2">
+            <h4>Description:</h4>
+            <p>{product.description}</p>
+          </div>
+          <div className="user-box2">
+            <h4>Category</h4>
+            <p>{product.category}</p>
+          </div>
+          <div className="user-box2">
+            <h4>Price</h4>
+            <p>{product.prices}$</p>
+            <h4>Seller</h4>
+            <p>{product.username}</p>
+          </div>
+          <ButtonComponent
+            text={"Buy" + product.prices + "$"}
+            click={this.addButtonIsClick.bind(this)}
+          />
+        </div>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">
+          Sell by: {product.username}
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+</div> */
+}

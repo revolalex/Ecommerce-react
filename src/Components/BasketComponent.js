@@ -15,6 +15,7 @@ import {
 class BasketComponent extends Component {
   deleteClick(index) {
     this.props.deleteProductFromCart(this.props.productBasket[index]);
+    alert(`${this.props.productBasket[index].name} has been deleted from your basket`)
   }
 
   renderProduct(product, index) {

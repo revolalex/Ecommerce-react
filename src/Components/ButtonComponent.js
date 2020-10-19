@@ -4,7 +4,7 @@ import"./ButtonComponent.css"
 class ButtonComponent extends Component {
   render() {
     return (
-      <a
+      <a className="myA"
         href={this.props.link === undefined ? "/#" : this.props.link}
         onClick={
           this.props.click === undefined ? this.props.lol : this.props.click
