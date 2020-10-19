@@ -195,5 +195,32 @@ const appRouter = async function(app, connection) {
         })
       } 
     })
+
+    await app.post('/userEdit/:id',auth,(req,res) => {
+      if(typeof JSON.parse(req.params.id) === "number"){
+        if (
+          req.body.password.length &&
+          req.body.lastName.length &&
+          req.body.firstName.length &&
+          req.body.url.length > 0
+        ){ 
+          const cryptedPassword = bcrypt.hashSync(req.body.password, saltRounds)
+          const capitalLastName = req.body.lastName.charAt(0).toUpperCase() + req.body.lastName.slice(1);
+          const capitalFirstName = req.body.firstName.charAt(0).toUpperCase() + req.body.firstName.slice(1);
+          const sql = `UPDATE users SET firstname = '${capitalFirstName}', lastName = '${capitalLastName}', url = '${req.body.url}', email = '${req.body.email}', password = '${cryptedPassword}' WHERE id = ${req.params.id}`
+          connection.query(sql,(err)=>{
+            if (err) {
+              console.log(err);
+              res.sendStatus(500)
+            } else res.send('Updated')
+          })
+        } else {
+          res.send('Champs incorrects')
+        }
+      }else{
+        res.send("Id incorrect")
+      }
+    })
+      
 };
 module.exports = appRouter;
