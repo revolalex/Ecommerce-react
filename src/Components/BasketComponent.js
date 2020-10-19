@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { deleteProductFromCart } from "../store/actions/cart";
 import { connect } from "react-redux";
-import "./BasketComponent.css";
+import "../Styles/BasketComponent.css";
 import {
   Card,
   Col,

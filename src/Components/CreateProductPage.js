@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Sign.css";
+import "../Styles/Sign.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import UserBox from "./UserBox";

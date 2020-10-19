@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./productCard2.css";
+import "../Styles/productCard2.css";
 import { connect } from "react-redux";
 import { setProductClick } from "../store/actions/product";
 import { addProductToCart } from "../store/actions/cart";

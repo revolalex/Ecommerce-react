@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { setListOfProducts, setIdProduct } from "../store/actions/product.js";
 import axios from "axios";
-import "./ListOfProduct.css";
+import "../Styles/ListOfProduct.css";
 import { connect } from "react-redux";
 class ProductListPage extends Component {
   componentDidMount() {

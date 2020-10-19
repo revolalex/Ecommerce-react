@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ButtonComponent from "./ButtonComponent";
 import UserBox2 from "./UserBox2";
-import "./EditProfilComponent.css"
+import "./EditProfilComponent.css";
 
 class EditProfileComponent extends Component {
   constructor(props) {
@@ -20,7 +20,6 @@ class EditProfileComponent extends Component {
     };
   }
 
-  
   componentDidMount() {}
 
   render() {
@@ -53,12 +52,16 @@ class EditProfileComponent extends Component {
 
     let requireFirstName;
     if (this.state.firstName.length < 3) {
-      requireFirstName = <span id="formTestNames">{this.props.user.firstName}</span>;
+      requireFirstName = (
+        <span id="formTestNames">{this.props.user.firstName}</span>
+      );
     }
 
     let requireLastName;
     if (this.state.lastName.length < 3) {
-      requireLastName = <span id="formTestNames">{this.props.user.lastName}</span>;
+      requireLastName = (
+        <span id="formTestNames">{this.props.user.lastName}</span>
+      );
     }
 
     let requireUrl;
@@ -132,14 +135,17 @@ class EditProfileComponent extends Component {
     console.log(this.props.user);
     return (
       <div>
-        <div className="login-box-editProfil">
+        <div className="login-box">
           <h2>Edit Your Profil</h2>
           <img className="profileImg" src={this.props.user.url} alt="" />
           <form>
             {formInput.map((elem) => {
               return <UserBox2 form={elem} key={elem.id} />;
             })}
-            <ButtonComponent text="Edit Your Profile" click={this.buttonIsClick} />
+            <ButtonComponent
+              text="Edit Your Profile"
+              click={this.buttonIsClick}
+            />
             {submitUserTest}
           </form>
         </div>

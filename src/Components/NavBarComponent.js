@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
-import "./NavBar.css";
+import "../Styles/NavBar.css";
 import { withRouter } from "react-router-dom";
 import MyRouter from "./Router";
 import { deleteToken, authFalse } from "../store/actions/user";

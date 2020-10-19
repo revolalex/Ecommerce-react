@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./Sign.css";
+import "../Styles/Sign.css";
 import axios from "axios";
 import { setToken, setID, authTrue, setUser } from "../store/actions/user";
 import ButtonComponent from "./ButtonComponent";
@@ -11,7 +11,6 @@ class SignInComponent extends Component {
     this.state = {
       email: "",
       password: "",
-      idOfUserConnect: "",
     };
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -43,15 +42,8 @@ class SignInComponent extends Component {
           } else if (result.data === "password error") {
             alert("Password error");
           } else {
-            console.log("HERE", result.data);
             this.props.setToken(result.data.token);
-            console.log(result.data.id); // fonctionne bien []
-            this.setState({
-              idOfUserConnect: result.data.id,
-            });
-            console.log("STATE", this.state.idOfUserConnect);
             this.props.setID(result.data.id);
-            console.log("IDSET", this.props.id); // = undefined
             this.props.authTrue();
           }
         })
@@ -64,7 +56,7 @@ class SignInComponent extends Component {
 
     try {
       await axios
-        .get(`http://localhost:8080/users/${this.state.idOfUserConnect}`)
+        .get(`http://localhost:8080/users/${this.props.id}`)
         .then((result) => {
           console.log("ICI", result.data[0]);
           this.props.setUser(result.data[0]);
@@ -113,7 +105,7 @@ class SignInComponent extends Component {
 
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  id: state.userReducer.ID,
+  id: state.userReducer.id,
 });
 
 const mapDispatchToProps = {

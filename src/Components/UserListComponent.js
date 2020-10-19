@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Col, Row, Container } from "react-bootstrap";
-import "./UserList.css";
+import "../Styles/UserList.css";
 import axios from "axios";
 import { setUsers } from "../store/actions/user";
 import { connect } from "react-redux";

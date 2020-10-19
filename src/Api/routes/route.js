@@ -38,7 +38,6 @@ const appRouter = async function(app, connection) {
         req.body.email.toLowerCase(),
         cryptedPassword,
       ];
-      console.log("USER -- /users/sign-up", user);
       connection.query(addUser, [user], (err) => {
         if (err) throw err;
         res.status(201).send(`Utilisateur enregistré`);
@@ -59,13 +58,6 @@ const appRouter = async function(app, connection) {
   });
 
   // Get all users with all info
-  // await app.get("/allUsers", function(req, res) {
-  //   let getUserInfo = "SELECT * FROM users";
-  //   connection.query(getUserInfo, function(err, results) {
-  //     if (err) throw err;
-  //     res.send(results);
-  //   });
-  // });
   await app.get("/allUsers", function(req, res) {
     let getUserInfo = "SELECT id,firstName,lastName,url,email FROM users";
     connection.query(getUserInfo, function(err, results) {
@@ -84,10 +76,8 @@ const appRouter = async function(app, connection) {
 
     connection.query(mailUser, [email], function(err, results) {
       if (err) throw err;
-      // console.log("result sign-in ==>", results);
       // handle email error
       if (!Array.isArray(results) || !results.length) {
-        console.log("email error");
         // res.status(401).send("Sorry, email incorrect");
         res.send("Sorry, email incorrect");
       } else {
@@ -106,8 +96,6 @@ const appRouter = async function(app, connection) {
             var decoded = jwt.decode(token);
             // get the decoded payload and header
             var decoded = jwt.decode(token, { complete: true });
-            console.log("header ==>", decoded.header);
-            console.log("payload ==>", decoded.payload);
             res.status(200).send({
               auth: true,
               token: token,
@@ -115,7 +103,6 @@ const appRouter = async function(app, connection) {
               id: id,
             });
           } else {
-            console.log("pass error");
             res.send("password error");
           }
         });
@@ -149,13 +136,10 @@ const appRouter = async function(app, connection) {
   // must add middleware for jwt allow acces
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
   await app.post("/products/", auth, function(req, res) {
-    let category =
-      req.body.category.charAt(0).toUpperCase() + req.body.category.slice(1);
+    let category = req.body.category;
     let prices = req.body.prices;
-    let name = req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1);
-    let description =
-      req.body.description.charAt(0).toUpperCase() +
-      req.body.description.slice(1);
+    let name = req.body.name;
+    let description = req.body.description;
     let url = req.body.url;
     let id_user_affiliate = req.body.id_user_affiliate;
 
@@ -180,7 +164,7 @@ const appRouter = async function(app, connection) {
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = `SELECT users.lastName AS username, products.name, products.category, products.description, products.prices, products.url 
+    let productInfo = `SELECT users.lastName,users.firstName, products.name, products.category, products.description, products.prices, products.url 
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {
@@ -188,5 +172,55 @@ const appRouter = async function(app, connection) {
       res.send(results);
     });
   });
+  // POST /product/:id => Delete this specific product from the database
+  await app.post("/product/:id",auth ,(req,res) => {
+    let sql = `DELETE FROM products WHERE id = ${req.params.id}`
+    connection.query(sql, (err) => {
+      if (err) {
+        console.log(err)
+        res.sendStatus(500)
+      }else res.send("Deleted")
+    })
+  })
+
+  // POST /productEdit/:id => Update this specific product from the database
+  await app.post('/productEdit/:id',auth,(req,res) => { 
+    if(req.body.idUser === req.body.id_user_affiliate){
+        let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.price}',url = '${req.body.url}' WHERE id = ${req.params.id}`
+        connection.query(sql, (err) => {
+          if (err) {
+            console.log(err)
+            res.sendStatus(500)
+          } else res.send('Updated')
+        })
+      } 
+    })
+
+    await app.post('/userEdit/:id',auth,(req,res) => {
+      if(typeof JSON.parse(req.params.id) === "number"){
+        if (
+          req.body.password.length &&
+          req.body.lastName.length &&
+          req.body.firstName.length &&
+          req.body.url.length > 0
+        ){ 
+          const cryptedPassword = bcrypt.hashSync(req.body.password, saltRounds)
+          const capitalLastName = req.body.lastName.charAt(0).toUpperCase() + req.body.lastName.slice(1);
+          const capitalFirstName = req.body.firstName.charAt(0).toUpperCase() + req.body.firstName.slice(1);
+          const sql = `UPDATE users SET firstname = '${capitalFirstName}', lastName = '${capitalLastName}', url = '${req.body.url}', email = '${req.body.email}', password = '${cryptedPassword}' WHERE id = ${req.params.id}`
+          connection.query(sql,(err)=>{
+            if (err) {
+              console.log(err);
+              res.sendStatus(500)
+            } else res.send('Updated')
+          })
+        } else {
+          res.send('Champs incorrects')
+        }
+      }else{
+        res.send("Id incorrect")
+      }
+    })
+      
 };
 module.exports = appRouter;
