@@ -185,9 +185,9 @@ const appRouter = async function(app, connection) {
   });
 
 
-
+  // MIDDLEWARE A REMETTRE
   // POST /product/:id => Delete this specific product from the database
-  await app.post("/product/:id",auth ,(req,res) => {
+  await app.post("/product/:id",(req,res) => {
     let sql = `DELETE FROM products WHERE id = ${req.params.id}`
     connection.query(sql, (err) => {
       if (err) {

@@ -46,6 +46,22 @@ class ProductEditComponent extends Component {
     } catch (error) {
       console.log(error);
     }
+    try {
+      await axios
+      .get(`http://localhost:8080/productid/${this.props.id}`)
+      .then((result) => {
+        console.log("DATA", result.data);
+        this.setState({
+          productOfThisUser: result.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   renderProduct(product, index) {
