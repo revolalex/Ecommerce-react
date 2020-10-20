@@ -1,0 +1,28 @@
+.basketCard{
+    background: linear-gradient( #141e30, #243b55,);
+    margin: 10% 10% 10% 10%;
+    opacity: 0.8;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    background: linear-gradient(#243b55, #141e30);
+}
+.basketCard:hover{
+    opacity: 1;
+}
+.basketImg{
+    margin: 10% 10% 10% 10%;
+    height: 200px;
+    width: auto;
+}
+.textCard{
+    color: white;
+}
+.trashBasket{
+    height: 20px;
+}
+Form Button{
+    margin-top: 20px;
+    margin-right: 20px;
+}

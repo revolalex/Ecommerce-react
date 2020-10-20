@@ -4,7 +4,8 @@ import "./NavBar.css";
 import {deleteToken,authFalse} from '../store/actions/user'
 import { connect } from "react-redux";
 import {withRouter} from "react-router-dom"
-
+import ProfilPictureComoponent from "./ProfilePictureComponent"
+import CartComponent from './CartComponent'
 class Navbare extends Component {
   deleteToken() {
     this.props.deleteToken()
@@ -12,8 +13,7 @@ class Navbare extends Component {
   }
   render() {
     let withToken;
-    const testToken = this.props.auth;
-    if (testToken) {
+    if (this.props.auth) {
       withToken = (
         <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="/">React-Ecom</Navbar.Brand>
@@ -23,8 +23,12 @@ class Navbare extends Component {
               <Nav.Link href="/addProduct">Add Product</Nav.Link>
               <Nav.Link href="/list-of-products">Products List</Nav.Link>
               <Nav.Link href="/Users-List">Users List</Nav.Link>
+              <Form inline>
+                <CartComponent />
+              </Form>
             </Nav>
             <Form inline>
+              <ProfilPictureComoponent />
               <Button variant="danger" onClick={this.deleteToken.bind(this)}>
                 Sign Out
               </Button>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Sign.css";
 import axios from "axios";
 import { connect } from "react-redux";
-import {setToken,setID,authTrue} from "../store/actions/user"
+import {setToken,setID,authTrue,setUser} from "../store/actions/user"
 import Button from './button'
 class SignInComponent extends Component {
   constructor(props) {
@@ -25,14 +25,14 @@ class SignInComponent extends Component {
       password: event.target.value,
     });
   }
-  buttonIsClick(e) {
+  async buttonIsClick(e) {
     e.preventDefault();
     let userObject = {
       email: this.state.email,
       password: this.state.password,
     };
     try {
-      axios
+      await axios
         .post(`http://localhost:8080/users/sign-in/`, userObject)
         .then((result) => {
           if (result.data === "Sorry, email incorrect") {
@@ -49,6 +49,14 @@ class SignInComponent extends Component {
         .catch((error) => {
           console.log(error);
         });
+      await axios
+        .get(`http://localhost:8080/users/${this.props.id}`)
+        .then((result) => {
+          this.props.setUser(result.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });  
     } catch (error) {
       console.log(error);
     }
@@ -90,13 +98,14 @@ class SignInComponent extends Component {
 
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  id: state.userReducer.ID
+  id: state.userReducer.id
 })
 
 const mapDispatchToProps = {
   setToken,
   setID,
-  authTrue
+  authTrue,
+  setUser
 }
 
 export default connect(mapStateToProps,mapDispatchToProps) (SignInComponent);

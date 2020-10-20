@@ -24,3 +24,8 @@ export const authTrue = () => ({
 export const authFalse = () => ({
     type: 'AUTH_FALSE'
 })
+
+export const setUser = (user) => ({
+    type: "SET_USER",
+    user: user,
+})
