@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../Styles/AnimationPlane.css";
+import "../../Styles/AnimationPlane.css";
 
 class AnimationPlane extends Component {
   render() {

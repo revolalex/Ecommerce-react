@@ -26,7 +26,7 @@ class ProductEditComponent extends Component {
   }
   renderProduct(product, index) {
     return (
-      <div className="login-box-Edit">
+      <div className="login-box-Edit" key={product.id}>
         <Row className="changeUrlP">
           <Col sm={2}>
             <img
@@ -48,7 +48,7 @@ class ProductEditComponent extends Component {
           <Col sm={5}>
             <Card.Body>
               <Card.Text className="productNameTitle">Price: {product.prices} $</Card.Text>
-              <Form center>
+              <Form center="true">
                 <Button variant="info">Edit</Button>
                 <Button variant="danger">
                   <img

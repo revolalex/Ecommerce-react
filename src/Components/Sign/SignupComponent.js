@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "../Styles/Sign.css";
+import "../../Styles/Sign.css";
 import axios from "axios";
-import UserBox2 from "./UserBox2";
-import ButtonComponent from "./ButtonComponent";
-import AnimationPlane from "./AnimationPlane";
+import UserBox2 from "../Small/UserBox2";
+import ButtonComponent from "../Small/ButtonComponent";
+import AnimationPlane from "../Animation/AnimationPlane";
 class SignupComponent extends Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../Styles/ProfilPictureComponent.css";
+import "../../Styles/ProfilPictureComponent.css";
 import { connect } from "react-redux";
 
 class ProfilPictureComoponent extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../Styles/WaveAnimation.css";
+import "../../Styles/WaveAnimation.css";
 
 class WaveAnimationComponent extends Component {
   render() {

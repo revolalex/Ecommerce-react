@@ -229,7 +229,7 @@ const appRouter = async function(app, connection) {
             } else res.send('Updated')
           })
         } else {
-          res.send('Champs incorrects')
+          res.send('Field incorrects')
         }
       }else{
         res.send("Id incorrect")

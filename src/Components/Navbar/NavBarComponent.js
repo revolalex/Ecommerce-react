@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
-import "../Styles/NavBar.css";
+import "../../Styles/NavBar.css";
 import { withRouter } from "react-router-dom";
-import MyRouter from "./Router";
-import { deleteToken, authFalse } from "../store/actions/user";
+import MyRouter from "../Router";
+import { deleteToken, authFalse } from "../../store/actions/user";
 import { connect } from "react-redux";
-import WaveAnimationComponent from "./WaveAnimation";
+import WaveAnimationComponent from "../Animation/WaveAnimation";
 import CartComponent from "./CartComponent";
 import ProfilPictureComoponent from "./ProfilPictureComponent";
 

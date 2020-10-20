@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../Styles/Sign.css";
+import "../../Styles/Sign.css";
 import axios from "axios";
-import { setToken, setID, authTrue, setUser } from "../store/actions/user";
-import ButtonComponent from "./ButtonComponent";
+import { setToken, setID, authTrue, setUser } from "../../store/actions/user";
+import ButtonComponent from "../Small/ButtonComponent";
 
 class SignInComponent extends Component {
   constructor(props) {

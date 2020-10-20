@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Navbar from "./Components/NavBarComponent";
+import Navbar from "./Components/Navbar/NavBarComponent";
 import "./App.css";
 import { connect } from "react-redux";
 import { setListOfProducts } from "./store/actions/product";

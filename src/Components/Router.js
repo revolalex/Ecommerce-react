@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import SignupComponent from "./SignupComponent";
-import SignInComponent from "./SignInComponent";
-import CreateProductPage from "./CreateProductPage";
+import SignupComponent from "./Sign/SignupComponent";
+import SignInComponent from "./Sign/SignInComponent";
+import CreateProductPage from "./Product/CreateProductPage";
 import UserListComponent from "./UserListComponent";
-import ListOfProducts from "./ListOfProductsComponent";
-import ProductCardComponent2 from "./ProductCardComponent2";
-import BasketComponent from "./BasketComponent";
+import ListOfProducts from "./Product/ListOfProductsComponent";
+import ProductCardComponent2 from "./Product/ProductCardComponent2";
+import BasketComponent from "./Basket/BasketComponent";
 import EditProfileComponent from "./EditProfileComponent"
 import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";

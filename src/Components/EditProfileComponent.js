@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ButtonComponent from "./ButtonComponent";
-import UserBox2 from "./UserBox2";
+import ButtonComponent from "./Small/ButtonComponent";
+import UserBox2 from "./Small/UserBox2";
 import "./EditProfilComponent.css";
-import ProductEditComponent from "./ProductEditComponent"
+import ProductEditComponent from "./ProductEditComponent";
+import axios from "axios";
+import {setUser} from"../store/actions/user"
 
 class EditProfilComponent extends Component {
   constructor(props) {
@@ -17,6 +19,11 @@ class EditProfilComponent extends Component {
       confirmPassword: "",
       passTest: Boolean,
       submitOk: false,
+      headerWithToken: {
+        headers: {
+          Authorization: "Bearer " + this.props.token,
+        },
+      },
     };
     // Cette liaison est nécéssaire afin de permettre
     // l'utilisation de `this` dans la fonction de rappel.
@@ -74,7 +81,7 @@ class EditProfilComponent extends Component {
     });
   }
   // post user to DB
-  buttonIsClick(e) {
+  async buttonIsClick(e) {
     e.preventDefault();
     var mailformat = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
     let userObject = {
@@ -105,6 +112,48 @@ class EditProfilComponent extends Component {
         break;
       default:
         try {
+          await axios
+            .post(
+              `http://localhost:8080/userEdit/${this.props.user.id}`,
+              userObject,
+              this.state.headerWithToken
+            )
+            .then((result) => {
+              if (result.data === "Id incorrect") {
+                alert("Sorry, Id incorrect");
+              } else if (result.data === "Field incorrects") {
+                alert("Field incorrects");
+              } else {
+                console.log("RESULT", result);
+                this.setState({
+                  firstName: "",
+                  lastName: "",
+                  url: "",
+                  email: "",
+                  password: "",
+                  confirmPassword: "",
+                });
+                this.setState({
+                  submitOk: true,
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } catch (error) {
+          console.log(error);
+        }
+        try {
+          await axios
+            .get(`http://localhost:8080/users/${this.props.id}`)
+            .then((result) => {
+              console.log("ICI", result.data[0]);
+              this.props.setUser(result.data[0]);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         } catch (error) {
           console.log(error);
         }
@@ -112,19 +161,19 @@ class EditProfilComponent extends Component {
   }
   render() {
     let testConfirmPassword;
-    const passwordMatch = this.state.passTest;
+    let passwordMatch = this.state.passTest;
     if (passwordMatch) {
       testConfirmPassword = <p></p>;
     } else {
       testConfirmPassword = <span id="formTest2">Password not match</span>;
     }
 
-    let submitUserTest;
-    const submitTestDone = this.state.submitOk;
+    let submitEditProfil;
+    let submitTestDone = this.state.submitOk;
     if (submitTestDone) {
-      submitUserTest = <p id="submitOk2">User edited !</p>;
+      submitEditProfil = <p id="submitOk2">User edited !</p>;
     } else {
-      submitUserTest = <p id="submitOk2"></p>;
+      submitEditProfil = <p id="submitOk2"></p>;
     }
 
     let passwordCharCheck;
@@ -253,20 +302,24 @@ class EditProfilComponent extends Component {
               text="Edit Your Profile"
               click={this.buttonIsClick}
             />
-            
-            {submitUserTest}
+
+            {submitEditProfil}
           </form>
         </div>
-        <ProductEditComponent/>
+        <ProductEditComponent />
       </div>
     );
   }
 }
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setUser
+};
 
 const mapStateToProps = (state) => ({
   user: state.userReducer.user,
+  token: state.userReducer.token,
+  id: state.userReducer.id,
 });
 
 export default connect(
