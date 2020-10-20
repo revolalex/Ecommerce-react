@@ -36,7 +36,7 @@ class ProductEditComponent extends Component {
     e.preventDefault();
     try {
       await axios
-        .post(`http://localhost:8080/product/${id}`, this.state.headerWithToken)
+        .post(`http://localhost:8080/product/${id}`,"", this.state.headerWithToken)
         .then((result) => {
           console.log(result);
         })

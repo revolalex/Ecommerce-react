@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { deleteProductFromCart } from "../../store/actions/cart";
+import {
+  deleteProductFromCart,
+  increaseCounter,
+  decreaseCounter
+} from "../../store/actions/cart";
 import { connect } from "react-redux";
 import "../../Styles/BasketComponent.css";
 import {
@@ -15,7 +19,15 @@ import {
 class BasketComponent extends Component {
   deleteClick(index) {
     this.props.deleteProductFromCart(this.props.productBasket[index]);
-    alert(`${this.props.productBasket[index].name} has been deleted from your basket`)
+    alert(
+      `${this.props.productBasket[index].name} has been deleted from your basket`
+    );
+  }
+  increase(product) {
+    this.props.increaseCounter(product);
+  }
+  decrease(product) {
+    this.props.decreaseCounter(product);
   }
 
   renderProduct(product, index) {
@@ -34,18 +46,28 @@ class BasketComponent extends Component {
               <Card.Title className="textCard">{product.name}</Card.Title>
               <ListGroup horizontal>
                 <ListGroup.Item variant="info">
-                  <Card.Text>Qté: {this.props.counter}</Card.Text>
+                  <Card.Text>Qté: {product.quantity}</Card.Text>
                 </ListGroup.Item>
                 <ListGroup.Item variant="info">
                   Price : {product.prices}$
                 </ListGroup.Item>
                 <ListGroup.Item variant="info">
-                  Total : {product.prices}
+                Total : {product.prices * product.quantity}$
                 </ListGroup.Item>
               </ListGroup>
               <Form inline>
-                <Button variant="info">+1</Button>
-                <Button variant="warning">-1</Button>
+                <Button
+                  variant="info"
+                  onClick={this.increase.bind(this, product)}
+                >
+                  +1
+                </Button>
+                <Button
+                  variant="warning"
+                  onClick={this.decrease.bind(this, product)}
+                >
+                  -1
+                </Button>
                 <Button variant="danger">
                   <img
                     className="trashBasket"
@@ -63,18 +85,25 @@ class BasketComponent extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.props.productBasket.map((product, index) =>
-          this.renderProduct(product, index)
-        )}
-      </div>
-    );
+    console.log(this.props);
+    if (this.props.productBasket) {
+      return (
+        <div>
+          {this.props.productBasket.map((product, index) =>
+            this.renderProduct(product, index)
+          )}
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 
 const mapDispatchToProps = {
   deleteProductFromCart,
+  increaseCounter,
+  decreaseCounter,
 };
 
 const mapStateToProps = (state) => ({

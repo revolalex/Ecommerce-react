@@ -12,11 +12,13 @@ export const resetCart = ()=>({
 })
 
 
-// Not use 
-export const increaseCounter = () => ({
-  type: "INCREASE_COUNTER",
-});
-export const decreaseCounter = () => ({
-  type: "DECREASE_COUNTER",
-});
+  // Not use 
+  export const increaseCounter = (product) => ({
+    type: "INCREASE_COUNTER",
+    productBasket: product,
+  });
+  export const decreaseCounter = (product) => ({
+    type: "DECREASE_COUNTER",
+    productBasket: product,
+  });
 
