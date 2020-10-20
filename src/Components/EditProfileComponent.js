@@ -270,6 +270,7 @@ class EditProfilComponent extends Component {
         id: 6,
       },
     ];
+    /* Profil modification appear up the button */
     let newUrl;
     if (this.state.firstName.length > 3) {
       newUrl = (

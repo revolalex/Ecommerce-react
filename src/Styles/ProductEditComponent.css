@@ -13,7 +13,8 @@
 }
 .basketImg2{
     margin: auto;
-    height: 180px;
+    /* height: 180px; */
+    max-width: 120px;
     width: auto;
 }
 .textCard2{
@@ -21,6 +22,9 @@
 }
 .trashBasket2{
     height: 20px;
+}
+.trashBasket2Big{
+    height: 30px;
 }
 Form Button{
     margin-top: 20px;

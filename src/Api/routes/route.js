@@ -114,7 +114,7 @@ const appRouter = async function(app, connection) {
   // - GET /users/:id ⇒ Return all the datas of this specific User (including the name of the products he created...)
   await app.get("/users/:id", function(req, res) {
     let id = req.params.id;
-    let getUserInfo = `SELECT * FROM ecomreact.users where id = ${id};`;
+    let getUserInfo = `SELECT * FROM users where id = ${id};`;
     connection.query(getUserInfo, function(err, results) {
       if (err) throw err;
       res.send(results);
@@ -176,7 +176,7 @@ const appRouter = async function(app, connection) {
 
   await app.get("/productid/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = `SELECT * FROM ecomreact.products where id_user_affiliate = ${id};`;
+    let productInfo = `SELECT * FROM products where id_user_affiliate = ${id};`;
 
     connection.query(productInfo, function(err, results) {
       if (err) throw err;
