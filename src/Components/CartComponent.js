@@ -7,7 +7,7 @@ class CartComponent extends Component {
     return (
       <a className="cartA" href="/basket">
         {" "}
-        {this.props.productBasket.length}
+        {this.props.productBasket ? this.props.productBasket.length : 0}
         <img
           className="cartImg"
           src="https://purepng.com/public/uploads/large/purepng.com-shopping-cartshoppingcarttrolleycarriagebuggysupermarkets-1421526532331jylag.png"

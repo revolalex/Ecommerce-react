@@ -14,14 +14,13 @@ class ProductCardComponent2 extends Component {
       .then((result) => {
         this.props.setProduct(result.data);
       })
-      .catch(() => {
-        console.log("Oops, request failed!");
+      .catch((err) => {
+        console.log(err);
       });
   }
   addButtonIsClick(e) {
     let poductAdded = this.props.product[0].name
     e.preventDefault();
-    console.log(this.props.product);
     this.props.addProductToCart(this.props.product[0]);
     alert(`${poductAdded}, has been added to your basket`)
   }

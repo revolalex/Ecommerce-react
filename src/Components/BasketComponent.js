@@ -70,13 +70,20 @@ class BasketComponent extends Component {
   }
 
   render() {
+    console.log(this.props);
+    if(this.props.productBasket){
     return (
       <div>
         {this.props.productBasket.map((product, index) =>
           this.renderProduct(product, index)
         )}
       </div>
-    );
+    );} else {
+      return(
+        <div></div>
+      )
+    }
+
   }
 }
 

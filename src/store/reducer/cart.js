@@ -2,15 +2,14 @@ const initialState = {
     productBasket: [],
     total: 0,
   };
-  
-  const cartReducer = (state = initialState, action) => {
-    let item = state.productBasket.find(element => element.id === action.productBasket.id)
-    switch (action.type) {
-      case "ADD_PRODUCT_TO_CART":
+let item = {}
+const cartReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_PRODUCT_TO_CART":
+      item =  state.productBasket.find(element => element.id === action.productBasket.id)
       if (item === undefined){
-          action.productBasket.quantity = 1
-          return {
-            ...state,
+        action.productBasket.quantity = 1
+        return {
             total: state.total + action.productBasket.prices,
             productBasket: [...state.productBasket, action.productBasket],
           };
@@ -19,12 +18,11 @@ const initialState = {
           return {
             ...state,
             total: state.total + action.productBasket.prices,
-            product: [...state.productBasket]
+            productBasket: [...state.productBasket]
           }
         }
       case "DELETE_PRODUCT_FROM_CART":
         return {
-          ...state,
           total: state.total - ( action.productBasket.prices * action.productBasket.quantity),
           productBasket: state.productBasket.filter(
             (product) => product !== action.productBasket
@@ -36,19 +34,27 @@ const initialState = {
             total: 0,
           };
       case "INCREASE_COUNTER":
+      item = state.productBasket.find(element => element.id === action.productBasket.id)
           item.quantity += 1
           return {
-            ...state,
             total: state.total + action.productBasket.prices,
-            product: [...state.productBasket]
+            productBasket: [...state.productBasket]
           }
       case "DECREASE_COUNTER":
+      item = state.productBasket.find(element => element.id === action.productBasket.id)
+          if(item.quantity === 1){
+            return {
+              total: state.total - ( action.productBasket.prices * action.productBasket.quantity),
+              productBasket: state.productBasket.filter(
+                (product) => product !== action.productBasket
+              ),
+            };
+          }else{
           item.quantity -= 1
           return {
-            ...state,
             total: state.total - action.productBasket.prices,
-            product: [...state.productBasket]
-          }
+            productBasket: [...state.productBasket]
+          }}
       default:
         return state;
     }
