@@ -6,6 +6,7 @@ let item = {};
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_PRODUCT_TO_CART":
+      console.log("ICI",action.productBasket); // undefined
       item = state.productBasket.find(
         (element) => element.id === action.productBasket.id
       );

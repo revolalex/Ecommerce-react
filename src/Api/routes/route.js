@@ -164,7 +164,7 @@ const appRouter = async function(app, connection) {
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = `SELECT users.lastName,users.firstName, products.name, products.category, products.description, products.prices, products.url 
+    let productInfo = `SELECT users.lastName,users.firstName,products.id, products.name, products.category, products.description, products.prices, products.url 
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {

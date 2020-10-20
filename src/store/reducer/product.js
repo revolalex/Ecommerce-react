@@ -11,7 +11,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         products: action.products,
       };
-    case "SET_PRODUCT_CLICK":
+    case "SET_PRODUCT":
       return {
         ...state,
         product: action.product,

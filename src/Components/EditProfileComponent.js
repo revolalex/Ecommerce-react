@@ -11,10 +11,10 @@ class EditProfilComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      url: "",
-      email: "",
+      firstName: this.props.user.firstName,
+      lastName: this.props.user.lastName,
+      url: this.props.user.url,
+      email: this.props.user.email,
       password: "",
       confirmPassword: "",
       passTest: Boolean,
@@ -285,6 +285,7 @@ class EditProfilComponent extends Component {
     }
 
     return (
+      
       <div>
         <div className="login-box-Edit">
           <h2>Edit Your Profil</h2>

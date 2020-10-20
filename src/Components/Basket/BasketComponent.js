@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   deleteProductFromCart,
   increaseCounter,
-  decreaseCounter
+  decreaseCounter, resetCart
 } from "../../store/actions/cart";
 import { connect } from "react-redux";
 import "../../Styles/BasketComponent.css";
@@ -19,29 +19,28 @@ import {
 class BasketComponent extends Component {
   deleteClick(index) {
     this.props.deleteProductFromCart(this.props.productBasket[index]);
-    alert(
-      `${this.props.productBasket[index].name} has been deleted from your basket`
-    );
-  }
-  increase(product) {
-    this.props.increaseCounter(product);
-  }
-  decrease(product) {
-    this.props.decreaseCounter(product);
+    alert(`${this.props.productBasket[index].name} has been deleted from your basket`)
   }
 
+  increase(product){
+    this.props.increaseCounter(product)
+  }
+  decrease(product){
+    this.props.decreaseCounter(product)
+  }
   renderProduct(product, index) {
+    console.log(product);
     return (
       <Container className="basketCard" key={index}>
         <Row>
-          <Col md={2}>
+          <Col md={4}>
             <img
               className="basketImg"
               src={product.url}
               alt={product.name}
             ></img>
           </Col>
-          <Col md={10}>
+          <Col md={8}>
             <Card.Body>
               <Card.Title className="textCard">{product.name}</Card.Title>
               <ListGroup horizontal>
@@ -52,22 +51,12 @@ class BasketComponent extends Component {
                   Price : {product.prices}$
                 </ListGroup.Item>
                 <ListGroup.Item variant="info">
-                Total : {product.prices * product.quantity}$
+                  Total : {product.prices * product.quantity}$
                 </ListGroup.Item>
               </ListGroup>
               <Form inline>
-                <Button
-                  variant="info"
-                  onClick={this.increase.bind(this, product)}
-                >
-                  +1
-                </Button>
-                <Button
-                  variant="warning"
-                  onClick={this.decrease.bind(this, product)}
-                >
-                  -1
-                </Button>
+                <Button variant="info" onClick={this.increase.bind(this,product)}>+1</Button>
+                <Button variant="warning" onClick={this.decrease.bind(this,product)}>-1</Button>
                 <Button variant="danger">
                   <img
                     className="trashBasket"
@@ -86,17 +75,19 @@ class BasketComponent extends Component {
 
   render() {
     console.log(this.props);
-    if (this.props.productBasket) {
-      return (
-        <div>
-          {this.props.productBasket.map((product, index) =>
-            this.renderProduct(product, index)
-          )}
-        </div>
-      );
-    } else {
-      return <div></div>;
+    if(this.props.productBasket){
+    return (
+      <div>
+        {this.props.productBasket.map((product, index) =>
+          this.renderProduct(product, index)
+        )}
+      </div>
+    );} else {
+      return(
+        <div></div>
+      )
     }
+
   }
 }
 
@@ -104,6 +95,7 @@ const mapDispatchToProps = {
   deleteProductFromCart,
   increaseCounter,
   decreaseCounter,
+  resetCart
 };
 
 const mapStateToProps = (state) => ({

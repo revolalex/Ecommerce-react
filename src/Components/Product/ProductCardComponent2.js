@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "../../Styles/productCard2.css";
 import { connect } from "react-redux";
-import { setProductClick } from "../../store/actions/product";
+import { setProduct } from "../../store/actions/product";
 import { addProductToCart } from "../../store/actions/cart";
 import ButtonComponent from "../Small/ButtonComponent";
 import { Card, Row, Col } from "react-bootstrap";
@@ -12,7 +12,7 @@ class ProductCardComponent2 extends Component {
     axios
       .get(`http://localhost:8080/products/${this.props.id}`)
       .then((result) => {
-        this.props.setProductClick(result.data);
+        this.props.setProduct(result.data);
       })
       .catch(() => {
         console.log("Oops, request failed!");
@@ -101,7 +101,7 @@ class ProductCardComponent2 extends Component {
 }
 
 const mapDispatchToProps = {
-  setProductClick,
+  setProduct,
   addProductToCart,
 };
 
