@@ -197,7 +197,16 @@ const appRouter = async function(app, connection) {
   // POST /productEdit/:id => Update this specific product from the database
   await app.post("/productEdit/:id", auth, (req, res) => {
     if (req.body.idUser === req.body.id_user_affiliate) {
-      let sql = `UPDATE products  SET category = '${req.body.category.charAt(0).toUpperCase() + req.body.category.slice(1)}', name = '${req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1)}', description = '${req.body.description}', prices = '${req.body.prices}',url = '${req.body.url}' WHERE id = ${req.params.id}`;
+      let sql = `UPDATE products  SET category = '${req.body.category
+        .charAt(0)
+        .toUpperCase() +
+        req.body.category.slice(1)}', name = '${req.body.name
+        .charAt(0)
+        .toUpperCase() + req.body.name.slice(1)}', description = '${
+        req.body.description
+      }', prices = '${req.body.prices}',url = '${req.body.url}' WHERE id = ${
+        req.params.id
+      }`;
       connection.query(sql, (err) => {
         if (err) {
           console.log(err);
@@ -235,6 +244,45 @@ const appRouter = async function(app, connection) {
     } else {
       res.send("Id incorrect");
     }
+  });
+
+  /**************************** API BASKET ***********************************/
+  /*****************************************************************************/
+
+  /* Get All Order History where id_user_affiliate = */
+  await app.get("/basketHistory/:id", (req, res) => {
+    let getHistory = `SELECT * FROM basket where id_user_affiliate = ${req.params.id};`
+    connection.query(getHistory, (err, results)=>{
+      if (err) throw err
+      res.send(results);
+    })
+  });
+
+
+
+  await app.post("/panier/", (req, res) => {
+    let update = `DELETE FROM basket WHERE id_user_affiliate = ${req.body[0].id_user_affiliate}`;
+    connection.query(update, (err) => {
+      if (err) console.log(err);
+    });
+    let sql =
+      "INSERT INTO basket (category,name,description,prices,url,quantity,id_product,id_user_affiliate) VALUES (?)";
+    for (i = 0; i < req.body.length; i++) {
+      let product = [
+        req.body[i].category,
+        req.body[i].name,
+        req.body[i].description,
+        req.body[i].prices,
+        req.body[i].url,
+        req.body[i].quantity,
+        req.body[i].id,
+        req.body[i].id_user_affiliate,
+      ];
+      connection.query(sql, [product], (err) => {
+        if (err) console.log(err);
+      });
+    }
+    res.send("Stockés");
   });
 };
 module.exports = appRouter;

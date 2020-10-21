@@ -12,10 +12,11 @@ class ProductCardComponent2 extends Component {
     axios
       .get(`http://localhost:8080/products/${this.props.id}`)
       .then((result) => {
+        result.data[0].id_user_affiliate = this.props.idUser
         this.props.setProduct(result.data);
       })
-      .catch(() => {
-        console.log("Oops, request failed!");
+      .catch((err) => {
+        console.log(err);
       });
   }
   addButtonIsClick(e) {
@@ -109,6 +110,7 @@ const mapStateToProps = (state) => ({
   counter: state.cartReducer.counter,
   product: state.productReducer.product,
   id: state.productReducer.id,
+  idUser: state.userReducer.id,
   productBasket: state.cartReducer.productBasket,
 });
 

@@ -34,49 +34,49 @@ class MyRouter extends Component {
           </Route>
           <Route path="/addProduct">
             {this.props.auth === false || undefined ? (
-              <Redirect to="/sign-in" />
+              <Redirect to="/sign-up" />
             ) : (
               <CreateProductPage />
             )}
           </Route>
           <Route path="/Users-List">
             {this.props.auth === false || undefined ? (
-              <Redirect to="/sign-in" />
+              <Redirect to="/sign-up" />
             ) : (
               <UserListComponent />
             )}
           </Route>
           <Route path="/editProfil">
             {this.props.auth === false || undefined ? (
-              <Redirect to="/sign-in" />
+              <Redirect to="/sign-up" />
             ) : (
               <EditProfileComponent />
             )}
           </Route>
           <Route path="/edit-product">
             {this.props.auth === false || undefined ? (
-              <Redirect to="/sign-in" />
+              <Redirect to="/sign-up" />
             ) : (
               <EditProductComponent />
             )}
           </Route>
           <Route path="/list-of-products">
             {this.props.auth === false || undefined ? (
-              <Redirect to="/sign-in" />
+              <Redirect to="/sign-up" />
             ) : (
               <ListOfProducts />
             )}
           </Route>
           <Route path="/productCard2">
             {this.props.auth === false || undefined ? (
-              <Redirect to="/sign-in" />
+              <Redirect to="/sign-up" />
             ) : (
               <ProductCardComponent2 />
             )}
           </Route>
           <Route path="/basket">
             {this.props.auth === false || undefined ? (
-              <Redirect to="/sign-in" />
+              <Redirect to="/sign-up" />
             ) : (
               <BasketComponent />
             )}
