@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import UserBox from "./Small/UserBox";
 import ButtonComponent from "./Small/ButtonComponent";
 import { withRouter } from "react-router-dom";
+import "../Styles/EditProduct.css";
 
 class CreateProductPage extends Component {
   constructor(props) {
@@ -137,7 +138,7 @@ class CreateProductPage extends Component {
                 id_user_affiliate: "",
               });
               let that = this
-              setTimeout(function(){ that.props.history.push("/editProfil");}, 1500);
+              setTimeout(function(){ that.props.history.push("/editProfil");}, 2000);
 
             })
             .catch(() => {
@@ -201,9 +202,9 @@ class CreateProductPage extends Component {
 
     return (
       <div>
-        <div className="login-box">
+        <div className="login-box-Edit">
           <h2>Edit Product</h2>
-          <img className="uploadImg" src={this.state.url} alt="" />
+          <img className="uploadImgEditProduct" src={this.state.url} alt="" />
           <br/><br/>
           <form>
             {formInput.map((elem) => {

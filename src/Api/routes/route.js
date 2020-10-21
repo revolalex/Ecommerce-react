@@ -135,9 +135,10 @@ const appRouter = async function(app, connection) {
 
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
   await app.post("/products/", auth, function(req, res) {
-    let category = req.body.category;
+    let category =
+      req.body.category.charAt(0).toUpperCase() + req.body.category.slice(1);
     let prices = req.body.prices;
-    let name = req.body.name;
+    let name = req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1);
     let description = req.body.description;
     let url = req.body.url;
     let id_user_affiliate = req.body.id_user_affiliate;
@@ -194,19 +195,17 @@ const appRouter = async function(app, connection) {
   });
 
   // POST /productEdit/:id => Update this specific product from the database
-  await app.post('/productEdit/:id', auth,(req,res) => {
-    if(req.body.idUser === req.body.id_user_affiliate){
-        let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.prices}',url = '${req.body.url}' WHERE id = ${req.params.id}`
-        connection.query(sql, (err) => {
-          if (err) {
-            console.log(err)
-            res.sendStatus(500)
-          } else res.send('Updated')
-        })
-      }
-    })
-
-
+  await app.post("/productEdit/:id", auth, (req, res) => {
+    if (req.body.idUser === req.body.id_user_affiliate) {
+      let sql = `UPDATE products  SET category = '${req.body.category.charAt(0).toUpperCase() + req.body.category.slice(1)}', name = '${req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1)}', description = '${req.body.description}', prices = '${req.body.prices}',url = '${req.body.url}' WHERE id = ${req.params.id}`;
+      connection.query(sql, (err) => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+        } else res.send("Updated");
+      });
+    }
+  });
 
   await app.post("/userEdit/:id", auth, (req, res) => {
     if (typeof JSON.parse(req.params.id) === "number") {
