@@ -133,7 +133,6 @@ const appRouter = async function(app, connection) {
     });
   });
 
-  // must add middleware for jwt allow acces
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
   await app.post("/products/", auth, function(req, res) {
     let category = req.body.category;
@@ -207,15 +206,7 @@ const appRouter = async function(app, connection) {
       }
     })
 
-  // await app.post("/productEdit/:id", auth, (req, res) => {
-  //   let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.price}',url = '${req.body.url}' WHERE id = ${req.params.id}`;
-  //   connection.query(sql, (err) => {
-  //     if (err) {
-  //       console.log(err);
-  //       res.sendStatus(500);
-  //     } else res.send("Updated");
-  //   });
-  // });
+
 
   await app.post("/userEdit/:id", auth, (req, res) => {
     if (typeof JSON.parse(req.params.id) === "number") {

@@ -30,6 +30,23 @@ class CreateProductPage extends Component {
     this.buttonIsClick = this.buttonIsClick.bind(this);
   }
 
+  componentDidMount() {
+    axios.get(`http://localhost:8080/products/${localStorage.getItem("productIdToEdit")}`)
+    .then((result) => {
+      this.setState({
+        category: result.data[0].category,
+        name: result.data[0].name,
+        description: result.data[0].description,
+        url: result.data[0].url,
+        prices: result.data[0].prices,
+        id_user_affiliate: result.data[0].id_user_affiliate,
+      });
+    })
+    .catch(() => {
+      console.log("Oops, request failed!");
+    });
+  }
+
   handleCategory(event) {
     this.setState({
       category: event.target.value,
