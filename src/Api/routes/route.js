@@ -172,7 +172,6 @@ const appRouter = async function(app, connection) {
       res.send(results);
     });
   });
-  
 
   await app.get("/productid/:id", function(req, res) {
     let id = req.params.id;
@@ -184,21 +183,19 @@ const appRouter = async function(app, connection) {
     });
   });
 
-
-  // MIDDLEWARE A REMETTRE
   // POST /product/:id => Delete this specific product from the database
-  await app.post("/product/:id", auth,(req,res) => {
-    let sql = `DELETE FROM products WHERE id = ${req.params.id}`
+  await app.post("/product/:id", auth, (req, res) => {
+    let sql = `DELETE FROM products WHERE id = ${req.params.id}`;
     connection.query(sql, (err) => {
       if (err) {
-        console.log(err)
-        res.sendStatus(500)
-      }else res.send("Deleted")
-    })
-  })
+        console.log(err);
+        res.sendStatus(500);
+      } else res.send("Deleted");
+    });
+  });
 
   // POST /productEdit/:id => Update this specific product from the database
-  await app.post('/productEdit/:id',auth,(req,res) => { 
+  await app.post('/productEdit/:id',auth,(req,res) => {
     if(req.body.idUser === req.body.id_user_affiliate){
         let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.price}',url = '${req.body.url}' WHERE id = ${req.params.id}`
         connection.query(sql, (err) => {
@@ -207,34 +204,47 @@ const appRouter = async function(app, connection) {
             res.sendStatus(500)
           } else res.send('Updated')
         })
-      } 
-    })
-
-    await app.post('/userEdit/:id',auth,(req,res) => {
-      if(typeof JSON.parse(req.params.id) === "number"){
-        if (
-          req.body.password.length &&
-          req.body.lastName.length &&
-          req.body.firstName.length &&
-          req.body.url.length > 0
-        ){ 
-          const cryptedPassword = bcrypt.hashSync(req.body.password, saltRounds)
-          const capitalLastName = req.body.lastName.charAt(0).toUpperCase() + req.body.lastName.slice(1);
-          const capitalFirstName = req.body.firstName.charAt(0).toUpperCase() + req.body.firstName.slice(1);
-          const sql = `UPDATE users SET firstname = '${capitalFirstName}', lastName = '${capitalLastName}', url = '${req.body.url}', email = '${req.body.email}', password = '${cryptedPassword}' WHERE id = ${req.params.id}`
-          connection.query(sql,(err)=>{
-            if (err) {
-              console.log(err);
-              res.sendStatus(500)
-            } else res.send('Updated')
-          })
-        } else {
-          res.send('Field incorrects')
-        }
-      }else{
-        res.send("Id incorrect")
       }
     })
-      
+
+  // await app.post("/productEdit/:id", auth, (req, res) => {
+  //   let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.price}',url = '${req.body.url}' WHERE id = ${req.params.id}`;
+  //   connection.query(sql, (err) => {
+  //     if (err) {
+  //       console.log(err);
+  //       res.sendStatus(500);
+  //     } else res.send("Updated");
+  //   });
+  // });
+
+  await app.post("/userEdit/:id", auth, (req, res) => {
+    if (typeof JSON.parse(req.params.id) === "number") {
+      if (
+        req.body.password.length &&
+        req.body.lastName.length &&
+        req.body.firstName.length &&
+        req.body.url.length > 0
+      ) {
+        const cryptedPassword = bcrypt.hashSync(req.body.password, saltRounds);
+        const capitalLastName =
+          req.body.lastName.charAt(0).toUpperCase() +
+          req.body.lastName.slice(1);
+        const capitalFirstName =
+          req.body.firstName.charAt(0).toUpperCase() +
+          req.body.firstName.slice(1);
+        const sql = `UPDATE users SET firstname = '${capitalFirstName}', lastName = '${capitalLastName}', url = '${req.body.url}', email = '${req.body.email}', password = '${cryptedPassword}' WHERE id = ${req.params.id}`;
+        connection.query(sql, (err) => {
+          if (err) {
+            console.log(err);
+            res.sendStatus(500);
+          } else res.send("Updated");
+        });
+      } else {
+        res.send("Field incorrects");
+      }
+    } else {
+      res.send("Id incorrect");
+    }
+  });
 };
 module.exports = appRouter;

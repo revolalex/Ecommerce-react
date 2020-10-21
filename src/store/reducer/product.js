@@ -2,6 +2,7 @@ const initialState = {
   products: [],
   product: {},
   id: "",
+  productIdToEdit: 0,
 };
 
 const productReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         id: action.id,
+      };
+    case "PRODUCT_ID_TO_EDIT":
+      return {
+        ...state,
+        productIdToEdit: action.id,
       };
     default:
       return state;

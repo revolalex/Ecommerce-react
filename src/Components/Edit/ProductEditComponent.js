@@ -1,9 +1,12 @@
 import { Card, Col, Row, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../Styles/ProductEditComponent.css";
+import "../../Styles/ProductEditComponent.css";
 import axios from "axios";
-import ButtonComponent from "./Small/ButtonComponent";
+import ButtonComponent from "../Small/ButtonComponent";
+
+
+import { withRouter } from "react-router-dom";
 
 class ProductEditComponent extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class ProductEditComponent extends Component {
     await axios
       .get(`http://localhost:8080/productid/${this.props.id}`)
       .then((result) => {
-        console.log("DATA", result.data);
+        console.log("PRODUCT THIS USER HAVE TO SELL", result.data);
         this.setState({
           productOfThisUser: result.data,
         });
@@ -32,11 +35,14 @@ class ProductEditComponent extends Component {
   }
   async deleteClick(id, e) {
     console.log(this.state.headerWithToken);
-    alert(`${id}`);
     e.preventDefault();
     try {
       await axios
-        .post(`http://localhost:8080/product/${id}`,"", this.state.headerWithToken)
+        .post(
+          `http://localhost:8080/product/${id}`,
+          "",
+          this.state.headerWithToken
+        )
         .then((result) => {
           console.log(result);
         })
@@ -48,20 +54,25 @@ class ProductEditComponent extends Component {
     }
     try {
       await axios
-      .get(`http://localhost:8080/productid/${this.props.id}`)
-      .then((result) => {
-        console.log("DATA", result.data);
-        this.setState({
-          productOfThisUser: result.data,
+        .get(`http://localhost:8080/productid/${this.props.id}`)
+        .then((result) => {
+          console.log("PRODUCT AFTER DELETE", result.data);
+          this.setState({
+            productOfThisUser: result.data,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  }
+
+   editButtonClick(index, e) {
+    localStorage.setItem('productIdToEdit', index);
+    e.preventDefault();
+    this.props.history.push("/edit-product");
   }
 
   renderProduct(product, index) {
@@ -93,7 +104,11 @@ class ProductEditComponent extends Component {
                 Price: {product.prices} $
               </Card.Text>
               <Form center="true">
-                <ButtonComponent text="Edit" />
+                <ButtonComponent
+                  text="Edit"
+                  click={this.editButtonClick.bind(this, product.id)}
+                  link="/edit-product"
+                />
                 <ButtonComponent
                   click={this.deleteClick.bind(this, product.id)}
                   class="myARed"
@@ -108,34 +123,6 @@ class ProductEditComponent extends Component {
             </Card.Body>
           </Col>
         </Row>
-
-        {/* <Container className="basketCard2" key={index}>
-        <Row>
-          <Col md={2}>
-            <img
-              className="basketImg2"
-              src={product.url}
-              alt={product.name}
-            ></img>
-          </Col>
-          <Col md={10}>
-            <Card.Body>
-              <Card.Title className="textCard2">{product.name}</Card.Title>
-              <Form inline>
-                <Button variant="info">Edit</Button>
-                <Button variant="danger">
-                  Delete
-                  <img
-                    className="trashBasket2"
-                    src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
-                    alt="trash"
-                  />
-                </Button>
-              </Form>
-            </Card.Body>
-          </Col>
-        </Row>
-      </Container> */}
       </div>
     );
   }
@@ -155,4 +142,10 @@ const mapStateToProps = (state) => ({
   id: state.userReducer.id,
   token: state.userReducer.token,
 });
-export default connect(mapStateToProps)(ProductEditComponent);
+const mapDispatchToProps = {
+
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ProductEditComponent));

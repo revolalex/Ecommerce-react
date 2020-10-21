@@ -1,5 +1,5 @@
 .basketCard2{
-    background: linear-gradient( #141e30, #243b55,);
+    /* background: linear-gradient( #141e30, #243b55,); */
     margin: 10% 20% 10% 20%;
     opacity: 0.8;
     background: rgba(0, 0, 0, 0.8);
@@ -33,3 +33,4 @@ Form Button{
 .productNameTitle{
     color: #03e9f4;
 }
+
