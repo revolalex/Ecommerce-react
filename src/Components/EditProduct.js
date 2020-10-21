@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import UserBox from "./Small/UserBox";
 import ButtonComponent from "./Small/ButtonComponent";
+import { withRouter } from "react-router-dom";
 
 class CreateProductPage extends Component {
   constructor(props) {
@@ -31,20 +32,30 @@ class CreateProductPage extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8080/products/${localStorage.getItem("productIdToEdit")}`)
-    .then((result) => {
-      this.setState({
-        category: result.data[0].category,
-        name: result.data[0].name,
-        description: result.data[0].description,
-        url: result.data[0].url,
-        prices: result.data[0].prices,
-        id_user_affiliate: result.data[0].id_user_affiliate,
+    try {
+      axios
+      .get(
+        `http://localhost:8080/products/${localStorage.getItem(
+          "productIdToEdit"
+        )}`
+      )
+      .then((result) => {
+        this.setState({
+          category: result.data[0].category,
+          name: result.data[0].name,
+          description: result.data[0].description,
+          url: result.data[0].url,
+          prices: result.data[0].prices,
+          id_user_affiliate: result.data[0].id_user_affiliate,
+        });
+      })
+      .catch(() => {
+        console.log("Oops, request failed!");
       });
-    })
-    .catch(() => {
-      console.log("Oops, request failed!");
-    });
+    } catch (error) {
+      console.log(error)
+    }
+   
   }
 
   handleCategory(event) {
@@ -88,23 +99,23 @@ class CreateProductPage extends Component {
     };
     switch (true) {
       case productObject.category.length < 2:
-        alert("category error: min 2 characters");
+        alert("Category error: min 2 characters");
         break;
       case productObject.name.length < 3:
-        alert("name error: min 3 characters");
+        alert("Name error: min 3 characters");
         break;
       case productObject.description.length < 10:
-        alert("description required min 10 characters");
+        alert("Description required min 10 characters");
         break;
       case productObject.url.length < 10:
-        alert("url of product picture required min 10 characters");
+        alert("Url of product picture required min 10 characters");
         break;
       case productObject.prices.length < 1:
         alert("Price missing");
         break;
       default:
         try {
-          console.log("PRODUCT OBJECT EDIT",productObject);
+          console.log("PRODUCT OBJECT EDIT", productObject);
           axios
             .post(
               `http://localhost:8080/productEdit/${productIdToEdit}`,
@@ -125,6 +136,9 @@ class CreateProductPage extends Component {
                 prices: "",
                 id_user_affiliate: "",
               });
+              let that = this
+              setTimeout(function(){ that.props.history.push("/editProfil");}, 1500);
+
             })
             .catch(() => {
               console.log("Oops, request failed!");
@@ -189,11 +203,13 @@ class CreateProductPage extends Component {
       <div>
         <div className="login-box">
           <h2>Edit Product</h2>
+          <img className="uploadImg" src={this.state.url} alt="" />
+          <br/><br/>
           <form>
             {formInput.map((elem) => {
               return <UserBox props={elem} key={elem.id} />;
             })}
-            <img className="uploadImg" src={this.state.url} alt="" />
+
             <ButtonComponent click={this.buttonIsClick} text="Edit" />
 
             {submitProduct}
@@ -207,7 +223,7 @@ class CreateProductPage extends Component {
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
   productIdToEdit: state.productReducer.productIdToEdit,
-  id: state.userReducer.id
+  id: state.userReducer.id,
 });
 
-export default connect(mapStateToProps)(CreateProductPage);
+export default connect(mapStateToProps)(withRouter(CreateProductPage));
