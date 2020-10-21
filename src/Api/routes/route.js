@@ -195,9 +195,9 @@ const appRouter = async function(app, connection) {
   });
 
   // POST /productEdit/:id => Update this specific product from the database
-  await app.post('/productEdit/:id',auth,(req,res) => {
+  await app.post('/productEdit/:id', auth,(req,res) => {
     if(req.body.idUser === req.body.id_user_affiliate){
-        let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.price}',url = '${req.body.url}' WHERE id = ${req.params.id}`
+        let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.prices}',url = '${req.body.url}' WHERE id = ${req.params.id}`
         connection.query(sql, (err) => {
           if (err) {
             console.log(err)
