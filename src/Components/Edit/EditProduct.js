@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "../Styles/Sign.css";
+import "../../Styles/Sign.css";
 import axios from "axios";
 import { connect } from "react-redux";
-import UserBox from "./Small/UserBox";
-import ButtonComponent from "./Small/ButtonComponent";
+import UserBox from "../Small/UserBox";
+import ButtonComponent from "../Small/ButtonComponent";
 import { withRouter } from "react-router-dom";
-import "../Styles/EditProduct.css";
+import "../../Styles/EditProduct.css";
 
 class CreateProductPage extends Component {
   constructor(props) {

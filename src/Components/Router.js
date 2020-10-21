@@ -9,7 +9,7 @@ import ListOfProducts from "./Product/ListOfProductsComponent";
 import ProductCardComponent2 from "./Product/ProductCardComponent2";
 import BasketComponent from "./Basket/BasketComponent";
 import EditProfileComponent from "./Edit/EditProfileComponent"
-import EditProductComponent from './EditProduct';
+import EditProductComponent from './Edit/EditProduct';
 import { deleteToken, authFalse } from "../store/actions/user";
 import { connect } from "react-redux";
 
