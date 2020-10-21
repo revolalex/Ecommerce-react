@@ -221,6 +221,29 @@ const appRouter = async function(app, connection) {
         res.send("Id incorrect")
       }
     })
+    await app.get("/productid/:id", function(req, res) {
+      let id = req.params.id;
+      let productInfo = `SELECT * FROM products where id_user_affiliate = ${id};`;
+  
+      connection.query(productInfo, function(err, results) {
+        if (err) throw err;
+        res.send(results);
+      });
+    });
+    await app.post('/panier', (req,res)=>{
+      let update = `DELETE FROM basket WHERE id_user_affiliate = ${req.body[0].id_user_affiliate}`
+      connection.query(update,(err)=> {
+        if(err)console.log(err);
+      })
+      let sql = "INSERT INTO basket (category,name,description,prices,url,quantity,id_product,id_user_affiliate) VALUES (?)"
+      for (i = 0; i < req.body.length; i++) {
+        let product = [req.body[i].category,req.body[i].name,req.body[i].description,req.body[i].prices,req.body[i].url,req.body[i].quantity,req.body[i].id,req.body[i].id_user_affiliate]
+        connection.query(sql,[product],(err)=>{
+          if (err) console.log(err)
+        })
+      }
+      res.send('Stockés')
+    })
       
 };
 module.exports = appRouter;

@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 class Button extends Component {
     render(){
         return(
-            <a href={ this.props.link === undefined ? "/#" : this.props.link} onClick={this.props.click === undefined ? this.props.lol : this.props.click }>
+            <a className='anim'href={ this.props.link === undefined ? "/#" : this.props.link} onClick={this.props.click === undefined ? this.props.lol : this.props.click }>
               <span></span>
               <span></span>
               <span></span>

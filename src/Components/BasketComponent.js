@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { deleteProductFromCart, increaseCounter, decreaseCounter } from "../store/actions/cart";
 import { connect } from "react-redux";
 import "./BasketComponent.css";
+import Axios from "axios"
+import Buttton from './button'
 import {
   Card,
   Col,
@@ -24,8 +26,11 @@ class BasketComponent extends Component {
   decrease(product){
     this.props.decreaseCounter(product)
   }
+  storeBasket(e){
+    e.preventDefault()
+    Axios.post("http://localhost:8080/panier",this.props.productBasket)
+  }
   renderProduct(product, index) {
-    console.log(product);
     return (
       <Container className="basketCard" key={index}>
         <Row>
@@ -70,13 +75,13 @@ class BasketComponent extends Component {
   }
 
   render() {
-    console.log(this.props);
-    if(this.props.productBasket){
+    if(this.props.productBasket.length !== 0){
     return (
       <div>
         {this.props.productBasket.map((product, index) =>
           this.renderProduct(product, index)
         )}
+        <Buttton text="Valider le panier" link='/paiement' click={this.storeBasket.bind(this)}/>
       </div>
     );} else {
       return(

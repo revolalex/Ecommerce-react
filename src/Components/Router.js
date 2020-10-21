@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { deleteToken, authFalse } from "../store/actions/user";
 import EditProfileComponent from './EditProfileComponent'
 import BasketComponent from "./BasketComponent";
+import EditProductComponent from './ProductEditComponent'
 class MyRouter extends Component {
     render(){
         return(
@@ -40,6 +41,9 @@ class MyRouter extends Component {
             </Route>
             <Route path="/basket">
             {this.props.auth === false || undefined ? (<Redirect to="/sign-in" />) : (<BasketComponent />)}
+            </Route>
+            <Route path="/editProduct">
+              {this.props.auth === false || undefined ? (<Redirect to="/sign-in"/>):(<EditProductComponent/>)}
             </Route>
             <Route render={ () => this.props.auth === false || undefined ? <Redirect to="/"/> : <Redirect to="/Users-List"/> }/>
           </Switch>
