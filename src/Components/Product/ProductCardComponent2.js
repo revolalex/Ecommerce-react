@@ -53,7 +53,7 @@ class ProductCardComponent2 extends Component {
               <h4>Price</h4>
               <p>{product.prices}$</p>
               <h4>Seller</h4>
-              <p>{product.username}</p>
+              <p>{product.lastName} {product.firstName}</p>
             </div>
             <ButtonComponent
               text={"Buy" + product.prices + "$"}
@@ -81,7 +81,7 @@ class ProductCardComponent2 extends Component {
                     <h4 >Price:</h4>
                     <p>{product.prices}</p>
                     <h4 >Seller:</h4>
-                    <p>{product.username}</p>
+                    <p>{product.lastName} {product.firstName}</p>
                   </Card.Body>
                   <ButtonComponent
                     text={"Buy" + product.prices + "$"}
