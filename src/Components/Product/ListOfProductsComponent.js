@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
-import { setListOfProducts, setIdProduct } from "../../store/actions/product.js";
+import { Card, Col, Container, Row, NavDropdown } from "react-bootstrap";
+import {
+  setListOfProducts,
+  setIdProduct,
+} from "../../store/actions/product.js";
 import axios from "axios";
 import "../../Styles/ListOfProduct.css";
+import TitleComponent from "../Small/TitleComponent";
 import { connect } from "react-redux";
 class ProductListPage extends Component {
   componentDidMount() {
@@ -19,11 +23,44 @@ class ProductListPage extends Component {
     this.props.setIdProduct(id);
     console.log(this.props.products.id);
   }
+  categorySet(e) {
+    console.log(e);
+    // axios
+    //   .get(`http://localhost:8080/products/`)
+    //   .then((result) => {
+    //     this.props.setListOfProducts(result.data);
+    //   })
+    //   .catch(() => {
+    //     console.log("Oops, request failed!");
+    //   });
+  }
+
+  // renderCategory(product) {
+  //   console.log(product.category);
+  //   return (
+  //     <NavDropdown
+  //       title="Category"
+  //       id="nav-dropdown"
+  //       onSelect={this.categorySet.bind(this)}
+  //     >
+  //       {this.props.products.map((product) => this.renderNavItems(product))}
+  //       <NavDropdown.Item eventKey="4.1">{product.category}</NavDropdown.Item>
+
+  //     </NavDropdown>
+  //   );
+  // }
+
+  // renderNavItems(product){
+  //   return(
+  //     <NavDropdown.Item eventKey="4.1">{product.category}</NavDropdown.Item>
+  //   )
+
+  // }
 
   render() {
     return (
       <div id="myRow">
-        <h1 className="pageTitle">Product To Sell</h1>
+        <TitleComponent text1="Products" text2="&nbsp;list"/>
         <Container className="testContainer">
           <Row className="justify-content-md-center">
             {this.props.products.map((product) => this.renderProduct(product))}

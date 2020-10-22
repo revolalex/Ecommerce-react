@@ -88,4 +88,6 @@ body {
     display: none;
   }
 }
-
+#promotion{
+  text-decoration: line-through
+}

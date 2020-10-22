@@ -26,7 +26,7 @@ const appRouter = async function(app, connection) {
         lastName.charAt(0).toUpperCase() + lastName.slice(1);
       let capitalFirstName =
         firstName.charAt(0).toUpperCase() + firstName.slice(1);
-
+      // Crypt the password
       let cryptedPassword = bcrypt.hashSync(password, saltRounds);
 
       let addUser =
@@ -110,7 +110,6 @@ const appRouter = async function(app, connection) {
     });
   });
 
-  //   to be continued
   // - GET /users/:id ⇒ Return all the datas of this specific User (including the name of the products he created...)
   await app.get("/users/:id", function(req, res) {
     let id = req.params.id;
@@ -216,6 +215,7 @@ const appRouter = async function(app, connection) {
     }
   });
 
+  // POST /  Edit an user information
   await app.post("/userEdit/:id", auth, (req, res) => {
     if (typeof JSON.parse(req.params.id) === "number") {
       if (
@@ -246,21 +246,46 @@ const appRouter = async function(app, connection) {
     }
   });
 
+  // Get Product by category
+  await app.get("/productCategory/", (req, res) => {
+    let categorie = req.body.categorie;
+    let getCategory = `SELECT * FROM products where category = '${categorie}';`;
+    try {
+      connection.query(getCategory, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+      });
+    } catch (error) {}
+  });
+
   /**************************** API BASKET ***********************************/
   /*****************************************************************************/
 
-  /* Get All Order History where id_user_affiliate = */
+  /*Get / Get All Order History where id_user_affiliate = */
   await app.get("/basketHistory/:id", (req, res) => {
-    let getHistory = `SELECT * FROM basket where id_user_affiliate = ${req.params.id};`
-    connection.query(getHistory, (err, results)=>{
-      if (err) throw err
+    let getHistory = `SELECT * FROM basket where id_user_affiliate = ${req.params.id};`;
+    connection.query(getHistory, (err, results) => {
+      if (err) throw err;
       res.send(results);
-    })
+    });
   });
 
-
-
+  // Post / post the basket in the db
   await app.post("/panier/", (req, res) => {
+    /**
+     * HERE
+     */
+    // to do: date in db and insert it
+    const event = new Date();
+
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    console.log(event.toLocaleDateString('fr-FR', options));
+
     let sql =
       "INSERT INTO basket (category,name,description,prices,url,quantity,id_product,id_user_affiliate) VALUES (?)";
     for (i = 0; i < req.body.length; i++) {

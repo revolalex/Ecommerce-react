@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import UserBox from "../Small/UserBox";
 import ButtonComponent from "../Small/ButtonComponent";
+import TitleComponent from "../Small/TitleComponent";
 
 class CreateProductPage extends Component {
   constructor(props) {
@@ -166,7 +167,7 @@ class CreateProductPage extends Component {
     }
     return (
       <div id="addArrticleDiv">
-        <h1 className="pageTitle">sell a product</h1>
+        <TitleComponent text1="sell" text2="&nbsp; article"/>
         <div className="login-box">
           <h2>Add an article</h2>
           <form>

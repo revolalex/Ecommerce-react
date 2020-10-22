@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Card, Col, Row} from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import "./OrderComponent.css";
-import "../../Styles/ListOfProduct.css";
-import { setHistoryOrders, resetHistoryOrders } from "../../store/actions/orders";
+// import "../../Styles/ListOfProduct.css";
+import {
+  setHistoryOrders,
+  resetHistoryOrders,
+} from "../../store/actions/orders";
 import { connect } from "react-redux";
+import TitleComponent from "../Small/TitleComponent"
 
 class OrderComponent extends Component {
   componentDidMount() {
@@ -38,11 +42,9 @@ class OrderComponent extends Component {
           </Col>
           <Col sm={5}>
             <Card.Body>
-              <Card.Title >
-                Order number: {product.id}
-              </Card.Title>
+              <Card.Title>Order number: {product.id}</Card.Title>
               <Card.Text>
-              <p className="productNameTitle">Category:</p>
+                <p className="productNameTitle">Category:</p>
                 {product.category}
               </Card.Text>
               <Card.Text>
@@ -54,12 +56,12 @@ class OrderComponent extends Component {
           <Col sm={5}>
             <Card.Body>
               <Card.Text>
-              <p className="productNameTitle">Price:</p>
+                <p className="productNameTitle">Price:</p>
                 {product.prices} $
               </Card.Text>
               <Card.Text>
-              <p className="productNameTitle">Description:</p>
-                {product.description} 
+                <p className="productNameTitle">Description:</p>
+                {product.description}
               </Card.Text>
             </Card.Body>
           </Col>
@@ -69,14 +71,34 @@ class OrderComponent extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1 className="pageTitle">Orders History</h1>
-        {this.props.old_Orders.map((product, index) =>
-          this.renderProduct(product, index)
-        )}
-      </div>
-    );
+    let a = "You have"
+    let b = "never ordered"
+    if (this.props.old_Orders.length>1) {
+      return (
+        <div>
+          <TitleComponent text1="Orders" text2="&nbsp;History"/>
+          {/* <h1 className="pageTitle">Orders History</h1> */}
+          {this.props.old_Orders.map((product, index) =>
+            this.renderProduct(product, index)
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div class="container2">
+            <h1>
+              <div class="animation">
+                <span class="first">{a}</span> 
+                <span class="oh">
+                  <span class="second">&nbsp;{b}</span>
+                </span>
+              </div>
+            </h1>
+          </div>
+        </div>
+      );
+    }
   }
 }
 const mapDispatchToProps = {
@@ -86,7 +108,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   old_Orders: state.ordersReducer.old_Orders,
-  id: state.userReducer.id
+  id: state.userReducer.id,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderComponent);

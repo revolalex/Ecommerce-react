@@ -8,6 +8,7 @@ import {
 import { connect } from "react-redux";
 import "../../Styles/BasketComponent.css";
 import Buttton from "../Small/ButtonComponent";
+import TitleComponent from "../Small/TitleComponent";
 import axios from "axios";
 import {
   Card,
@@ -100,7 +101,7 @@ class BasketComponent extends Component {
     if (this.props.productBasket.length !== 0) {
       return (
         <div>
-          <h1 className="pageTitle">Cart Detail</h1>
+          <TitleComponent text1="Cart" text2="&nbsp;Detail"/>
 
           {this.props.productBasket.map((product, index) =>
             this.renderProduct(product, index)
@@ -114,8 +115,15 @@ class BasketComponent extends Component {
       );
     } else {
       return (
-        <div>
-          <h1 id="hello">HELLO</h1>
+        <div class="container2">
+          <h1>
+            <div class="animation">
+              <span class="first">Cart </span>
+              <span class="oh">
+                <span class="second">&nbsp;is empty</span>
+              </span>
+            </div>
+          </h1>
         </div>
       );
     }

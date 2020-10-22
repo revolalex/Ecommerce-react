@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { setProduct } from "../../store/actions/product";
 import { addProductToCart } from "../../store/actions/cart";
 import ButtonComponent from "../Small/ButtonComponent";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Badge } from "react-bootstrap";
 
 class ProductCardComponent2 extends Component {
   componentDidMount() {
@@ -38,6 +38,7 @@ class ProductCardComponent2 extends Component {
     console.log(product)
     return (
       <div>
+        <h1 className="pageTitle">{product.name}: details </h1>
         <div className="login-box2 smallScreen">
           <h2>{product.name}</h2>
           <img className="cardProductImg2" src={product.url} alt="product" />
@@ -80,7 +81,11 @@ class ProductCardComponent2 extends Component {
                     <h4>Category:</h4>
                     <p>{product.category}</p>
                     <h4 >Price:</h4>
-                    <p>{product.prices}</p>
+                    
+                    {/* test promotion price */}  
+                   <h5><Badge id="promotion" variant="danger"> {product.prices + 14} $</Badge>{' '}</h5>
+                    
+                    <p>{product.prices} $</p>
                     <h4 >Seller:</h4>
                     <p>{product.lastName} {product.firstName}</p>
                   </Card.Body>
