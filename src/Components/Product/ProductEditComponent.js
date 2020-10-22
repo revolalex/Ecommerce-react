@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "./ProductEditComponent.css";
 import axios from "axios";
 import ButtonComponent from '../Others/button'
+import {setIdProduct} from '../../store/actions/product'
 class ProductEditComponent extends Component {
     constructor(props) {
       super(props);
@@ -20,7 +21,6 @@ class ProductEditComponent extends Component {
       await axios
         .get(`http://localhost:8080/productid/${this.props.id}`)
         .then((result) => {
-          console.log("DATA", result.data);
           this.setState({
             productOfThisUser: result.data,
           });
@@ -62,6 +62,10 @@ class ProductEditComponent extends Component {
         console.log(error)
       }
     }
+    setid(id){
+      console.log(id);
+      this.props.setIdProduct(id)
+    }
   
     renderProduct(product, index) {
       return (
@@ -92,7 +96,7 @@ class ProductEditComponent extends Component {
                   Price: {product.prices} $
                 </Card.Text>
                 <Form center="true">
-                  <ButtonComponent text="Edit" />
+                  <ButtonComponent text="Edit" link="/editProduct" click={this.setid.bind(this,product.id)}/>
                   <ButtonComponent
                     click={this.deleteClick.bind(this, product.id)}
                     class="myARed"
@@ -154,4 +158,8 @@ class ProductEditComponent extends Component {
     id: state.userReducer.id,
     token: state.userReducer.token,
   });
-  export default connect(mapStateToProps)(ProductEditComponent);
+  const mapDispatchToProps = {
+    setIdProduct
+  }  
+
+  export default connect(mapStateToProps,mapDispatchToProps)(ProductEditComponent);

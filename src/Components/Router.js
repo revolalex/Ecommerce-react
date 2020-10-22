@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { deleteToken, authFalse } from "../store/actions/user";
 import EditProfileComponent from './Profil/EditProfileComponent'
 import BasketComponent from "./Basket/BasketComponent";
-import EditProductComponent from './Product/ProductEditComponent'
+import EditProductComponent from './Product/EditProduct'
 class MyRouter extends Component {
     render(){
         return(

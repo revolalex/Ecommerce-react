@@ -79,6 +79,9 @@ body {
 }
 
 .login-box form a {
+  text-align: center;
+  right: 12%;
+  width: 40%;
   position: relative;
   display: inline-block;
   padding: 10px 20px;
