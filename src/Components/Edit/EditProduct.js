@@ -7,6 +7,7 @@ import ButtonComponent from "../Small/ButtonComponent";
 import { withRouter } from "react-router-dom";
 import "../../Styles/EditProduct.css";
 
+
 class CreateProductPage extends Component {
   constructor(props) {
     super(props);
@@ -35,28 +36,27 @@ class CreateProductPage extends Component {
   componentDidMount() {
     try {
       axios
-      .get(
-        `http://localhost:8080/products/${localStorage.getItem(
-          "productIdToEdit"
-        )}`
-      )
-      .then((result) => {
-        this.setState({
-          category: result.data[0].category,
-          name: result.data[0].name,
-          description: result.data[0].description,
-          url: result.data[0].url,
-          prices: result.data[0].prices,
-          id_user_affiliate: result.data[0].id_user_affiliate,
+        .get(
+          `http://localhost:8080/products/${localStorage.getItem(
+            "productIdToEdit"
+          )}`
+        )
+        .then((result) => {
+          this.setState({
+            category: result.data[0].category,
+            name: result.data[0].name,
+            description: result.data[0].description,
+            url: result.data[0].url,
+            prices: result.data[0].prices,
+            id_user_affiliate: result.data[0].id_user_affiliate,
+          });
+        })
+        .catch(() => {
+          console.log("Oops, request failed!");
         });
-      })
-      .catch(() => {
-        console.log("Oops, request failed!");
-      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-   
   }
 
   handleCategory(event) {
@@ -137,9 +137,10 @@ class CreateProductPage extends Component {
                 prices: "",
                 id_user_affiliate: "",
               });
-              let that = this
-              setTimeout(function(){ that.props.history.push("/editProfil");}, 2000);
-
+              let that = this;
+              setTimeout(function() {
+                that.props.history.push("/editProfil");
+              }, 2000);
             })
             .catch(() => {
               console.log("Oops, request failed!");
@@ -205,12 +206,12 @@ class CreateProductPage extends Component {
         <div className="login-box-Edit">
           <h2>Edit Product</h2>
           <img className="uploadImgEditProduct" src={this.state.url} alt="" />
-          <br/><br/>
+          <br />
+          <br />
           <form>
             {formInput.map((elem) => {
               return <UserBox props={elem} key={elem.id} />;
             })}
-
             <ButtonComponent click={this.buttonIsClick} text="Edit" />
 
             {submitProduct}

@@ -261,10 +261,6 @@ const appRouter = async function(app, connection) {
 
 
   await app.post("/panier/", (req, res) => {
-    let update = `DELETE FROM basket WHERE id_user_affiliate = ${req.body[0].id_user_affiliate}`;
-    connection.query(update, (err) => {
-      if (err) console.log(err);
-    });
     let sql =
       "INSERT INTO basket (category,name,description,prices,url,quantity,id_product,id_user_affiliate) VALUES (?)";
     for (i = 0; i < req.body.length; i++) {

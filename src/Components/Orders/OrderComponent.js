@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Col, Row, Button } from "react-bootstrap";
+import { Card, Col, Row} from "react-bootstrap";
 import axios from "axios";
 import "./OrderComponent.css";
 import "../../Styles/ListOfProduct.css";
@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 class OrderComponent extends Component {
   componentDidMount() {
     axios
-      .get(`http://localhost:8080/basketHistory/${20}`)
+      .get(`http://localhost:8080/basketHistory/${this.props.id}`)
       .then((result) => {
         console.log("ICI", result.data);
         this.props.setHistoryOrders(result.data);
@@ -38,22 +38,29 @@ class OrderComponent extends Component {
           </Col>
           <Col sm={5}>
             <Card.Body>
-              <Card.Title className="productNameTitle">
-                Commande n°:{product.id}
+              <Card.Title >
+                Order number: {product.id}
               </Card.Title>
               <Card.Text>
-                Category:
-                <br />
+              <p className="productNameTitle">Category:</p>
+                {product.category}
+              </Card.Text>
+              <Card.Text>
+                <p className="productNameTitle">Name:</p>
                 {product.name}
               </Card.Text>
             </Card.Body>
           </Col>
           <Col sm={5}>
             <Card.Body>
-              <Card.Text className="productNameTitle">
-                Price: {product.prices} $
+              <Card.Text>
+              <p className="productNameTitle">Price:</p>
+                {product.prices} $
               </Card.Text>
-              <Button onClick={this.ButtonIsClick.bind(this)} />
+              <Card.Text>
+              <p className="productNameTitle">Description:</p>
+                {product.description} 
+              </Card.Text>
             </Card.Body>
           </Col>
         </Row>
@@ -78,6 +85,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   old_Orders: state.ordersReducer.old_Orders,
+  id: state.userReducer.id
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderComponent);

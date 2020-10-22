@@ -4,6 +4,8 @@ import "../../Styles/NavBar.css";
 import { withRouter } from "react-router-dom";
 import MyRouter from "../Router";
 import { deleteToken, authFalse } from "../../store/actions/user";
+import { resetHistoryOrders } from "../../store/actions/orders";
+
 import { connect } from "react-redux";
 import WaveAnimationComponent from "../Animation/WaveAnimation";
 import CartComponent from "./CartComponent";
@@ -14,6 +16,7 @@ class Navbare extends Component {
     this.props.authFalse();
     this.props.deleteToken();
     this.props.history.push("/");
+    this.props.resetHistoryOrders();
   }
 
   render() {
@@ -29,12 +32,11 @@ class Navbare extends Component {
               <Nav.Link href="/addProduct">Add Product</Nav.Link>
               <Nav.Link href="/list-of-products">Products List</Nav.Link>
               <Nav.Link href="/Users-List">Users List</Nav.Link>
+              <Form inline></Form>
               <Nav.Link href="/orders">History</Nav.Link>
-              <Form inline>
-                <CartComponent />
-              </Form>
             </Nav>
             <Form inline>
+              <CartComponent />
               <ProfilPictureComoponent />
               <Button variant="danger" onClick={this.deleteToken.bind(this)}>
                 Sign Out
@@ -75,6 +77,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   deleteToken,
   authFalse,
+  resetHistoryOrders,
 };
 export default connect(
   mapStateToProps,
