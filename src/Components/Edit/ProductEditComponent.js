@@ -6,6 +6,7 @@ import axios from "axios";
 import ButtonComponent from "../Small/ButtonComponent";
 
 
+
 import { withRouter } from "react-router-dom";
 
 class ProductEditComponent extends Component {
@@ -130,6 +131,7 @@ class ProductEditComponent extends Component {
   render() {
     return (
       <div>
+        <h1 className="pageTitle">Article to sell</h1>
         {this.state.productOfThisUser.map((product, index) =>
           this.renderProduct(product, index)
         )}

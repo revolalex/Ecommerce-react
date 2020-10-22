@@ -43,6 +43,7 @@ class ProductCardComponent extends Component {
   render() {
     return (
       <div id="myRow">
+        <h1 className="pageTitle">User List</h1>
         <Container className="testContainer">
           <Row className="justify-content-md-center">
             {this.props.users.map((user) => this.renderProduct(user))}

@@ -287,6 +287,7 @@ class EditProfilComponent extends Component {
     return (
       
       <div>
+        <h1 className="pageTitle">Profil Detail</h1>
         <div className="login-box-Edit">
           <h2>Edit Your Profil</h2>
           <img

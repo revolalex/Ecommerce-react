@@ -35,7 +35,7 @@ const cartReducer = (state = initialState, action) => {
       };
     case "RESET_CART":
       return {
-        ...state,
+        productBasket: [],
         total: 0,
       };
     case "INCREASE_COUNTER":

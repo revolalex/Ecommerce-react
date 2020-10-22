@@ -37,9 +37,8 @@ class CreateProductPage extends Component {
     try {
       axios
         .get(
-          `http://localhost:8080/products/${localStorage.getItem(
-            "productIdToEdit"
-          )}`
+          `http://localhost:8080/products/${
+            localStorage.getItem("productIdToEdit")}`
         )
         .then((result) => {
           this.setState({
@@ -226,6 +225,7 @@ const mapStateToProps = (state) => ({
   token: state.userReducer.token,
   productIdToEdit: state.productReducer.productIdToEdit,
   id: state.userReducer.id,
+  idProduct: state.productReducer.id
 });
 
 export default connect(mapStateToProps)(withRouter(CreateProductPage));

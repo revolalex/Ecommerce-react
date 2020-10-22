@@ -3,6 +3,7 @@ import {
   deleteProductFromCart,
   increaseCounter,
   decreaseCounter,
+  resetCart,
 } from "../../store/actions/cart";
 import { connect } from "react-redux";
 import "../../Styles/BasketComponent.css";
@@ -35,9 +36,11 @@ class BasketComponent extends Component {
     console.log(this.props.productBasket);
     e.preventDefault();
     axios.post("http://localhost:8080/panier", this.props.productBasket);
+    let that = this;
     setTimeout(function() {
-      alert("Basket Validate");
+      that.props.resetCart();
     }, 1000);
+    alert("Basket Validate");
   }
   renderProduct(product, index) {
     return (
@@ -97,6 +100,8 @@ class BasketComponent extends Component {
     if (this.props.productBasket.length !== 0) {
       return (
         <div>
+          <h1 className="pageTitle">Cart Detail</h1>
+
           {this.props.productBasket.map((product, index) =>
             this.renderProduct(product, index)
           )}
@@ -108,7 +113,11 @@ class BasketComponent extends Component {
         </div>
       );
     } else {
-      return <div></div>;
+      return (
+        <div>
+          <h1 id="hello">HELLO</h1>
+        </div>
+      );
     }
   }
 }
@@ -117,6 +126,7 @@ const mapDispatchToProps = {
   deleteProductFromCart,
   increaseCounter,
   decreaseCounter,
+  resetCart,
 };
 
 const mapStateToProps = (state) => ({

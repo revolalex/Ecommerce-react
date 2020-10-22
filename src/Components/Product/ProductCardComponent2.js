@@ -35,6 +35,7 @@ class ProductCardComponent2 extends Component {
   }
 
   renderProduct(product) {
+    console.log(product)
     return (
       <div>
         <div className="login-box2 smallScreen">
@@ -53,7 +54,7 @@ class ProductCardComponent2 extends Component {
               <h4>Price</h4>
               <p>{product.prices}$</p>
               <h4>Seller</h4>
-              <p>{product.username}</p>
+              <p>{product.lastName} {product.firstName}</p>
             </div>
             <ButtonComponent
               text={"Buy" + product.prices + "$"}
@@ -81,10 +82,10 @@ class ProductCardComponent2 extends Component {
                     <h4 >Price:</h4>
                     <p>{product.prices}</p>
                     <h4 >Seller:</h4>
-                    <p>{product.username}</p>
+                    <p>{product.lastName} {product.firstName}</p>
                   </Card.Body>
                   <ButtonComponent
-                    text={"Buy" + product.prices + "$"}
+                    text={"Buy " + product.prices + " $"}
                     click={this.addButtonIsClick.bind(this)}
                     className="downButton"
                   />

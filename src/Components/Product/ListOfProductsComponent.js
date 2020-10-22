@@ -23,6 +23,7 @@ class ProductListPage extends Component {
   render() {
     return (
       <div id="myRow">
+        <h1 className="pageTitle">Product To Sell</h1>
         <Container className="testContainer">
           <Row className="justify-content-md-center">
             {this.props.products.map((product) => this.renderProduct(product))}

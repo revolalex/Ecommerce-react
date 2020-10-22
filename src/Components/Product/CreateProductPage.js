@@ -165,7 +165,8 @@ class CreateProductPage extends Component {
       submitProduct = <p id="submitOk"></p>;
     }
     return (
-      <div>
+      <div id="addArrticleDiv">
+        <h1 className="pageTitle">sell a product</h1>
         <div className="login-box">
           <h2>Add an article</h2>
           <form>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 .basketCard{
     background: linear-gradient( #141e30, #243b55,);
     margin: 10% 10% 10% 10%;
@@ -27,5 +28,12 @@ Form Button{
     margin-right: 20px;
 }
 
-
-/* ARNAUD */
+.pageTitle{
+    
+    margin-top: 2%;
+    color: #0899ee;
+    text-align: center;
+    font-family: 'Bangers', cursive;
+    text-shadow: 2px 2px 2px rgb(30, 84, 109);
+    letter-spacing: .4rem;
+}

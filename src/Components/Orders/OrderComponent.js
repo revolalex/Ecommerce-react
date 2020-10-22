@@ -71,6 +71,7 @@ class OrderComponent extends Component {
   render() {
     return (
       <div>
+        <h1 className="pageTitle">Orders History</h1>
         {this.props.old_Orders.map((product, index) =>
           this.renderProduct(product, index)
         )}

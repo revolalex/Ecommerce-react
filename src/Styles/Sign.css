@@ -123,3 +123,7 @@ body {
   font-size: 0.8em;
   padding-left: 60px;
 }
+
+#addArrticleDiv{
+  padding-bottom: 10vh;
+}
