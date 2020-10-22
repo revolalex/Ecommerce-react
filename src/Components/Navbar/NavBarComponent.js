@@ -29,6 +29,7 @@ class Navbare extends Component {
               <Nav.Link href="/addProduct">Add Product</Nav.Link>
               <Nav.Link href="/list-of-products">Products List</Nav.Link>
               <Nav.Link href="/Users-List">Users List</Nav.Link>
+              <Nav.Link href="/orders">History</Nav.Link>
               <Form inline>
                 <CartComponent />
               </Form>

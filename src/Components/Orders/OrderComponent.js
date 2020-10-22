@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import axios from "axios";
 import "./OrderComponent.css";
-import "../Styles/ListOfProduct.css";
-import { setHistoryOrders, resetHistoryOrders } from "../store/actions/orders";
+import "../../Styles/ListOfProduct.css";
+import { setHistoryOrders, resetHistoryOrders } from "../../store/actions/orders";
 import { connect } from "react-redux";
 
 class OrderComponent extends Component {

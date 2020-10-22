@@ -7,7 +7,6 @@ import {
 import { connect } from "react-redux";
 import "../../Styles/BasketComponent.css";
 import Buttton from "../Small/ButtonComponent";
-import OrderComponent from '../OrderComponent'
 import axios from "axios";
 import {
   Card,
@@ -106,7 +105,6 @@ class BasketComponent extends Component {
             link="/paiement"
             click={this.storeBasket.bind(this)}
           />
-          <OrderComponent/>
         </div>
       );
     } else {
