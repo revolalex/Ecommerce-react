@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import "./NavBar.css";
-import {deleteToken,authFalse} from '../store/actions/user'
+import {deleteToken,authFalse} from '../../store/actions/user'
 import { connect } from "react-redux";
 import {withRouter} from "react-router-dom"
-import ProfilPictureComoponent from "./ProfilePictureComponent"
-import CartComponent from './CartComponent'
+import ProfilPictureComoponent from "../Profil/ProfilePictureComponent"
+import CartComponent from '../Cart/CartComponent'
 class Navbare extends Component {
   deleteToken() {
     this.props.deleteToken()

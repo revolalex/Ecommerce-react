@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { deleteProductFromCart, increaseCounter, decreaseCounter } from "../store/actions/cart";
+import { deleteProductFromCart, increaseCounter, decreaseCounter } from "../../store/actions/cart";
 import { connect } from "react-redux";
 import "./BasketComponent.css";
 import Axios from "axios"
-import Buttton from './button'
+import Buttton from '../Others/button'
 import {
   Card,
   Col,

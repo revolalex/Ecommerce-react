@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, } from "react-router-dom";
-import CreateProductPage from "./CreateProductPage";
-import SignupComponent from "./SignupComponent";
-import SignInComponent from "./SignInComponent";
-import UserListComponent from "./UserListComponent";
-import ProductCardComponet2 from "./ProductCardComponent2";
-import ListOfProducts from "./ListOfProductsComponent";
+import CreateProductPage from "./Product/CreateProductPage";
+import SignupComponent from "./Sign/SignupComponent";
+import SignInComponent from "./Sign/SignInComponent";
+import UserListComponent from "./User/UserListComponent";
+import ProductCardComponet2 from "./Product/ProductCardComponent2";
+import ListOfProducts from "./Product/ListOfProductsComponent";
 import { connect } from 'react-redux';
 import { deleteToken, authFalse } from "../store/actions/user";
-import EditProfileComponent from './EditProfileComponent'
-import BasketComponent from "./BasketComponent";
-import EditProductComponent from './ProductEditComponent'
+import EditProfileComponent from './Profil/EditProfileComponent'
+import BasketComponent from "./Basket/BasketComponent";
+import EditProductComponent from './Product/ProductEditComponent'
 class MyRouter extends Component {
     render(){
         return(

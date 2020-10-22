@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./ProductEditComponent.css";
 import axios from "axios";
-import ButtonComponent from './button'
+import ButtonComponent from '../Others/button'
 class ProductEditComponent extends Component {
     constructor(props) {
       super(props);

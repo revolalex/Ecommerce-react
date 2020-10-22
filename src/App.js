@@ -3,7 +3,7 @@ import "./App.css";
 import { connect } from "react-redux";
 import { setProduct } from "./store/actions/product";
 import { setToken, deleteToken } from "./store/actions/user";
-import Navbar from "./Components/NavBarComponent";
+import Navbar from "./Components/Navbar/NavBarComponent";
 import Router from "./Components/Router"
 class App extends Component {
   render() {

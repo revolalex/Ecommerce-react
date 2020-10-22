@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./productCard2.css";
 import { connect } from "react-redux";
-import { setProduct } from "../store/actions/product";
-import { addProductToCart } from "../store/actions/cart";
-import ButtonComponent from "./button";
+import { setProduct } from "../../store/actions/product";
+import { addProductToCart } from "../../store/actions/cart";
+import ButtonComponent from "../Others/button";
 import { Card, Row, Col } from "react-bootstrap";
 
 class ProductCardComponent2 extends Component {

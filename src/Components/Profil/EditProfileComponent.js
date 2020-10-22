@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ButtonComponent from "./button";
-import UserBox2 from "./UserBox2";
+import ButtonComponent from "../Others/button";
+import UserBox2 from "../User/UserBox2";
 import "./EditProfilComponent.css";
-import ProductEditComponent from "./ProductEditComponent";
+import ProductEditComponent from "../Product/ProductEditComponent";
 import axios from "axios";
-import {setUser} from"../store/actions/user"
+import {setUser} from"../../store/actions/user"
 
 class EditProfilComponent extends Component {
   constructor(props) {

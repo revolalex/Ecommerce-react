@@ -3,7 +3,7 @@ import { Card, Col, Row, Container } from "react-bootstrap";
 import "./UserList.css";
 import axios from "axios";
 import { connect } from "react-redux";
-import {setUsers} from '../store/actions/user'
+import {setUsers} from '../../store/actions/user'
 class UserListComponent extends Component {
   componentDidMount() {
     axios
@@ -11,8 +11,8 @@ class UserListComponent extends Component {
       .then((result) => {
         this.props.setUsers(result.data)
       })
-      .catch(() => {
-        console.log("Oops, request failed!");
+      .catch((err) => {
+        console.log(err);
       });
   }
   render() {
