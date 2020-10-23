@@ -2,7 +2,14 @@ body {
   height: 100%;
 }
 .box {
+  overflow: scroll;
+  min-height: 500px;
+  max-height: 500px;
   opacity: 0.75;
+  
+}
+#footerCard{
+  position: absolute;
 }
 .box:hover {
   opacity: 0.95;
@@ -15,6 +22,7 @@ body {
 }
 .testCol {
   padding-bottom: 10vh;
+
 }
 .testImg {
   height: 200px;

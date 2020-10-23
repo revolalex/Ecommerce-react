@@ -22,7 +22,7 @@ class ProductCardComponent extends Component {
     return (
       <Col className="testCol" md="auto" key={user.id}>
         <Card
-          className="box"
+          className="box2"
           border="info"
           bg="dark"
           text="light"

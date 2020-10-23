@@ -246,17 +246,6 @@ const appRouter = async function(app, connection) {
     }
   });
 
-  // Get Product by category
-  await app.get("/productCategory/", (req, res) => {
-    let categorie = req.body.categorie;
-    let getCategory = `SELECT * FROM products where category = '${categorie}';`;
-    try {
-      connection.query(getCategory, (err, results) => {
-        if (err) throw err;
-        res.send(results);
-      });
-    } catch (error) {}
-  });
 
   /**************************** API BASKET ***********************************/
   /*****************************************************************************/

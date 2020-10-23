@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import "../../Styles/TitleComponent.css"
+import "../../Styles/TitleComponent.css";
 
 class TitleComponent extends Component {
   render() {
     return (
-      <div class="titleContainer">
+      <div className="titleContainer">
         <h1>
-          <div class="animation">
-    <span class="first">{this.props.text1}</span>
-            <span class="oh">
-              <span class="second">{this.props.text2}</span>
+          <div className="animation">
+            <span className="first">{this.props.text1}</span>
+            <span className="oh">
+              <span className="second">{this.props.text2}</span>
             </span>
           </div>
         </h1>
