@@ -107,6 +107,34 @@ class CreateProductPage extends Component {
     }
     
   }
+  renderSwitchButton(){
+    if(this.state.promotionIsActive === 1){
+      return(
+        <div>
+          <Form.Check
+            type="switch"
+            id="custom-switch"
+            onClick={this.handlePromotionIsActive}
+            label={this.state.promotionIsActive === 1 ? "Sale active" : "Sale not active"}
+            style={{color: "white"}}
+            defaultChecked
+          />
+        </div>
+      )
+    } else {
+      return(
+        <div>
+          <Form.Check
+            type="switch"
+            id="custom-switch"
+            onClick={this.handlePromotionIsActive}
+            label={this.state.promotionIsActive === 1 ? "Sale active" : "Sale not active"}
+            style={{color: "white"}}
+          />
+        </div>
+      )
+    }
+  }
   buttonIsClick(e) {
     e.preventDefault();
     let productObject = {
@@ -242,17 +270,8 @@ class CreateProductPage extends Component {
             {formInput.map((elem) => {
               return <UserBox props={elem} key={elem.id} />;
             })}
-            <Form>
-              <Form.Check
-                type="switch"
-                id="custom-switch"
-                onClick={this.handlePromotionIsActive}
-                label={this.state.promotionIsActive === 1 ? "Sale active" : "Sale not active"}
-                style={{color: "white"}}
-              />
-            </Form>
+            {this.renderSwitchButton()}
             <ButtonComponent click={this.buttonIsClick} text="Edit" />
-
             {submitProduct}
           </form>
         </div>

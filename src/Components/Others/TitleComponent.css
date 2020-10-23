@@ -8,8 +8,7 @@
     width: 100vw;
   }
   .titleContainer {
-    padding-top: 20px;
-    text-align: center;
+    margin: 0 40%;
     display: flex;
     justify-content: center;
     align-content: center;

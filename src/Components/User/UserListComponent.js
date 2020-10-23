@@ -4,6 +4,7 @@ import "./UserList.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import {setUsers} from '../../store/actions/user'
+import TitleComponent from '../Others/TitleComponent'
 class UserListComponent extends Component {
   componentDidMount() {
     axios
@@ -19,6 +20,7 @@ class UserListComponent extends Component {
     return (
       <div id="myRow">
         <Container className="testContainer">
+        <TitleComponent text1="Users" text2="&nbsp;list"/>
           <Row className="justify-content-md-center">
             {this.props.users.map((user) => this.renderProduct(user))}
           </Row>

@@ -35,11 +35,11 @@ class ProductCardComponent2 extends Component {
   }
   renderPromo(product){
     if(product.promotionIsActive){
-    return(
-    <div>
-      <h5><Badge id="promotion" variant="danger"> {product.prices} $</Badge></h5>
-      <p>{product.promotion} $</p>
-    </div>
+      return(
+        <div>
+          <h5><Badge id="promotion" variant="danger"> {product.prices} $</Badge></h5>
+          <p>{product.promotion} $</p>
+        </div>
     )} else {
       return(
         <div>
