@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { setProduct } from "../../store/actions/product";
 import { addProductToCart } from "../../store/actions/cart";
 import ButtonComponent from "../Others/button";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col,Badge } from "react-bootstrap";
 
 class ProductCardComponent2 extends Component {
   componentDidMount() {
@@ -33,7 +33,21 @@ class ProductCardComponent2 extends Component {
       </div>
     );
   }
-
+  renderPromo(product){
+    if(product.promotionIsActive){
+    return(
+    <div>
+      <h5><Badge id="promotion" variant="danger"> {product.prices} $</Badge></h5>
+      <p>{product.promotion} $</p>
+    </div>
+    )} else {
+      return(
+        <div>
+          <p>{product.prices} $</p>
+        </div>
+      )
+    }
+  }
   renderProduct(product) {
     return (
       <div>
@@ -51,7 +65,7 @@ class ProductCardComponent2 extends Component {
             </div>
             <div className="user-box2">
               <h4>Price</h4>
-              <p>{product.prices}$</p>
+              {this.renderPromo(product)}
               <h4>Seller</h4>
               <p>{product.lastName} {product.firstName}</p>
             </div>
@@ -79,7 +93,7 @@ class ProductCardComponent2 extends Component {
                     <h4>Category:</h4>
                     <p>{product.category}</p>
                     <h4 >Price:</h4>
-                    <p>{product.prices}</p>
+                    {this.renderPromo(product)}
                     <h4 >Seller:</h4>
                     <p>{product.lastName} {product.firstName}</p>
                   </Card.Body>

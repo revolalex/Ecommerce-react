@@ -6,6 +6,7 @@ import UserBox from "../User/UserBox";
 import ButtonComponent from "../Others/button";
 import { withRouter } from "react-router-dom";
 import "./EditProduct.css";
+import { Form } from "react-bootstrap";
 
 
 class CreateProductPage extends Component {
@@ -17,6 +18,8 @@ class CreateProductPage extends Component {
       description: "",
       url: "",
       prices: "",
+      promotion: "",
+      promotionIsActive: 0,
       idUser: this.props.id,
       submitOk: false,
       headerWithToken: {
@@ -31,6 +34,9 @@ class CreateProductPage extends Component {
     this.handleName = this.handleName.bind(this);
     this.handlePrices = this.handlePrices.bind(this);
     this.buttonIsClick = this.buttonIsClick.bind(this);
+    this.handlePromotion = this.handlePromotion.bind(this) 
+    this.handlePromotionIsActive = this.handlePromotionIsActive.bind(this) 
+
   }
 
   componentDidMount() {
@@ -47,6 +53,8 @@ class CreateProductPage extends Component {
             url: result.data[0].url,
             prices: result.data[0].prices,
             id_user_affiliate: result.data[0].id_user_affiliate,
+            promotion: result.data[0].promotion,
+            promotionIsActive: result.data[0].promotionIsActive
           });
         })
         .catch((err) => {
@@ -82,6 +90,23 @@ class CreateProductPage extends Component {
       url: event.target.value,
     });
   }
+  handlePromotion(event){
+    this.setState({
+      promotion: event.target.value
+    })
+  }
+  handlePromotionIsActive(){
+    if(this.state.promotionIsActive === 1){
+      this.setState({
+      promotionIsActive : 0
+      })
+    } else {
+      this.setState({
+        promotionIsActive : 1
+      })
+    }
+    
+  }
   buttonIsClick(e) {
     e.preventDefault();
     let productObject = {
@@ -92,6 +117,8 @@ class CreateProductPage extends Component {
       prices: this.state.prices,
       idUser: this.props.id,
       id_user_affiliate: this.props.id,
+      promotion: this.state.promotion,
+      promotionIsActive: this.state.promotionIsActive
     };
     switch (true) {
       case productObject.category.length < 2:
@@ -129,6 +156,7 @@ class CreateProductPage extends Component {
                 url: "",
                 prices: "",
                 id_user_affiliate: "",
+                promotion: ""
               });
               let that = this;
               setTimeout(function() {
@@ -186,6 +214,14 @@ class CreateProductPage extends Component {
         label: "Picture",
         id: 5,
       },
+      {
+        type: "number",
+        name: 'promotion',
+        value: this.state.promotion,
+        onChange: this.handlePromotion,
+        label: "Promotion",
+        id: 6
+      }
     ];
     let submitProduct;
     const submitTestDone = this.state.submitOk;
@@ -206,6 +242,15 @@ class CreateProductPage extends Component {
             {formInput.map((elem) => {
               return <UserBox props={elem} key={elem.id} />;
             })}
+            <Form>
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                onClick={this.handlePromotionIsActive}
+                label={this.state.promotionIsActive === 1 ? "Sale active" : "Sale not active"}
+                style={{color: "white"}}
+              />
+            </Form>
             <ButtonComponent click={this.buttonIsClick} text="Edit" />
 
             {submitProduct}

@@ -13,7 +13,7 @@ import {
   Form,
   ListGroup,
 } from "react-bootstrap";
-
+import TitleComponent from '../Others/TitleComponent'
 class BasketComponent extends Component {
   deleteClick(index) {
     this.props.deleteProductFromCart(this.props.productBasket[index]);
@@ -75,20 +75,35 @@ class BasketComponent extends Component {
   }
 
   render() {
-    if(this.props.productBasket.length !== 0){
-    return (
-      <div>
-        {this.props.productBasket.map((product, index) =>
-          this.renderProduct(product, index)
-        )}
-        <Buttton text="Valider le panier" link='/paiement' click={this.storeBasket.bind(this)}/>
-      </div>
-    );} else {
-      return(
-        <div></div>
-      )
-    }
+    if (this.props.productBasket.length !== 0) {
+      return (
+        <div>
+          <TitleComponent text1="Cart" text2="&nbsp;Detail"/>
 
+          {this.props.productBasket.map((product, index) =>
+            this.renderProduct(product, index)
+          )}
+          <Buttton
+            text="Valider le panier"
+            link="/paiement"
+            click={this.storeBasket.bind(this)}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div class="container2">
+          <h1>
+            <div class="animation">
+              <span class="first">Cart </span>
+              <span class="oh">
+                <span class="second">&nbsp;is empty</span>
+              </span>
+            </div>
+          </h1>
+        </div>
+      );
+    }
   }
 }
 

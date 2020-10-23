@@ -164,7 +164,7 @@ const appRouter = async function(app, connection) {
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = `SELECT users.lastName,users.firstName,products.id, products.name, products.category, products.description, products.prices, products.url 
+    let productInfo = `SELECT users.lastName,users.firstName,products.id, products.name, products.category, products.description, products.prices, products.url, products.promotion, products.promotionIsActive
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {
@@ -186,7 +186,7 @@ const appRouter = async function(app, connection) {
   // POST /productEdit/:id => Update this specific product from the database
   await app.post('/productEdit/:id',auth,(req,res) => { 
     if(req.body.idUser === req.body.id_user_affiliate){
-        let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.prices}',url = '${req.body.url}' WHERE id = ${req.params.id}`
+        let sql = `UPDATE products  SET category = '${req.body.category}', name = '${req.body.name}', description = '${req.body.description}', prices = '${req.body.prices}',url = '${req.body.url}',promotion = '${req.body.promotion}', promotionIsActive = '${req.body.promotionIsActive}' WHERE id = ${req.params.id}`
         connection.query(sql, (err) => {
           if (err) {
             console.log(err)
