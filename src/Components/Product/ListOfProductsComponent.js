@@ -22,25 +22,23 @@ class ProductListPage extends Component {
   }
   productClick(id) {
     this.props.setIdProduct(id);
-    console.log(this.props.products.id);
   }
   categorySet(e) {
-    console.log(e);
-    localStorage.setItem("categoryToShow", e);
     this.props.categoryToShow(e);
   }
 
   render() {
+    //store in navCategory all te different category of products
     let product = this.props.products;
-    let test = [];
+    let navCategory = [];
     product.forEach((element) => {
       if (element.category) {
-        if (!test.includes(element.category)) {
-          test.push(element.category);
+        // if test not contains this category add it
+        if (!navCategory.includes(element.category)) {
+          navCategory.push(element.category);
         }
       }
     });
-    console.log(test);
     return (
       <div id="myRow">
         <NavDropdown
@@ -48,7 +46,9 @@ class ProductListPage extends Component {
           id="nav-dropdown"
           onSelect={this.categorySet.bind(this)}
         >
-          {test.map((product) => this.renderCategory(product))}
+          <NavDropdown.Item eventKey="All">All</NavDropdown.Item>
+          {navCategory.map((product) => this.renderCategory(product))}
+          
         </NavDropdown>
 
         <TitleComponent text1="Products" text2="&nbsp;list" />
@@ -62,6 +62,7 @@ class ProductListPage extends Component {
     );
   }
 
+  //use to show all the different category of products
   renderCategory(category) {
     return (
       <div key={category}>
@@ -71,7 +72,7 @@ class ProductListPage extends Component {
   }
 
   renderProduct(product) {
-    if (product.category === `${this.props.category}`) {
+    if (product.category === `${this.props.category}`|| this.props.category === "All") {
       return (
         <Col className="testCol" md="auto" key={product.id}>
           <Card

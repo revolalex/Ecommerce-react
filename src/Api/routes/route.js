@@ -159,11 +159,11 @@ const appRouter = async function(app, connection) {
     });
   });
 
-  //GET /products/:id ⇒ Return all the datas of this specific Product
+   //GET /products/:id ⇒ Return all the datas of this specific Product
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
-    let productInfo = `SELECT users.lastName,users.firstName,products.id, products.name, products.category, products.description, products.prices, products.url 
+    let productInfo = `SELECT users.lastName,users.firstName,products.id, products.name, products.category, products.description, products.prices, products.url, products.promotion, products.promotionIsActive
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {
@@ -203,7 +203,9 @@ const appRouter = async function(app, connection) {
         .charAt(0)
         .toUpperCase() + req.body.name.slice(1)}', description = '${
         req.body.description
-      }', prices = '${req.body.prices}',url = '${req.body.url}' WHERE id = ${
+      }', prices = '${req.body.prices}',url = '${req.body.url}',promotion = '${
+        req.body.promotion
+      }', promotionIsActive = '${req.body.promotionIsActive}' WHERE id = ${
         req.params.id
       }`;
       connection.query(sql, (err) => {
@@ -246,7 +248,6 @@ const appRouter = async function(app, connection) {
     }
   });
 
-
   /**************************** API BASKET ***********************************/
   /*****************************************************************************/
 
@@ -273,7 +274,7 @@ const appRouter = async function(app, connection) {
       month: "long",
       day: "numeric",
     };
-    console.log(event.toLocaleDateString('fr-FR', options));
+    console.log(event.toLocaleDateString("fr-FR", options));
 
     let sql =
       "INSERT INTO basket (category,name,description,prices,url,quantity,id_product,id_user_affiliate) VALUES (?)";

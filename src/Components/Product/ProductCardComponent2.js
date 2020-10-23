@@ -12,6 +12,7 @@ class ProductCardComponent2 extends Component {
     axios
       .get(`http://localhost:8080/products/${this.props.id}`)
       .then((result) => {
+        console.log(result);
         result.data[0].id_user_affiliate = this.props.idUser
         this.props.setProduct(result.data);
       })
@@ -33,12 +34,24 @@ class ProductCardComponent2 extends Component {
       </div>
     );
   }
-
+  renderPromo(product){
+    if(product.promotionIsActive){
+    return(
+    <div>
+      <h5><Badge id="promotion" variant="danger"> {product.prices} $</Badge></h5>
+      <p>{product.promotion} $</p>
+    </div>
+    )} else {
+      return(
+        <div>
+          <p>{product.prices} $</p>
+        </div>
+      )
+    }
+  }
   renderProduct(product) {
-    console.log(product)
     return (
       <div>
-        <h1 className="pageTitle">{product.name}: details </h1>
         <div className="login-box2 smallScreen">
           <h2>{product.name}</h2>
           <img className="cardProductImg2" src={product.url} alt="product" />
@@ -53,12 +66,12 @@ class ProductCardComponent2 extends Component {
             </div>
             <div className="user-box2">
               <h4>Price</h4>
-              <p>{product.prices}$</p>
+              {this.renderPromo(product)}
               <h4>Seller</h4>
               <p>{product.lastName} {product.firstName}</p>
             </div>
             <ButtonComponent
-              text={"Buy" + product.prices + "$"}
+              text={"Buy " + product.prices + " $"}
               click={this.addButtonIsClick.bind(this)}
             />
           </form>
@@ -81,16 +94,12 @@ class ProductCardComponent2 extends Component {
                     <h4>Category:</h4>
                     <p>{product.category}</p>
                     <h4 >Price:</h4>
-                    
-                    {/* test promotion price */}  
-                   <h5><Badge id="promotion" variant="danger"> {product.prices + 14} $</Badge>{' '}</h5>
-                    
-                    <p>{product.prices} $</p>
+                    {this.renderPromo(product)}
                     <h4 >Seller:</h4>
                     <p>{product.lastName} {product.firstName}</p>
                   </Card.Body>
                   <ButtonComponent
-                    text={"Buy " + product.prices + " $"}
+                    text={"Buy" + product.prices + "$"}
                     click={this.addButtonIsClick.bind(this)}
                     className="downButton"
                   />
@@ -124,4 +133,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProductCardComponent2);
-

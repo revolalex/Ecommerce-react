@@ -101,7 +101,7 @@ class BasketComponent extends Component {
     if (this.props.productBasket.length !== 0) {
       return (
         <div>
-          <TitleComponent text1="Cart" text2="&nbsp;Detail"/>
+          <TitleComponent text1="Cart" text2="&nbsp;Detail" />
 
           {this.props.productBasket.map((product, index) =>
             this.renderProduct(product, index)
@@ -115,15 +115,17 @@ class BasketComponent extends Component {
       );
     } else {
       return (
-        <div class="container2">
-          <h1>
-            <div class="animation">
-              <span class="first">Cart </span>
-              <span class="oh">
-                <span class="second">&nbsp;is empty</span>
-              </span>
-            </div>
-          </h1>
+        <div>
+          <div class="container2">
+            <h1>
+              <div class="animation">
+                <span class="first">Cart </span>
+                <span class="oh">
+                  <span class="second">&nbsp;is empty</span>
+                </span>
+              </div>
+            </h1>
+          </div>
         </div>
       );
     }

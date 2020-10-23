@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import MyRouter from "../Router";
 import { deleteToken, authFalse } from "../../store/actions/user";
 import { resetHistoryOrders } from "../../store/actions/orders";
-
+import{resetCategory} from"../../store/actions/category"
 import { connect } from "react-redux";
 import WaveAnimationComponent from "../Animation/WaveAnimation";
 import CartComponent from "./CartComponent";
@@ -17,6 +17,8 @@ class Navbare extends Component {
     this.props.deleteToken();
     this.props.history.push("/");
     this.props.resetHistoryOrders();
+    this.props.resetCategory()
+
   }
 
   render() {
@@ -78,6 +80,7 @@ const mapDispatchToProps = {
   deleteToken,
   authFalse,
   resetHistoryOrders,
+  resetCategory
 };
 export default connect(
   mapStateToProps,

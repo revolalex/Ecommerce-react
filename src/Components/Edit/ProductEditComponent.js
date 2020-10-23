@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "../../Styles/ProductEditComponent.css";
 import axios from "axios";
 import ButtonComponent from "../Small/ButtonComponent";
+import {setIdProduct} from "../../store/actions/product"
 
 
 
@@ -73,6 +74,7 @@ class ProductEditComponent extends Component {
    editButtonClick(index, e) {
     localStorage.setItem('productIdToEdit', index);
     e.preventDefault();
+    this.props.setIdProduct(index)
     this.props.history.push("/edit-product");
   }
 
@@ -145,6 +147,7 @@ const mapStateToProps = (state) => ({
   token: state.userReducer.token,
 });
 const mapDispatchToProps = {
+  setIdProduct
 
 };
 export default connect(
