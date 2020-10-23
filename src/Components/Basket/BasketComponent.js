@@ -81,12 +81,14 @@ class BasketComponent extends Component {
                 >
                   -1
                 </Button>
-                <Button variant="danger">
+                <Button
+                  variant="danger"
+                  onClick={this.deleteClick.bind(this, index)}
+                >
                   <img
                     className="trashBasket"
                     src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
                     alt="trash"
-                    onClick={this.deleteClick.bind(this, index)}
                   />
                 </Button>
               </Form>

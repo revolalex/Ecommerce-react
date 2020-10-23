@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// allow to connect the component to redux store
 import { connect } from "react-redux";
 import "../../Styles/Sign.css";
 import axios from "axios";

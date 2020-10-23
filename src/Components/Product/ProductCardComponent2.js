@@ -49,7 +49,9 @@ class ProductCardComponent2 extends Component {
       )
     }
   }
+  
   renderProduct(product) {
+    let reducPrice = `${product.promotion} $`
     return (
       <div>
         <div className="login-box2 smallScreen">
@@ -71,7 +73,7 @@ class ProductCardComponent2 extends Component {
               <p>{product.lastName} {product.firstName}</p>
             </div>
             <ButtonComponent
-              text={"Buy " + product.prices + " $"}
+              text={"Buy" + product.prices + " $"}
               click={this.addButtonIsClick.bind(this)}
             />
           </form>
@@ -99,7 +101,7 @@ class ProductCardComponent2 extends Component {
                     <p>{product.lastName} {product.firstName}</p>
                   </Card.Body>
                   <ButtonComponent
-                    text={"Buy" + product.prices + "$"}
+                    text={product.promotionIsActive === 1 ? reducPrice: product.prices} 
                     click={this.addButtonIsClick.bind(this)}
                     className="downButton"
                   />

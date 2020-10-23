@@ -8,7 +8,7 @@ import {
   resetHistoryOrders,
 } from "../../store/actions/orders";
 import { connect } from "react-redux";
-import TitleComponent from "../Small/TitleComponent"
+import TitleComponent from "../Small/TitleComponent";
 
 class OrderComponent extends Component {
   componentDidMount() {
@@ -63,6 +63,10 @@ class OrderComponent extends Component {
                 <p className="productNameTitle">Description:</p>
                 {product.description}
               </Card.Text>
+              <Card.Text>
+              <p className="productNameTitle"> Qty:</p>
+              {product.quantity}
+              </Card.Text>
             </Card.Body>
           </Col>
         </Row>
@@ -71,12 +75,12 @@ class OrderComponent extends Component {
   }
 
   render() {
-    let a = "You have"
-    let b = "never ordered"
-    if (this.props.old_Orders.length>1) {
+    let a = "You have";
+    let b = "never ordered";
+    if (this.props.old_Orders.length > 1) {
       return (
         <div>
-          <TitleComponent text1="Orders" text2="&nbsp;History"/>
+          <TitleComponent text1="Orders" text2="&nbsp;History" />
           {/* <h1 className="pageTitle">Orders History</h1> */}
           {this.props.old_Orders.map((product, index) =>
             this.renderProduct(product, index)
@@ -89,7 +93,7 @@ class OrderComponent extends Component {
           <div class="container2">
             <h1>
               <div class="animation">
-                <span class="first">{a}</span> 
+                <span class="first">{a}</span>
                 <span class="oh">
                   <span class="second">&nbsp;{b}</span>
                 </span>

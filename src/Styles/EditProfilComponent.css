@@ -15,7 +15,7 @@ body {
 .login-box-Edit {
   margin: auto;
   margin-top: 10vh;
-  width: 70%;
+  width: 50%;
   padding: 40px;
   background: rgba(0, 0, 0, 0.8);
   box-sizing: border-box;
@@ -74,6 +74,7 @@ body {
     left: 50%;
     padding: 40px;
     margin-bottom: 40%;
+    width: 70%;
   }
   html {
     height: 150%;
@@ -132,6 +133,6 @@ body {
   margin-left: 40%;
   margin-bottom: 40px;
 }
-.editDiv {
+/* .editDiv {
 
-}
+} */

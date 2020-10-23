@@ -28,12 +28,12 @@ class ProductListPage extends Component {
   }
 
   render() {
-    //store in navCategory all te different category of products
+    //store in navCategory all the different category of products
     let product = this.props.products;
     let navCategory = [];
     product.forEach((element) => {
       if (element.category) {
-        // if test not contains this category add it
+        // if array not contains this category add it
         if (!navCategory.includes(element.category)) {
           navCategory.push(element.category);
         }
@@ -41,17 +41,17 @@ class ProductListPage extends Component {
     });
     return (
       <div id="myRow">
-        <NavDropdown
-          title="Category"
-          id="nav-dropdown"
-          onSelect={this.categorySet.bind(this)}
-        >
-          <NavDropdown.Item eventKey="All">All</NavDropdown.Item>
-          {navCategory.map((product) => this.renderCategory(product))}
-          
-        </NavDropdown>
-
         <TitleComponent text1="Products" text2="&nbsp;list" />
+        <div>
+          <NavDropdown
+            title="Category"
+            id="nav-dropdown"
+            onSelect={this.categorySet.bind(this)}
+          >
+            <NavDropdown.Item eventKey="All">All</NavDropdown.Item>
+            {navCategory.map((product) => this.renderCategory(product))}
+          </NavDropdown>
+        </div>
 
         <Container className="testContainer">
           <Row className="justify-content-md-center">
@@ -62,7 +62,7 @@ class ProductListPage extends Component {
     );
   }
 
-  //use to show all the different category of products
+  //use to show all the different category of products in NavDrop
   renderCategory(category) {
     return (
       <div key={category}>
@@ -72,7 +72,10 @@ class ProductListPage extends Component {
   }
 
   renderProduct(product) {
-    if (product.category === `${this.props.category}`|| this.props.category === "All") {
+    if (
+      product.category === `${this.props.category}` ||
+      this.props.category === "All"
+    ) {
       return (
         <Col className="testCol" md="auto" key={product.id}>
           <Card
@@ -96,9 +99,8 @@ class ProductListPage extends Component {
                 More Info
               </a>
             </Card.Body>
-            <Card.Footer id="footerCard" text="light">
-              {product.prices} €
-            </Card.Footer>
+            <Card.Footer className={product.promotionIsActive === 1 ? "colorSalePrice" : ""} id="footerCard" text="light">{product.promotionIsActive === 1 ? product.promotion : product.prices} €</Card.Footer>
+
           </Card>
         </Col>
       );

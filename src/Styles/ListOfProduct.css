@@ -6,9 +6,8 @@ body {
   min-height: 500px;
   max-height: 500px;
   opacity: 0.75;
-  
 }
-#footerCard{
+#footerCard {
   position: absolute;
 }
 .box:hover {
@@ -22,9 +21,14 @@ body {
 }
 .testCol {
   padding-bottom: 10vh;
-
 }
 .testImg {
   height: 200px;
   object-fit: contain;
 }
+.colorSalePrice{
+  color: rgb(38, 247, 10);
+  font-weight: bolder;
+}
+
+
