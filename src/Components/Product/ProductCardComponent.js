@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "../../Styles/productCard2.css";
+import "../../Styles/ProductCardComponent.css";
 import { connect } from "react-redux";
 import { setProduct } from "../../store/actions/product";
 import { addProductToCart } from "../../store/actions/cart";
 import ButtonComponent from "../Small/ButtonComponent";
 import { Card, Row, Col, Badge } from "react-bootstrap";
+import SalesLogo from "../Small/SalesLogo";
 
 class ProductCardComponent2 extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class ProductCardComponent2 extends Component {
       .get(`http://localhost:8080/products/${this.props.id}`)
       .then((result) => {
         console.log(result);
-        result.data[0].id_user_affiliate = this.props.idUser
+        result.data[0].id_user_affiliate = this.props.idUser;
         this.props.setProduct(result.data);
       })
       .catch((err) => {
@@ -21,10 +22,10 @@ class ProductCardComponent2 extends Component {
       });
   }
   addButtonIsClick(e) {
-    let poductAdded = this.props.product[0].name
+    let poductAdded = this.props.product[0].name;
     e.preventDefault();
     this.props.addProductToCart(this.props.product[0]);
-    alert(`${poductAdded}, has been added to your basket`)
+    alert(`${poductAdded}, has been added to your basket`);
   }
 
   render() {
@@ -34,28 +35,39 @@ class ProductCardComponent2 extends Component {
       </div>
     );
   }
-  renderPromo(product){
-    if(product.promotionIsActive){
-    return(
-    <div>
-      <h5><Badge id="promotion" variant="danger"> {product.prices} $</Badge></h5>
-      <p>{product.promotion} $</p>
-    </div>
-    )} else {
-      return(
+  renderPromo(product) {
+    if (product.promotionIsActive === 1) {
+      return (
+        <div>
+          <SalesLogo id="saleLogoProductCardComponent" />
+          <h5>
+            <Badge id="promotion" variant="danger">
+              {" "}
+              {product.prices} $
+            </Badge>
+          </h5>
+          <p>{product.promotion} $</p>
+        </div>
+      );
+    } else {
+      return (
         <div>
           <p>{product.prices} $</p>
         </div>
-      )
+      );
     }
   }
-  
+
   renderProduct(product) {
-    let reducPrice = `${product.promotion} $`
+    let reducPrice = `${product.promotion} $`;
     return (
       <div>
-        {/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}
-        {/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
         <div className="login-box2 smallScreen">
           <h2>{product.name}</h2>
           <img className="cardProductImg2" src={product.url} alt="product" />
@@ -69,10 +81,12 @@ class ProductCardComponent2 extends Component {
               <p>{product.category}</p>
             </div>
             <div className="user-box2">
-              <h4>Price</h4>
+              <h4>Price :</h4>
               {this.renderPromo(product)}
               <h4>Seller</h4>
-              <p>{product.lastName} {product.firstName}</p>
+              <p>
+                {product.lastName} {product.firstName}
+              </p>
             </div>
             <ButtonComponent
               text={"Buy" + product.prices + " $"}
@@ -80,8 +94,14 @@ class ProductCardComponent2 extends Component {
             />
           </form>
         </div>
-        {/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}
-        {/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
         <div className="bigScreen">
           <Card className="mb-3 login-box2">
             <Row className="no-gutters">
@@ -94,17 +114,23 @@ class ProductCardComponent2 extends Component {
                     <h2>{product.name}</h2>
                   </Card.Title>
                   <Card.Body className="subTitleCard">
-                    <h4 >Description:</h4>
+                    <h4>Description:</h4>
                     <p>{product.description}</p>
                     <h4>Category:</h4>
                     <p>{product.category}</p>
-                    <h4 >Price:</h4>
+                    <h4>Price :</h4>
                     {this.renderPromo(product)}
-                    <h4 >Seller:</h4>
-                    <p>{product.lastName} {product.firstName}</p>
+                    <h4>Seller:</h4>
+                    <p>
+                      {product.lastName} {product.firstName}
+                    </p>
                   </Card.Body>
                   <ButtonComponent
-                    text={product.promotionIsActive === 1 ? reducPrice: product.prices} 
+                    text={
+                      product.promotionIsActive === 1
+                        ? reducPrice
+                        : product.prices
+                    }
                     click={this.addButtonIsClick.bind(this)}
                     className="downButton"
                   />
@@ -113,9 +139,6 @@ class ProductCardComponent2 extends Component {
             </Row>
           </Card>
         </div>
-
-
-        
       </div>
     );
   }

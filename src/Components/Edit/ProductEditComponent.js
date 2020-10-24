@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import "../../Styles/ProductEditComponent.css";
 import axios from "axios";
 import ButtonComponent from "../Small/ButtonComponent";
-import {setIdProduct} from "../../store/actions/product"
-
-
+import { setIdProduct } from "../../store/actions/product";
+import SalesLogo from "../Small/SalesLogo";
 
 import { withRouter } from "react-router-dom";
 
@@ -71,10 +70,10 @@ class ProductEditComponent extends Component {
     }
   }
 
-   editButtonClick(index, e) {
-    localStorage.setItem('productIdToEdit', index);
+  editButtonClick(index, e) {
+    localStorage.setItem("productIdToEdit", index);
     e.preventDefault();
-    this.props.setIdProduct(index)
+    this.props.setIdProduct(index);
     this.props.history.push("/edit-product");
   }
 
@@ -98,7 +97,17 @@ class ProductEditComponent extends Component {
                 Category:
                 <br />
                 {product.category}
+                {product.promotionIsActive === 1 ? <SalesLogo /> : ""}
               </Card.Text>
+              <br />
+              <br />
+              <br />
+              <br />
+              {product.promotionIsActive === 1 ? (
+                <p>Sale Price: {product.promotion} $</p>
+              ) : (
+                ""
+              )}
             </Card.Body>
           </Col>
           <Col sm={5}>
@@ -147,8 +156,7 @@ const mapStateToProps = (state) => ({
   token: state.userReducer.token,
 });
 const mapDispatchToProps = {
-  setIdProduct
-
+  setIdProduct,
 };
 export default connect(
   mapStateToProps,

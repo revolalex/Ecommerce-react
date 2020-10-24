@@ -5,7 +5,8 @@ import UserBox2 from "../Small/UserBox2";
 import "../../Styles/EditProfilComponent.css";
 import ProductEditComponent from "./ProductEditComponent";
 import axios from "axios";
-import {setUser} from"../../store/actions/user"
+import { setUser } from "../../store/actions/user";
+import ProfilUpdate from "./EditProfileUpdate";
 
 class EditProfilComponent extends Component {
   constructor(props) {
@@ -36,8 +37,6 @@ class EditProfilComponent extends Component {
     this.handleLastName = this.handleLastName.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
   }
-
-  componentDidMount() {}
 
   handleFirstName(event) {
     this.setState({
@@ -274,18 +273,16 @@ class EditProfilComponent extends Component {
     let newUrl;
     if (this.state.firstName.length > 3) {
       newUrl = (
-        <div className="editDiv">
-          <p className="changeUrlP">Change to</p>
-          <img className="profileImgEdit" src={this.state.url} alt="profil" />
-          <p className="changeUrlP">{this.state.firstName}</p>
-          <p className="changeUrlP">{this.state.lastName}</p>
-          <p className="changeUrlP">{this.state.email}</p>
-        </div>
+        <ProfilUpdate
+          src={this.state.url}
+          firstname={this.state.firstName}
+          lastname={this.state.lastName}
+          email={this.state.email}
+        />
       );
     }
 
     return (
-      
       <div>
         <h1 className="pageTitle">Profil Detail</h1>
         <div className="login-box-Edit">
@@ -316,7 +313,7 @@ class EditProfilComponent extends Component {
 }
 
 const mapDispatchToProps = {
-  setUser
+  setUser,
 };
 
 const mapStateToProps = (state) => ({

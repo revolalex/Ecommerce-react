@@ -158,16 +158,10 @@ class CreateProductPage extends Component {
         id: 5,
       },
     ];
-    let submitProduct;
-    const submitTestDone = this.state.submitOk;
-    if (submitTestDone) {
-      submitProduct = <p id="submitOk">Product Added !</p>;
-    } else {
-      submitProduct = <p id="submitOk"></p>;
-    }
+
     return (
       <div id="addArrticleDiv">
-        <TitleComponent text1="sell" text2="&nbsp; article"/>
+        <TitleComponent text1="sell" text2="&nbsp; article" />
         <div className="login-box">
           <h2>Add an article</h2>
           <form>
@@ -180,7 +174,11 @@ class CreateProductPage extends Component {
               text="Create a Product"
             />
 
-            {submitProduct}
+            {this.state.submitOk === true ? (
+              <p id="submitOk">Product Added !</p>
+            ) : (
+              ""
+            )}
           </form>
         </div>
       </div>

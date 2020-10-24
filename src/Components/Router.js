@@ -6,7 +6,7 @@ import SignInComponent from "./Sign/SignInComponent";
 import CreateProductPage from "./Product/CreateProductPage";
 import UserListComponent from "./UserListComponent";
 import ListOfProducts from "./Product/ListOfProductsComponent";
-import ProductCardComponent2 from "./Product/ProductCardComponent2";
+import ProductCardComponent2 from "./Product/ProductCardComponent";
 import BasketComponent from "./Basket/BasketComponent";
 import EditProfileComponent from "./Edit/EditProfileComponent"
 import EditProductComponent from './Edit/EditProduct';

@@ -8,6 +8,22 @@ const appRouter = async function(app, connection) {
   /**************************** API USER ***************************************/
   /*****************************************************************************/
 
+    /*********************** Check if user with this email already exist *************************/
+    await app.use("/users/sign-up", (req, res, next) => {
+      console.log(req.body.email);
+      connection.query(
+        `SELECT * FROM users WHERE email = '${req.body.email}'`,
+        (err, results) => {
+          if (err) throw err;
+          if (results.length > 0) {
+            res.status(200).send("this EMAIL already exist");
+          } else {
+            next();
+          }
+        }
+      );
+    });
+
   // - POST /users/sign-up ⇒ Will add a user in the Users table (of course the
   // password will be encrypted...)
   await app.post("/users/sign-up", (req, res) => {
@@ -201,9 +217,9 @@ const appRouter = async function(app, connection) {
         .toUpperCase() +
         req.body.category.slice(1)}', name = '${req.body.name
         .charAt(0)
-        .toUpperCase() + req.body.name.slice(1)}', description = '${
+        .toUpperCase() + req.body.name.slice(1)}', description = "${
         req.body.description
-      }', prices = '${req.body.prices}',url = '${req.body.url}',promotion = '${
+      }", prices = '${req.body.prices}',url = '${req.body.url}',promotion = '${
         req.body.promotion
       }', promotionIsActive = '${req.body.promotionIsActive}' WHERE id = ${
         req.params.id

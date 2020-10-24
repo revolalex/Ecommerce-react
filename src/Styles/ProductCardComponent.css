@@ -82,12 +82,19 @@ body {
   .bigScreen {
     display: none;
   }
+  .cardProductImg2{
+    width: 260px;
+  }
 }
 @media screen and (min-width: 1000px) {
   .smallScreen {
     display: none;
   }
+
 }
 #promotion{
   text-decoration: line-through
+}
+#saleLogoProductCardComponent{
+  width: 100px;
 }

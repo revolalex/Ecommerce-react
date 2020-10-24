@@ -122,6 +122,18 @@ class SignupComponent extends Component {
               if (result.data === "error") {
                 alert("request error");
               }
+              if(result.data === "this EMAIL already exist"){
+                alert("email already exist please Sign In")
+                // reset input
+                this.setState({
+                  firstName: "",
+                  lastName: "",
+                  url: "",
+                  email: "",
+                  password: "",
+                  confirmPassword: "",
+                });
+              }
             })
             .catch(() => {
               console.log("Oops, request failed!");

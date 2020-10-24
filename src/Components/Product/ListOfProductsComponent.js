@@ -9,6 +9,8 @@ import "../../Styles/ListOfProduct.css";
 // import TitleComponent from "../Small/TitleComponent";
 import { connect } from "react-redux";
 import { categoryToShow } from "../../store/actions/category";
+import SalesLogo from "../Small/SalesLogo";
+
 class ProductListPage extends Component {
   componentDidMount() {
     axios
@@ -86,9 +88,9 @@ class ProductListPage extends Component {
   }
 
   renderProduct(product) {
-    let salelogo
-    if (product.promotionIsActive === 1){
-      salelogo = <img id="saleImg" src="https://www.icone-png.com/png/44/44044.png" alt="sale"></img>
+    let salelogo;
+    if (product.promotionIsActive === 1) {
+      salelogo = <SalesLogo />;
     }
     if (
       product.category === `${this.props.category}` ||
@@ -150,7 +152,7 @@ class ProductListPage extends Component {
               {product.category}
             </Card.Header>
             <Card.Img className="testImg" variant="top" src={product.url} />
-            <img id="saleImg" src="https://www.icone-png.com/png/44/44044.png" alt="sale"></img>
+            <SalesLogo />
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
               <Card.Text>{product.description}</Card.Text>

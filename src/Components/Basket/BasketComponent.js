@@ -19,6 +19,7 @@ import {
   Form,
   ListGroup,
 } from "react-bootstrap";
+import EmptyBasket from "./EmptyBasket";
 class BasketComponent extends Component {
   deleteClick(index) {
     this.props.deleteProductFromCart(this.props.productBasket[index]);
@@ -123,20 +124,7 @@ class BasketComponent extends Component {
         </div>
       );
     } else {
-      return (
-        <div>
-          <div class="container2">
-            <h1>
-              <div class="animation">
-                <span class="first">Cart </span>
-                <span class="oh">
-                  <span class="second">&nbsp;is empty</span>
-                </span>
-              </div>
-            </h1>
-          </div>
-        </div>
-      );
+      return <EmptyBasket />;
     }
   }
 }
