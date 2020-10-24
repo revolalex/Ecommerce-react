@@ -6,10 +6,10 @@ import {
   resetCart,
 } from "../../store/actions/cart";
 import { connect } from "react-redux";
-import "../../Styles/BasketComponent.css";
 import Buttton from "../Small/ButtonComponent";
 import TitleComponent from "../Small/TitleComponent";
 import axios from "axios";
+import "../../Styles/BasketComponent.css";
 import {
   Card,
   Col,
@@ -45,57 +45,59 @@ class BasketComponent extends Component {
   }
   renderProduct(product, index) {
     return (
-      <Container className="basketCard" key={index}>
-        <Row>
-          <Col md={4}>
-            <img
-              className="basketImg"
-              src={product.url}
-              alt={product.name}
-            ></img>
-          </Col>
-          <Col md={8}>
-            <Card.Body>
-              <Card.Title className="textCard">{product.name}</Card.Title>
-              <ListGroup horizontal>
-                <ListGroup.Item variant="info">
-                  <Card.Text>Qté: {product.quantity}</Card.Text>
-                </ListGroup.Item>
-                <ListGroup.Item variant="info">
-                  Price : {product.prices}$
-                </ListGroup.Item>
-                <ListGroup.Item variant="info">
-                  Total : {product.prices * product.quantity}$
-                </ListGroup.Item>
-              </ListGroup>
-              <Form inline>
-                <Button
-                  variant="info"
-                  onClick={this.increase.bind(this, product)}
-                >
-                  +1
-                </Button>
-                <Button
-                  variant="warning"
-                  onClick={this.decrease.bind(this, product)}
-                >
-                  -1
-                </Button>
-                <Button
-                  variant="danger"
-                  onClick={this.deleteClick.bind(this, index)}
-                >
-                  <img
-                    className="trashBasket"
-                    src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
-                    alt="trash"
-                  />
-                </Button>
-              </Form>
-            </Card.Body>
-          </Col>
-        </Row>
-      </Container>
+      <div id="basketCardConatiner">
+        <Container className="basketCard" key={index}>
+          <Row>
+            <Col md={4}>
+              <img
+                className="basketImg"
+                src={product.url}
+                alt={product.name}
+              ></img>
+            </Col>
+            <Col md={8}>
+              <Card.Body>
+                <Card.Title className="textCard">{product.name}</Card.Title>
+                <ListGroup horizontal>
+                  <ListGroup.Item variant="info">
+                    <Card.Text>Qté: {product.quantity}</Card.Text>
+                  </ListGroup.Item>
+                  <ListGroup.Item variant="info">
+                    Price : {product.prices}$
+                  </ListGroup.Item>
+                  <ListGroup.Item variant="info">
+                    Total : {product.prices * product.quantity}$
+                  </ListGroup.Item>
+                </ListGroup>
+                <Form inline>
+                  <Button
+                    variant="info"
+                    onClick={this.increase.bind(this, product)}
+                  >
+                    +1
+                  </Button>
+                  <Button
+                    variant="warning"
+                    onClick={this.decrease.bind(this, product)}
+                  >
+                    -1
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={this.deleteClick.bind(this, index)}
+                  >
+                    <img
+                      className="trashBasket"
+                      src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
+                      alt="trash"
+                    />
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 
@@ -104,15 +106,20 @@ class BasketComponent extends Component {
       return (
         <div>
           <TitleComponent text1="Cart" text2="&nbsp;Detail" />
+          <div>
+            {this.props.productBasket.map((product, index) =>
+              this.renderProduct(product, index)
+            )}
+          </div>
 
-          {this.props.productBasket.map((product, index) =>
-            this.renderProduct(product, index)
-          )}
-          <Buttton
-            text="Save Basket"
-            link="/paiement"
-            click={this.storeBasket.bind(this)}
-          />
+          <div>
+            <Buttton
+              class="saveBasketButton"
+              text="Save Basket"
+              link="/paiement"
+              click={this.storeBasket.bind(this)}
+            />
+          </div>
         </div>
       );
     } else {

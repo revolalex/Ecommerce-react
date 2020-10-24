@@ -43,17 +43,17 @@ class SignupComponent extends Component {
       url: event.target.value,
     });
   }
+  handleEmail(event) {
+    this.setState({
+      email: event.target.value,
+    });
+  }
   // The second (optional) parameter is a callback function that
   // will be executed once setState is completed and the
   // component is re-rendered.
   handlePassword(event) {
     this.setState({ password: event.target.value }, () => {
       this.comparePassword();
-    });
-  }
-  handleEmail(event) {
-    this.setState({
-      email: event.target.value,
     });
   }
   // The second (optional) parameter is a callback function that
@@ -72,7 +72,7 @@ class SignupComponent extends Component {
   // post user to DB
   buttonIsClick(e) {
     e.preventDefault();
-    var mailformat = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    
     let userObject = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -80,6 +80,7 @@ class SignupComponent extends Component {
       email: this.state.email,
       password: this.state.password,
     };
+    var mailformat = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
     switch (true) {
       case userObject.firstName.length < 3:
         alert("first name error: min 3 character");
@@ -238,7 +239,7 @@ class SignupComponent extends Component {
       },
     ];
     return (
-      <div>
+      <div id="spaceBottom">
         <div className="login-box">
           <h2>Sign up</h2>
           <img className="profileImg" src={this.state.url} alt="" />

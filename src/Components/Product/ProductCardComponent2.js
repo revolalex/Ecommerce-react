@@ -54,6 +54,8 @@ class ProductCardComponent2 extends Component {
     let reducPrice = `${product.promotion} $`
     return (
       <div>
+        {/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}
         <div className="login-box2 smallScreen">
           <h2>{product.name}</h2>
           <img className="cardProductImg2" src={product.url} alt="product" />
@@ -78,7 +80,8 @@ class ProductCardComponent2 extends Component {
             />
           </form>
         </div>
-
+        {/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}
+        {/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}
         <div className="bigScreen">
           <Card className="mb-3 login-box2">
             <Row className="no-gutters">
