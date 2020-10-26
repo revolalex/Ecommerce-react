@@ -8,21 +8,21 @@ const appRouter = async function(app, connection) {
   /**************************** API USER ***************************************/
   /*****************************************************************************/
 
-    /*********************** Check if user with this email already exist *************************/
-    await app.use("/users/sign-up", (req, res, next) => {
-      console.log(req.body.email);
-      connection.query(
-        `SELECT * FROM users WHERE email = '${req.body.email}'`,
-        (err, results) => {
-          if (err) throw err;
-          if (results.length > 0) {
-            res.status(200).send("this EMAIL already exist");
-          } else {
-            next();
-          }
+  /*********************** Check if user with this email already exist *************************/
+  await app.use("/users/sign-up", (req, res, next) => {
+    console.log(req.body.email);
+    connection.query(
+      `SELECT * FROM users WHERE email = '${req.body.email}'`,
+      (err, results) => {
+        if (err) throw err;
+        if (results.length > 0) {
+          res.status(200).send("this EMAIL already exist");
+        } else {
+          next();
         }
-      );
-    });
+      }
+    );
+  });
 
   // - POST /users/sign-up ⇒ Will add a user in the Users table (of course the
   // password will be encrypted...)
@@ -143,20 +143,31 @@ const appRouter = async function(app, connection) {
   await app.get("/products/", function(req, res) {
     let getProductsInfo = "SELECT * FROM products";
     connection.query(getProductsInfo, function(err, results) {
+      results.forEach((element) => {
+        element.url = element.url.split(",");
+      });
       if (err) throw err;
       res.send(results);
     });
   });
 
   // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
+  // POST /products/ ⇒ Will add a product in the Products table (only if the user who create the product has a good JWT...)
   await app.post("/products/", auth, function(req, res) {
-    let category =
-      req.body.category.charAt(0).toUpperCase() + req.body.category.slice(1);
+    let category = req.body.category;
     let prices = req.body.prices;
-    let name = req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1);
+    let name = req.body.name;
     let description = req.body.description;
-    let url = req.body.url;
+    let url = "";
     let id_user_affiliate = req.body.id_user_affiliate;
+
+    for (let i = 0; i < req.body.url.length; i++) {
+      if (i === 0) {
+         url = req.body.url[i];
+      } else {
+        url = url + "," + req.body.url[i];
+      }
+    }
 
     const productObject = {
       category: category,
@@ -175,7 +186,7 @@ const appRouter = async function(app, connection) {
     });
   });
 
-   //GET /products/:id ⇒ Return all the datas of this specific Product
+  //GET /products/:id ⇒ Return all the datas of this specific Product
   //(including the name of the user who created it, the category, the description etc...)
   await app.get("/products/:id", function(req, res) {
     let id = req.params.id;
@@ -183,6 +194,9 @@ const appRouter = async function(app, connection) {
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {
+      results.forEach((element) => {
+        element.url = element.url.split(",");
+      });
       if (err) throw err;
       res.send(results);
     });

@@ -59,18 +59,20 @@ class CreateProductPage extends Component {
   }
 
   moreImgButton() {
-    this.setState(
-      { allUrlImg: this.state.allUrlImg.concat(this.state.url) },
-      () => {
-        this.setState({
-          url: "",
-        });
-        console.log(this.state.allUrlImg);
-      }
-    );
-    alert(`${this.state.allUrlImg.length + 1} pictures added`);
+    if (this.state.url !== "") {
+      this.setState(
+        { allUrlImg: this.state.allUrlImg.concat(this.state.url) },
+        () => {
+          this.setState({
+            url: "",
+          });
+        }
+      );
+      alert(`${this.state.allUrlImg.length + 1} pictures added`);
+    } else {
+      alert("Veuillez donner une image");
+    }
   }
-
   buttonIsClick(e) {
     console.log("HEADER REQUEST POST", this.state.headerWithToken);
     e.preventDefault();
@@ -78,8 +80,7 @@ class CreateProductPage extends Component {
       category: this.state.category,
       name: this.state.name,
       description: this.state.description,
-      url: this.state.url,
-      allUrlImg: [],
+      url: this.state.allUrlImg,
       prices: this.state.prices,
       id_user_affiliate: this.props.id,
     };
@@ -93,7 +94,7 @@ class CreateProductPage extends Component {
       case productObject.description.length < 10:
         alert("description required min 10 characters");
         break;
-      case productObject.url.length < 10:
+      case productObject.url.length < 1:
         alert("url of product picture required min 10 characters");
         break;
       case productObject.prices.length < 1:
@@ -133,12 +134,9 @@ class CreateProductPage extends Component {
     }
   }
   renderProductImg(arrayImg) {
-    {
-      arrayImg.forEach((elem) => {
-        console.log(elem);
-        return <img className="uploadImg" src={elem} alt="" />;
-      });
-    }
+    return arrayImg.map((elem, index) => (
+      <img key={index} className="uploadImg" src={elem} alt={elem} />
+    ));
   }
 
   render() {
@@ -201,10 +199,8 @@ class CreateProductPage extends Component {
               More Picture
             </Button>{" "}
             <img className="uploadImg" src={this.state.url} alt="" />
-            {this.state.allUrlImg.forEach((elem)=>{
-              console.log(elem)
-              return <img className="uploadImg" src={elem} alt="" />
-            })}
+            <br />
+            <br />
             {this.renderProductImg(this.state.allUrlImg)}
             <ButtonComponent
               click={this.buttonIsClick}

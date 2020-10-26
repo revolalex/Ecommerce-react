@@ -98,3 +98,9 @@ body {
 #saleLogoProductCardComponent{
   width: 100px;
 }
+.imgCarousel{
+  margin: auto;
+  width: 100%;
+  object-fit: cover;
+  height: 500px; 
+}

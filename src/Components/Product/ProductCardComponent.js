@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { setProduct } from "../../store/actions/product";
 import { addProductToCart } from "../../store/actions/cart";
 import ButtonComponent from "../Small/ButtonComponent";
-import { Card, Row, Col, Badge } from "react-bootstrap";
+import { Card, Row, Col, Badge, Carousel } from "react-bootstrap";
 import SalesLogo from "../Small/SalesLogo";
 
 class ProductCardComponent2 extends Component {
@@ -57,17 +57,33 @@ class ProductCardComponent2 extends Component {
       );
     }
   }
+  renderCarrousel(url,){
+    return (url.map((elem,index)=> (
+      <Carousel.Item key={index} interval={1000}>
+        <img className="imgCarousel" src={elem} alt='error'/>
+      </Carousel.Item>
+    )))
+  }
 
   renderProduct(product) {
     let reducPrice = `${product.promotion} $`;
     return (
       <div>
-        {/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}
-        {/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}
-        {/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}{/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
+        {/* SMALL SCREEN */}
         <div className="login-box2 smallScreen">
           <h2>{product.name}</h2>
-          <img className="cardProductImg2" src={product.url} alt="product" />
+          {product.url.length === 1 ?  <img className="cardProductImg2" src={product.url} alt="product" /> : <Carousel justify="true" >{this.renderCarrousel(product.url)}</Carousel>}
           <form>
             <div className="user-box2">
               <h4>Description:</h4>
@@ -91,20 +107,30 @@ class ProductCardComponent2 extends Component {
             />
           </form>
         </div>
-        
-        {/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}
-        {/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}
-        {/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}{/* BIG SCREEN */}
+
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
+        {/* BIG SCREEN */}
         <div className="bigScreen">
           <Card className="mb-3 login-box2">
             <Row className="no-gutters">
               <Col className="md-4">
-                <Card.Img className="cardImgProduct" src={product.url} />
+              {product.url.length === 1 ?  <img className="cardProductImg2" src={product.url} alt="product" /> : <Carousel justify="true" >{this.renderCarrousel(product.url)}</Carousel>}
               </Col>
               <Col className="md-8">
                 <Card.Body>
                   <Card.Title className="titleCard">
                     <h2>{product.name}</h2>
+                    
                   </Card.Title>
                   <Card.Body className="subTitleCard">
                     <h4>Description:</h4>
@@ -122,7 +148,7 @@ class ProductCardComponent2 extends Component {
                     text={
                       product.promotionIsActive === 1
                         ? reducPrice
-                        : product.prices +" $"
+                        : product.prices + " $"
                     }
                     click={this.addButtonIsClick.bind(this)}
                     className="downButton"
