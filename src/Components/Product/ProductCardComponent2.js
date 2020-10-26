@@ -98,7 +98,7 @@ class ProductCardComponent2 extends Component {
                     <p>{product.lastName} {product.firstName}</p>
                   </Card.Body>
                   <ButtonComponent
-                    text={"Buy" + product.prices + "$"}
+                    text={"Buy" + (product.promotionIsActive === 1 ? product.promotion  : product.prices) + "$"}
                     click={this.addButtonIsClick.bind(this)}
                     className="downButton"
                   />

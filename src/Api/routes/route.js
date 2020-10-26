@@ -128,6 +128,9 @@ const appRouter = async function(app, connection) {
   await app.get("/products/", function(req, res) {
     let getProductsInfo = "SELECT * FROM products";
     connection.query(getProductsInfo, function(err, results) {
+      results.forEach((element)=>{
+        element.url = element.url.split(",")
+      })
       if (err) throw err;
       res.send(results);
     });
@@ -140,8 +143,13 @@ const appRouter = async function(app, connection) {
     let prices = req.body.prices;
     let name = req.body.name;
     let description = req.body.description;
-    let url = req.body.url;
+    let url = "";
     let id_user_affiliate = req.body.id_user_affiliate;
+
+    for (let i = 0; i < req.body.url.length; i++) {
+      if (i === 0) url + req.body.url[i]
+      else url + ',' + req.body.url[i]
+    }
 
     const productObject = {
       category: category,
@@ -168,6 +176,9 @@ const appRouter = async function(app, connection) {
     FROM users INNER JOIN products ON products.id = ${id} && products.id_user_affiliate = users.id`;
 
     connection.query(productInfo, function(err, results) {
+      results.forEach((element)=>{
+        element.url = element.url.split(',')
+      })
       if (err) throw err;
       res.send(results);
     });
@@ -226,6 +237,9 @@ const appRouter = async function(app, connection) {
       let productInfo = `SELECT * FROM products where id_user_affiliate = ${id};`;
   
       connection.query(productInfo, function(err, results) {
+        results.forEach(element => {
+          element.url = element.url.split(",")
+        })
         if (err) throw err;
         res.send(results);
       });

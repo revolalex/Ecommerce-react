@@ -6,7 +6,7 @@ import UserBox from "../User/UserBox";
 import ButtonComponent from "../Others/button";
 import { withRouter } from "react-router-dom";
 import "./EditProduct.css";
-import { Form } from "react-bootstrap";
+import { Form, Tab, Tabs } from "react-bootstrap";
 
 
 class CreateProductPage extends Component {
@@ -200,6 +200,7 @@ class CreateProductPage extends Component {
         }
     }
   }
+  
   render() {
     const formInput = [
       {
@@ -256,24 +257,48 @@ class CreateProductPage extends Component {
     if (submitTestDone) {
       submitProduct = <p id="submitOk">Product Edited !</p>;
     } else {
-      submitProduct = <p id="submitOk"></p>;
+      submitProduct = <p id="submitOk" style={{display: "none"}}>Product Edited !</p>;
     }
 
     return (
       <div>
         <div className="login-box-Edit">
           <h2>Edit Product</h2>
-          <img className="uploadImgEditProduct" src={this.state.url} alt="" />
-          <br />
-          <br />
-          <form>
-            {formInput.map((elem) => {
-              return <UserBox props={elem} key={elem.id} />;
-            })}
-            {this.renderSwitchButton()}
-            <ButtonComponent click={this.buttonIsClick} text="Edit" />
-            {submitProduct}
-          </form>
+          <Tabs>
+            <Tab eventKey="Edit Product" title='Edit Product' id="tab">
+              <img className="uploadImgEditProduct" src={this.state.url} alt="" />
+              <br />
+              <br />
+              <form>
+                {formInput.map((elem) => {
+                  return <UserBox props={elem} key={elem.id} />;
+                })}
+                {this.renderSwitchButton()}
+                <ButtonComponent click={this.buttonIsClick} text="Edit" />
+                {submitProduct}
+              </form>
+            </Tab>
+            <Tab eventKey="Edit Variant" title='Edit Variant' id="tab"></Tab>
+            <Tab eventKey="Add Variant" title='Add Variant' id="tab">
+            <img className="uploadImgEditProduct" src={this.state.url} alt="" />
+              <br />
+              <br />
+              <form>
+              <div className="user-box">
+                <input
+                  type="text"
+                  name="url"
+                  value={this.state.urlVariant}
+                  onChange={this.urlVariant}
+                  required
+                ></input>
+                <label>Picture</label>
+              </div>
+                <ButtonComponent click={this.buttonIsClick} text="Edit" />
+                {submitProduct}
+              </form>
+            </Tab>
+          </Tabs>
         </div>
       </div>
     );

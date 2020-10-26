@@ -74,7 +74,7 @@ class ProductListPage extends Component {
             <Card.Text>{product.description}</Card.Text>
             <a href="/productCard2" onClick={this.productClick.bind(this,product.id)}>More Info</a>
           </Card.Body>
-          <Card.Footer text="light">{product.prices} €</Card.Footer>
+          <Card.Footer text="light">{product.promotionIsActive === 1 ? product.promotion : product.prices} €</Card.Footer>
         </Card>
       </Col>
     );}

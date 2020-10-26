@@ -49,21 +49,20 @@ class BasketComponent extends Component {
                   <Card.Text>Qté: {product.quantity}</Card.Text>
                 </ListGroup.Item>
                 <ListGroup.Item variant="info">
-                  Price : {product.prices}$
+                  Price : {product.promotionIsActive === 1 ? product.promotion : product.prices}$
                 </ListGroup.Item>
                 <ListGroup.Item variant="info">
-                  Total : {product.prices * product.quantity}$
+                  Total : {product.promotionIsActive === 1 ? product.promotion * product.quantity : product.prices * product.quantity}$
                 </ListGroup.Item>
               </ListGroup>
               <Form inline>
                 <Button variant="info" onClick={this.increase.bind(this,product)}>+1</Button>
                 <Button variant="warning" onClick={this.decrease.bind(this,product)}>-1</Button>
-                <Button variant="danger">
+                <Button variant="danger" onClick={this.deleteClick.bind(this, index)}>
                   <img
                     className="trashBasket"
                     src="https://img.icons8.com/carbon-copy/100/000000/trash.png"
                     alt="trash"
-                    onClick={this.deleteClick.bind(this, index)}
                   />
                 </Button>
               </Form>
@@ -92,12 +91,12 @@ class BasketComponent extends Component {
       );
     } else {
       return (
-        <div class="container2">
+        <div className="container2">
           <h1>
-            <div class="animation">
-              <span class="first">Cart </span>
-              <span class="oh">
-                <span class="second">&nbsp;is empty</span>
+            <div className="animation">
+              <span className="first">Cart </span>
+              <span className="oh">
+                <span className="second">&nbsp;is empty</span>
               </span>
             </div>
           </h1>

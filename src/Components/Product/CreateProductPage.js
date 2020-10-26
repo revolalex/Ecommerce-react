@@ -3,7 +3,9 @@ import "../Sign/Sign.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import UserBox from "../User/UserBox";
-import Button  from "../Others/button.js";
+import ButtonComponent from "../Others/button";
+import TitleComponent from "../Others/TitleComponent";
+import { Button } from "react-bootstrap";
 
 class CreateProductPage extends Component {
   constructor(props) {
@@ -13,7 +15,9 @@ class CreateProductPage extends Component {
       name: "",
       description: "",
       url: "",
+      allUrlImg: [],
       prices: "",
+      index: 0,
       submitOk: false,
       headerWithToken: {
         headers: {
@@ -54,34 +58,55 @@ class CreateProductPage extends Component {
       url: event.target.value,
     });
   }
+
+  moreImgButton() {
+    if(this.state.url !== ""){
+     this.setState(
+      { allUrlImg: this.state.allUrlImg.concat(this.state.url) },
+      () => {
+        this.setState({
+          url: "",
+        });
+      }
+      );
+      alert(`${this.state.allUrlImg.length + 1} pictures added`);
+    } else {
+      alert('Veuillez donner une image')
+    }
+    
+  }
+
   buttonIsClick(e) {
+    console.log("HEADER REQUEST POST", this.state.headerWithToken);
     e.preventDefault();
     let productObject = {
       category: this.state.category,
       name: this.state.name,
       description: this.state.description,
       url: this.state.url,
+      allUrlImg: [],
       prices: this.state.prices,
       id_user_affiliate: this.props.id,
     };
     switch (true) {
       case productObject.category.length < 2:
         alert("category error: min 2 characters");
-        break
+        break;
       case productObject.name.length < 3:
         alert("name error: min 3 characters");
-        break
+        break;
       case productObject.description.length < 10:
         alert("description required min 10 characters");
-        break
+        break;
       case productObject.url.length < 10:
         alert("url of product picture required min 10 characters");
-        break
+        break;
       case productObject.prices.length < 1:
         alert("Price missing");
-        break
+        break;
       default:
         try {
+          console.log(this.props);
           axios
             .post(
               "http://localhost:8080/products/",
@@ -89,6 +114,7 @@ class CreateProductPage extends Component {
               this.state.headerWithToken
             )
             .then((result) => {
+              console.log(result);
               this.setState({
                 submitOk: true,
               });
@@ -98,6 +124,7 @@ class CreateProductPage extends Component {
                 name: "",
                 description: "",
                 url: "",
+                allUrlImg: [],
                 prices: "",
                 id_user_affiliate: "",
               });
@@ -110,63 +137,82 @@ class CreateProductPage extends Component {
         }
     }
   }
+  renderProductImg(arrayImg) {
+    return arrayImg.map((elem,index) => (<img key={index} className="uploadImg" src={elem} alt={elem} />))
+  }
+    
+
 
   render() {
     const formInput = [
       {
-        type:'text',
-        name:"category",
+        type: "text",
+        name: "category",
         value: this.state.category,
         onChange: this.handleCategory,
         label: "Category",
-        id:1
-      },{
-        type:'text',
-        name:"descrition",
+        id: 1,
+      },
+      {
+        type: "text",
+        name: "descrition",
         value: this.state.description,
         onChange: this.handleDescription,
         label: "Description",
-        id:2
-      },{
-        type:'text',
-        name:"name",
+        id: 2,
+      },
+      {
+        type: "text",
+        name: "name",
         value: this.state.name,
         onChange: this.handleName,
         label: "Name",
-        id:3
-      },{
-        type:'number',
-        name:"prices",
+        id: 3,
+      },
+      {
+        type: "number",
+        name: "prices",
         value: this.state.prices,
         onChange: this.handlePrices,
         label: "Prices",
-        id:4
-      },{
-        type:'text',
-        name:"picture",
+        id: 4,
+      },
+      {
+        type: "text",
+        name: "picture",
         value: this.state.url,
         onChange: this.handleUrl,
-        label: "Picture",
-        id:5
-      }
-    ]
-    let submitProduct;
-    const submitTestDone = this.state.submitOk;
-    if (submitTestDone) {
-      submitProduct = <p id="submitOk">Product Added !</p>;
-    } else {
-      submitProduct = <p id="submitOk"></p>;
-    }
+        label: "Picture url",
+        id: 5,
+      },
+    ];
+
     return (
-      <div>
+      <div id="addArrticleDiv">
+        <TitleComponent text1="sell" text2="&nbsp; article" />
         <div className="login-box">
           <h2>Add an article</h2>
           <form>
-            {formInput.map((elem)=>{
-              return <UserBox props={elem} key={elem.id}/>
+            {formInput.map((elem) => {
+              return <UserBox props={elem} key={elem.id} />;
             })}
-            <Button text="Create a product"click={this.buttonIsClick}/>
-            {submitProduct}
+            <Button
+              variant="outline-info"
+              onClick={this.moreImgButton.bind(this)}
+            >
+              More Picture
+            </Button>{" "}
+            <img className="uploadImg" src={this.state.url} alt="" />
+            {this.renderProductImg(this.state.allUrlImg)}
+            <ButtonComponent
+              click={this.buttonIsClick}
+              text="Create a Product"
+            />
+            {this.state.submitOk === true ? (
+              <p id="submitOk">Product Added !</p>
+            ) : (
+              ""
+            )}
           </form>
         </div>
       </div>
@@ -176,7 +222,7 @@ class CreateProductPage extends Component {
 
 const mapStateToProps = (state) => ({
   token: state.userReducer.token,
-  id : state.userReducer.id
-})
+  id: state.userReducer.id,
+});
 
-export default connect(mapStateToProps,null) (CreateProductPage);
+export default connect(mapStateToProps, null)(CreateProductPage);
