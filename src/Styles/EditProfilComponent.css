@@ -83,11 +83,10 @@ body {
 
 /*********** Uplaoad url image ***********/
 .uploadImg {
-  max-width: 300px;
-  height: 150px;
-  /* margin-left: 50px; */
-  margin-left: 35%;
-
+  padding-right: 5%;
+  padding-left: 5%;
+  width: 33%;
+  margin: auto;
 }
 
 #buttonNotVisible {

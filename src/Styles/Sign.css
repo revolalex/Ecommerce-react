@@ -134,3 +134,7 @@ body {
 #addArrticleDiv {
   padding-bottom: 10vh;
 }
+
+.urlSup{
+  display: none;
+}

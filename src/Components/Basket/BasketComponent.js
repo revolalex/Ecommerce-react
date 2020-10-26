@@ -46,8 +46,8 @@ class BasketComponent extends Component {
   }
   renderProduct(product, index) {
     return (
-      <div id="basketCardConatiner">
-        <Container className="basketCard" key={index}>
+      <div id="basketCardConatiner" key={index}>
+        <Container className="basketCard">
           <Row>
             <Col md={4}>
               <img

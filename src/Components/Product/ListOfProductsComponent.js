@@ -88,10 +88,6 @@ class ProductListPage extends Component {
   }
 
   renderProduct(product) {
-    let salelogo;
-    if (product.promotionIsActive === 1) {
-      salelogo = <SalesLogo />;
-    }
     if (
       product.category === `${this.props.category}` ||
       this.props.category === "All"
@@ -109,7 +105,8 @@ class ProductListPage extends Component {
               {product.category}
             </Card.Header>
             <Card.Img className="testImg" variant="top" src={product.url} />
-            {salelogo}
+            {product.promotionIsActive === 1 ? <SalesLogo /> :""}
+           
             <Card.Body>
               <Card.Title className="titleCardList">{product.name}</Card.Title>
               <Card.Text>{product.description}</Card.Text>

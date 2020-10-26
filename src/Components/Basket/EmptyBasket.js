@@ -3,12 +3,12 @@ import React, { Component } from "react";
 class EmptyBasket extends Component {
   render() {
     return (
-      <div class="container2">
+      <div className="container2">
         <h1>
-          <div class="animation">
-            <span class="first">Cart </span>
-            <span class="oh">
-              <span class="second">&nbsp;is empty</span>
+          <div className="animation">
+            <span className="first">Cart </span>
+            <span className="oh">
+              <span className="second">&nbsp;is empty</span>
             </span>
           </div>
         </h1>

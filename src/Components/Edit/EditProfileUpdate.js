@@ -5,7 +5,7 @@ class ProdilUpdateEdit extends Component {
     return (
       <div className="editDiv">
         <p className="changeUrlP">Change to</p>
-        <img className="profileImgEdit" src={this.props.src}alt="profil" />
+        <img className="profileImgEdit" src={this.props.src} alt="profil" />
         <p className="changeUrlP">{this.props.firstName}</p>
         <p className="changeUrlP">{this.props.lastName}</p>
         <p className="changeUrlP">{this.props.email}</p>

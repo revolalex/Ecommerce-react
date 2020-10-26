@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import UserBox from "../Small/UserBox";
 import ButtonComponent from "../Small/ButtonComponent";
 import TitleComponent from "../Small/TitleComponent";
+import { Button } from "react-bootstrap";
 
 class CreateProductPage extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class CreateProductPage extends Component {
       name: "",
       description: "",
       url: "",
+      allUrlImg: [],
       prices: "",
       submitOk: false,
       headerWithToken: {
@@ -55,6 +57,20 @@ class CreateProductPage extends Component {
       url: event.target.value,
     });
   }
+
+  moreImgButton() {
+    this.setState(
+      { allUrlImg: this.state.allUrlImg.concat(this.state.url) },
+      () => {
+        this.setState({
+          url: "",
+        });
+        console.log(this.state.allUrlImg);
+      }
+    );
+    alert(`${this.state.allUrlImg.length + 1} pictures added`);
+  }
+
   buttonIsClick(e) {
     console.log("HEADER REQUEST POST", this.state.headerWithToken);
     e.preventDefault();
@@ -63,6 +79,7 @@ class CreateProductPage extends Component {
       name: this.state.name,
       description: this.state.description,
       url: this.state.url,
+      allUrlImg: [],
       prices: this.state.prices,
       id_user_affiliate: this.props.id,
     };
@@ -102,6 +119,7 @@ class CreateProductPage extends Component {
                 name: "",
                 description: "",
                 url: "",
+                allUrlImg: [],
                 prices: "",
                 id_user_affiliate: "",
               });
@@ -112,6 +130,14 @@ class CreateProductPage extends Component {
         } catch (error) {
           console.log(error);
         }
+    }
+  }
+  renderProductImg(arrayImg) {
+    {
+      arrayImg.forEach((elem) => {
+        console.log(elem);
+        return <img className="uploadImg" src={elem} alt="" />;
+      });
     }
   }
 
@@ -154,7 +180,7 @@ class CreateProductPage extends Component {
         name: "picture",
         value: this.state.url,
         onChange: this.handleUrl,
-        label: "Picture",
+        label: "Picture url",
         id: 5,
       },
     ];
@@ -168,12 +194,22 @@ class CreateProductPage extends Component {
             {formInput.map((elem) => {
               return <UserBox props={elem} key={elem.id} />;
             })}
+            <Button
+              variant="outline-info"
+              onClick={this.moreImgButton.bind(this)}
+            >
+              More Picture
+            </Button>{" "}
             <img className="uploadImg" src={this.state.url} alt="" />
+            {this.state.allUrlImg.forEach((elem)=>{
+              console.log(elem)
+              return <img className="uploadImg" src={elem} alt="" />
+            })}
+            {this.renderProductImg(this.state.allUrlImg)}
             <ButtonComponent
               click={this.buttonIsClick}
               text="Create a Product"
             />
-
             {this.state.submitOk === true ? (
               <p id="submitOk">Product Added !</p>
             ) : (
