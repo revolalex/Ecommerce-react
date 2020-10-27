@@ -82,7 +82,7 @@ body {
   .bigScreen {
     display: none;
   }
-  .cardProductImg2{
+  .cardProductImg2 {
     width: 260px;
   }
 }
@@ -90,25 +90,24 @@ body {
   .smallScreen {
     display: none;
   }
-
 }
-#promotion{
-  text-decoration: line-through
+#promotion {
+  text-decoration: line-through;
 }
-#saleLogoProductCardComponent{
+#saleLogoProductCardComponent {
   width: 100px;
 }
-.imgCarousel{
+/* .imgCarousel{
   height: 500px; 
   margin: auto;
   object-fit: cover;
  
-}
+} */
 
-.carousel-item img{
-  width: auto;
-  height: 445px;
+.carousel-item img {
+  max-width: 240px;
   max-height: 445px;
-  margin: auto; 
+  margin: auto;
   display: block;
-  }
+  object-fit: cover;
+}

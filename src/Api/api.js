@@ -29,7 +29,10 @@ const connection = require("./database/db");
 connection.connect();
 
 /************************** Routes ****************************/
-require("./routes/route")(app, connection);
+// require("./routes/route")(app, connection);
+require("./routes/basketRoutes") (app, connection)
+require("./routes/productRoutes") (app, connection)
+require("./routes/userRoutes")(app, connection)
 
 //connection.end();
 
