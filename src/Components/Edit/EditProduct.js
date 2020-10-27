@@ -162,9 +162,9 @@ class CreateProductPage extends Component {
       case productObject.description.length < 10:
         alert("Description required min 10 characters");
         break;
-      case productObject.url.length < 10:
-        alert("Url of product picture required min 10 characters");
-        break;
+      // case productObject.url.length < 10:
+      //   alert("Url of product picture required min 10 characters");
+      //   break;
       case productObject.prices.length < 1:
         alert("Price missing");
         break;

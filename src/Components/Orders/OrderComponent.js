@@ -43,28 +43,41 @@ class OrderComponent extends Component {
             <Card.Body>
               <Card.Title>Order number: {product.id}</Card.Title>
               <Card.Text>
-                <p className="productNameTitle">Category:</p>
+                <span className="productNameTitle">Category:</span>
+                <br />
                 {product.category}
               </Card.Text>
               <Card.Text>
-                <p className="productNameTitle">Name:</p>
+                <span className="productNameTitle">Name:</span>
+                <br />
                 {product.name}
               </Card.Text>
             </Card.Body>
           </Col>
           <Col sm={5}>
             <Card.Body>
+              {product.promotionIsActive === 1 ? (
+                <Card.Text>
+                  <span className="productNameTitle">Promotion Price:</span>
+                  <br />
+                  {product.promotion} $
+                </Card.Text>
+              ) : (
+                <Card.Text>
+                  <span className="productNameTitle">Price:</span>
+                  <br />
+                  {product.prices} $
+                </Card.Text>
+              )}
               <Card.Text>
-                <p className="productNameTitle">Price:</p>
-                {product.prices} $
-              </Card.Text>
-              <Card.Text>
-                <p className="productNameTitle">Description:</p>
+                <span className="productNameTitle">Description:</span>
+                <br />
                 {product.description}
               </Card.Text>
               <Card.Text>
-              <p className="productNameTitle"> Qty:</p>
-              {product.quantity}
+                <span className="productNameTitle"> Qty:</span>
+                <br />
+                {product.quantity}
               </Card.Text>
             </Card.Body>
           </Col>

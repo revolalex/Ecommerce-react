@@ -30,7 +30,7 @@ switch (action.type) {
       };
     case "RESET_CART":
         return {
-          ...state,
+          productBasket: [],
           total: 0,
         };
     case "INCREASE_COUNTER":

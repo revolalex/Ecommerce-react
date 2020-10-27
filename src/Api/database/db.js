@@ -27,7 +27,7 @@ connection.connect(function(err) {
     if (err) throw err;
   });
   let basketTable =
-    "CREATE TABLE IF NOT EXISTS basket (id  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,category VARCHAR(30) NOT NULL, name VARCHAR(200) NOT NULL, description VARCHAR(500) NOT NULL, prices FLOAT(10) NOT NULL, url VARCHAR(200) NOT NULL, quantity INT(10) NOT NULL,id_product INT(10) NOT NULL, id_user_affiliate INT(10) NOT NULL)";
+    "CREATE TABLE IF NOT EXISTS basket (id  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,category VARCHAR(30) NOT NULL, name VARCHAR(200) NOT NULL, description VARCHAR(500) NOT NULL, prices FLOAT(10) NOT NULL, url VARCHAR(200) NOT NULL, quantity INT(10) NOT NULL,id_product INT(10) NOT NULL, id_user_affiliate INT(10) NOT NULL, promotionIsActive TINYINT NOT NULL, promotion INT(10))";
   connection.query(basketTable, (err) => {
     if (err) throw err;
   });

@@ -71,9 +71,13 @@ class BasketComponent extends Component {
                   >
                     Price: {product.prices}$
                   </ListGroup.Item>
-                  <ListGroup.Item variant="info">
-                    Promotion: {product.promotion}$
-                  </ListGroup.Item>
+                  {product.promotionIsActive === 1 ? (
+                    <ListGroup.Item variant="info">
+                      Promotion: {product.promotion}$
+                    </ListGroup.Item>
+                  ) : (
+                    ""
+                  )}
                   <ListGroup.Item variant="info">
                     Total:
                     {product.promotionIsActive === 1

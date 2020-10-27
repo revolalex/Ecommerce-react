@@ -307,7 +307,7 @@ const appRouter = async function(app, connection) {
     console.log(event.toLocaleDateString("fr-FR", options));
 
     let sql =
-      "INSERT INTO basket (category,name,description,prices,url,quantity,id_product,id_user_affiliate) VALUES (?)";
+      "INSERT INTO basket (category,name,description,prices,url,quantity,id_product,id_user_affiliate,promotion, promotionIsActive) VALUES (?)";
     for (i = 0; i < req.body.length; i++) {
       let product = [
         req.body[i].category,
@@ -318,6 +318,8 @@ const appRouter = async function(app, connection) {
         req.body[i].quantity,
         req.body[i].id,
         req.body[i].id_user_affiliate,
+        req.body[i].promotion,
+        req.body[i].promotionIsActive,
       ];
       connection.query(sql, [product], (err) => {
         if (err) console.log(err);

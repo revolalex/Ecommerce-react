@@ -83,7 +83,7 @@ class ProductCardComponent2 extends Component {
         {/* SMALL SCREEN */}
         <div className="login-box2 smallScreen">
           <h2>{product.name}</h2>
-          {product.url.length === 1 ?  <img className="cardProductImg2" src={product.url} alt="product" /> : <Carousel justify="true" >{this.renderCarrousel(product.url)}</Carousel>}
+          {product.url.length === 1 ?  <img className="cardProductImg2 " src={product.url} alt="product" /> : <Carousel justify="true" >{this.renderCarrousel(product.url)}</Carousel>}
           <form>
             <div className="user-box2">
               <h4>Description:</h4>
@@ -102,7 +102,7 @@ class ProductCardComponent2 extends Component {
               </p>
             </div>
             <ButtonComponent
-              text={"Buy" + product.prices + " $"}
+              text={"Buy " + product.prices + " $"}
               click={this.addButtonIsClick.bind(this)}
             />
           </form>
@@ -148,7 +148,7 @@ class ProductCardComponent2 extends Component {
                     text={
                       product.promotionIsActive === 1
                         ? reducPrice
-                        : product.prices + " $"
+                        : "Buy "+ product.prices + " $"
                     }
                     click={this.addButtonIsClick.bind(this)}
                     className="downButton"
