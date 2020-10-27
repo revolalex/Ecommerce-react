@@ -139,3 +139,7 @@ form button {
   }
 }
 
+.cross{
+  text-decoration: line-through;
+
+}

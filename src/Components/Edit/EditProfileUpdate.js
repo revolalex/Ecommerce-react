@@ -4,7 +4,7 @@ class ProdilUpdateEdit extends Component {
   render() {
     return (
       <div className="editDiv">
-        <p className="changeUrlP">Change to</p>
+       <h2>Change for :</h2>
         <img className="profileImgEdit" src={this.props.src} alt="profil" />
         <p className="changeUrlP">{this.props.firstName}</p>
         <p className="changeUrlP">{this.props.lastName}</p>

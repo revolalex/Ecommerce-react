@@ -302,7 +302,7 @@ class EditProfilComponent extends Component {
               text="Edit Your Profile"
               click={this.buttonIsClick}
             />
-
+            
             {submitEditProfil}
           </form>
         </div>

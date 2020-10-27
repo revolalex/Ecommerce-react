@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import axios from "axios";
-import "./OrderComponent.css";
 // import "../../Styles/ListOfProduct.css";
 import {
   setHistoryOrders,

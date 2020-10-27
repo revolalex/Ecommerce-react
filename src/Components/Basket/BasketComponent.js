@@ -20,6 +20,7 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import EmptyBasket from "./EmptyBasket";
+import SalesLogo from "../Small/SalesLogo";
 class BasketComponent extends Component {
   deleteClick(index) {
     this.props.deleteProductFromCart(this.props.productBasket[index]);
@@ -55,6 +56,7 @@ class BasketComponent extends Component {
                 src={product.url}
                 alt={product.name}
               ></img>
+              {product.promotionIsActive === 1 ? <SalesLogo /> : ""}
             </Col>
             <Col md={8}>
               <Card.Body>
@@ -63,11 +65,21 @@ class BasketComponent extends Component {
                   <ListGroup.Item variant="info">
                     <Card.Text>Qté: {product.quantity}</Card.Text>
                   </ListGroup.Item>
-                  <ListGroup.Item variant="info">
-                    Price : {product.prices}$
+                  <ListGroup.Item
+                    variant="info"
+                    className={product.promotionIsActive === 1 ? "cross" : ""}
+                  >
+                    Price: {product.prices}$
                   </ListGroup.Item>
                   <ListGroup.Item variant="info">
-                    Total : {product.prices * product.quantity}$
+                    Promotion: {product.promotion}$
+                  </ListGroup.Item>
+                  <ListGroup.Item variant="info">
+                    Total:
+                    {product.promotionIsActive === 1
+                      ? product.promotion * product.quantity
+                      : product.prices * product.quantity}
+                    $
                   </ListGroup.Item>
                 </ListGroup>
                 <Form inline>
