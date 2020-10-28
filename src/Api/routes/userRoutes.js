@@ -116,7 +116,7 @@ const appRouterUser = async function(app, connection) {
   // - GET /users/:id ⇒ Return all the datas of this specific User (including the name of the products he created...)
   await app.get("/users/:id", function(req, res) {
     let id = req.params.id;
-    connection.query(sqlRequestUsers.getUserInfoData, function(err, results) {
+    connection.query(sqlRequestUsers.getUserInfoData(id), function(err, results) {
       if (err) throw err;
       res.send(results);
     });

@@ -3,7 +3,7 @@ class sqlRequestUsers {
  static getUserInfo = "SELECT name, id FROM users"
  static getUsersInfo = "SELECT id,firstName,lastName,url,email FROM users";
  static mailUser = "SELECT * FROM users WHERE email = ?";
- static getUserInfo(id){
+ static getUserInfoData(id){
     return `SELECT * FROM users where id = ${id};`
  } 
 }
