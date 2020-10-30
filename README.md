@@ -22,17 +22,6 @@
 * [App](#app)
 * [Signup](#Signup)
 * [Signin](#Signin)
-* [General info](#general-info)
-* [API](#api)
-* [Front](#front)
-* [Vuelidate](#vuelidate)
-* [Persisted-state](#Persisted-state)
-* [Token in front](#token-in-front)
-* [Vuex](#vuex)
-* [VueRouter](#vuerouter)
-* [Technologies](#technologies)
-* [Pratice](#pratice)
-* [Difficulty](#Difficulty)
 * [Contact](#contact)
 
 ## Techno
