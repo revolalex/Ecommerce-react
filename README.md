@@ -26,20 +26,22 @@
 
 ## Techno
 
-### Back-End
+#### Back-End
 - node.js
 - express
 - bcrypt
 - jwt (jsonwebtoken)
 
-### DataBase:
+#### DataBase:
  - mysql
 
 
-### Front-End
+#### Front-End
 - react
+- react-context-devtool
 - react-router
 - redux
+- redux-persist
 - axios
 - boostrap
 
@@ -158,6 +160,7 @@ await app.post("/users/sign-in", function(req, res) {
   ```
   
 ## Create Product
+<img src="https://user-images.githubusercontent.com/56839789/97734940-0e4c3480-1ada-11eb-95d1-58dcbb315939.gif"/>
 
 ### handle error:
 ```js
