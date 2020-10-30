@@ -19,7 +19,8 @@
 
 ## Table of contents
 * [App](#app)
-* [Screenshots](#screenshots)
+* [SignUp](#SignUp)
+* [SignIn](#SignIn)
 * [General info](#general-info)
 * [API](#api)
 * [Front](#front)
@@ -47,8 +48,104 @@ This App is an E-commerce, you can:
 - have acces to your order history
 - ....
 
+## SignUp
 
-## Available Scripts
+<img src="https://user-images.githubusercontent.com/56839789/97727129-56665980-1ad0-11eb-8427-c59e5ec625be.gif"/>
+<br/>
+Handle error :
 
-In the project directory, you can run:
+```js
+var mailformat = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    switch (true) {
+      case userObject.firstName.length < 3:
+        alert("first name error: min 3 character");
+        break;
+      case userObject.lastName.length < 3:
+        alert("last name error: min 3 character");
+        break;
+      case userObject.url.length < 10:
+        alert("url profile picture require");
+        break;
+      case userObject.password < 8:
+        alert("password minimun 8 character");
+        break;
+      case !userObject.email.match(mailformat):
+        alert("email incorrect");
+        break;
+      case userObject.password !== this.state.confirmPassword:
+        alert("confirm password error");
+        break;
+      default:
+```
+
+Handle if an user already use this email Back-End:
+
+```js
+  /*********************** Check if user with this email already exist *************************/
+  await app.use("/users/sign-up", (req, res, next) => {
+    console.log(req.body.email);
+    connection.query(
+      `SELECT * FROM users WHERE email = '${req.body.email}'`,
+      (err, results) => {
+        if (err) throw err;
+        if (results.length > 0) {
+          res.status(200).send("this EMAIL already exist");
+        } else {
+          next();
+        }
+      }
+    );
+  });
+```
+
+
+## SignIn:
+
+<img src="https://user-images.githubusercontent.com/56839789/97726932-1010fa80-1ad0-11eb-9f41-48617d8a43bf.gif"/>
+
+Api, Back-end (token, bcrypt)
+<br/>
+
+```js
+await app.post("/users/sign-in", function(req, res) {
+    let password = req.body.password;
+    let email = req.body.email;
+    let hash = "";
+    connection.query(sqlRequestUsers.mailUser, [email], function(err, results) {
+      if (err) throw err;
+      // handle email error
+      if (!Array.isArray(results) || !results.length) {
+        res.send("Sorry, email incorrect");
+      } else {
+        let name = results[0].name;
+        let id = results[0].id;
+        /******* TOKEN *******/
+        let token = jwt.sign(
+          { email: email, name: name, id: id },
+          config.secret
+        );
+        hash = results[0].password;
+        // handle password error
+        bcrypt.compare(password, hash, function(err, result) {
+          if (result == true) {
+            // get the decoded payload ignoring signature, no secretOrPrivateKey needed
+            var decoded = jwt.decode(token);
+            // get the decoded payload and header
+            var decoded = jwt.decode(token, { complete: true });
+            res.status(200).send({
+              auth: true,
+              token: token,
+              email: email,
+              id: id,
+            });
+          } else {
+            res.send("password error");
+          }
+        });
+      }
+    });
+  });
+  
+  
+
 
