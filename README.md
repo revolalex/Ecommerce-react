@@ -18,6 +18,7 @@
 
 
 ## Table of contents
+* [Techno](#techno)
 * [App](#app)
 * [Signup](#Signup)
 * [Signin](#Signin)
@@ -33,6 +34,28 @@
 * [Pratice](#pratice)
 * [Difficulty](#Difficulty)
 * [Contact](#contact)
+
+## Techno
+
+### Back-End
+- node.js
+- express
+- bcrypt
+- jwt (jsonwebtoken)
+
+### DataBase:
+ - mysql
+
+
+### Front-End
+- react
+- react-router
+- redux
+- 
+
+- axios
+- boostrap
+
 
 ## App
 This App is an E-commerce, you can:
@@ -169,7 +192,6 @@ switch (true) {
         break;
       default:
 ```
-
 
 
 ### header with token:
