@@ -19,8 +19,8 @@
 
 ## Table of contents
 * [App](#app)
-* [SignUp](#SignUp)
-* [SignIn](#SignIn)
+* [Signup](#Signup)
+* [Signin](#Signin)
 * [General info](#general-info)
 * [API](#api)
 * [Front](#front)
@@ -48,7 +48,7 @@ This App is an E-commerce, you can:
 - have acces to your order history
 - ....
 
-## SignUp
+## Signup
 
 <img src="https://user-images.githubusercontent.com/56839789/97727129-56665980-1ad0-11eb-8427-c59e5ec625be.gif"/>
 <br/>
@@ -99,7 +99,7 @@ Handle if an user already use this email Back-End:
 ```
 
 
-## SignIn:
+## Signin:
 
 <img src="https://user-images.githubusercontent.com/56839789/97726932-1010fa80-1ad0-11eb-9f41-48617d8a43bf.gif"/>
 
@@ -145,7 +145,92 @@ await app.post("/users/sign-in", function(req, res) {
       }
     });
   });
+  ```
   
+## Create Product
+
+### handle error:
+```js
+switch (true) {
+      case productObject.category.length < 2:
+        alert("category error: min 2 characters");
+        break;
+      case productObject.name.length < 3:
+        alert("name error: min 3 characters");
+        break;
+      case productObject.description.length < 10:
+        alert("description required min 10 characters");
+        break;
+      case productObject.url.length < 1:
+        alert("url of product picture required min 10 characters");
+        break;
+      case productObject.prices.length < 1:
+        alert("Price missing");
+        break;
+      default:
+```
+
+
+
+### header with token:
+i store it in the state 
+```js
+headerWithToken: {
+        headers: {
+          Authorization: "Bearer " + this.props.token,
+        },
+      },
+```
+### request with token in the header:
+```js
+axios.post("http://localhost:8080/products/",productObject,this.state.headerWithToken)
+```
+
+### Middleware check token API Back-end:
+
+```js
+const jwt = require('jsonwebtoken');
+const config = require("../routes/modules/config");
+
+module.exports  = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, config.secret);
+    if (decodedToken) {
+      next();
+    } else {
+      res.sendStatus(403)
+    }
+  } catch {
+    res.status(401).json({
+      error: new Error('Invalid request!')
+    });
+  }
+}
+```
+
+Import the middleware:
+<br/>
+```js
+const auth = require("../middleware/auth");
+```
+
+Example of use:
+```js
+  // POST /productEdit/:id => Update this specific product from the database
+  await app.post("/productEdit/:id", auth, (req, res) => {
+    req.body.id = req.params.id;
+    if (req.body.idUser === req.body.id_user_affiliate) {
+      connection.query(sqlRequestProduct.editProduct(req.body), (err) => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+        } else res.send("Updated");
+      });
+    }
+  });
+```
+
   
 
 
