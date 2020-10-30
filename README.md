@@ -22,6 +22,7 @@
 * [App](#app)
 * [Signup](#Signup)
 * [Signin](#Signin)
+* [Product-List](#productlist)
 * [Contact](#contact)
 
 ## Techno
@@ -244,5 +245,20 @@ Example of use:
 ```
 
   
+## Product List
 
+<img src="https://user-images.githubusercontent.com/56839789/97735327-7864d980-1ada-11eb-83e0-ead9d3b6745a.gif"/>
 
+#### Get all the product:
+```js
+ componentDidMount() {
+    axios
+      .get(`http://localhost:8080/products/`)
+      .then((result) => {
+        this.props.setListOfProducts(result.data);
+      })
+      .catch(() => {
+        console.log("Oops, request failed!");
+      });
+  }
+```
