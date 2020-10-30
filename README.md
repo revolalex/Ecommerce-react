@@ -51,8 +51,6 @@
 - react
 - react-router
 - redux
-- 
-
 - axios
 - boostrap
 
