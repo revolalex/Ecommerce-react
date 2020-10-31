@@ -22,7 +22,9 @@
 * [App](#app)
 * [Signup](#Signup)
 * [Signin](#Signin)
-* [Product-List](#productlist)
+* [Create product](#createproduct)
+* [Products list](#productslist)
+* [Product detail](#productdetail)
 * [Contact](#contact)
 
 ## Techno
@@ -245,7 +247,7 @@ Example of use:
 ```
 
   
-## Product List
+## Products List
 
 <img src="https://user-images.githubusercontent.com/56839789/97735327-7864d980-1ada-11eb-83e0-ead9d3b6745a.gif"/>
 
