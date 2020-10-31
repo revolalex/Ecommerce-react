@@ -22,9 +22,9 @@
 * [App](#app)
 * [Signup](#Signup)
 * [Signin](#Signin)
-* [Create product](#createproduct)
-* [Products list](#productslist)
-* [Product detail](#productdetail)
+* [Create product](#create-product)
+* [Products list](#products-list)
+* [Product detail](#product-detail)
 * [Contact](#contact)
 
 ## Techno
@@ -270,3 +270,19 @@ Example of use:
 
 ## Basket
 <img src="https://user-images.githubusercontent.com/56839789/97783181-5d579f80-1b96-11eb-907a-7105da882602.gif"/>
+
+## Status
+Project is:  _Finish_
+
+
+## Contact	
+- [![LinkedIn][linkedin-shield]][linkedin-url] 	
+- revolalex@gmail.com
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/alexandre-rodrigueza/
+
+
