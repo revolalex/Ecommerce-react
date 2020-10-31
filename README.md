@@ -262,3 +262,9 @@ Example of use:
       });
   }
 ```
+
+## Product detail
+<img src="https://user-images.githubusercontent.com/56839789/97783238-b0315700-1b96-11eb-8ed2-475607acac7a.gif"/>
+
+## Basket
+<img src="https://user-images.githubusercontent.com/56839789/97783181-5d579f80-1b96-11eb-907a-7105da882602.gif"/>
